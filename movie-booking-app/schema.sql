@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `Staff` (
   `staff_id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Uid for staff member',
   `username` VARCHAR(100) NOT NULL UNIQUE COMMENT 'Username for staff login',
   `password_hash` VARCHAR(255) NOT NULL COMMENT 'Hashed password for staff',
-  `is_active` BOOLEAN NOT NULL DEFAULT TRUE,
+  -- `is_active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`staff_id`),
   INDEX `idx_username` (`username`)
 ) COMMENT = 'Stores information for operational staff managing the cinema system.';
