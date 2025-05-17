@@ -1,29 +1,41 @@
 package service;
 
 import model.User;
-import repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import model.Ticket;
+import database.Database;
+import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.stream.Collectors;
 
-@Service
 public class UserService {
-    private final UserRepository userRepository;
+    public boolean register(String email, String password, String birthdayStr) {
+        if (Database.users.values().stream().anyMatch(u -> u.email.equals(email))) return false;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        LocalDate birthday;
+        try {
+            birthday = LocalDate.parse(birthdayStr); // 格式 yyyy-MM-dd
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        String userId = UUID.randomUUID().toString();
+        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+        Database.users.put(userId, new User(userId, email, encryptedPassword, birthday));
+        return true;
     }
 
-    public User registerUser(User user) {
-        return userRepository.saveUser(user);
+    public User login(String email, String password) {
+        String encrypted = Base64.getEncoder().encodeToString(password.getBytes());
+        return Database.users.values().stream()
+            .filter(u -> u.email.equals(email) && u.password.equals(encrypted))
+            .findFirst().orElse(null);
     }
 
-    public User findByEmail(String email) {
-        return userRepository.getUserByEmail(email);
-    }
-
-    public boolean isAdmin(User user) {
-        return user.isAdmin();
+    public List<Ticket> getUserTickets(String userId) {
+        return Database.tickets.values().stream()
+            .filter(t -> t.userId.equals(userId))
+            .collect(Collectors.toList());
     }
 }
 
