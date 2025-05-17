@@ -1,31 +1,41 @@
-/**
- * 
- */
 package service;
 
 import model.Showtime;
-import repository.ShowtimeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import database.Database;
+import java.time.LocalDateTime;
+import java.util.*;
 
-import java.util.List;
-
-@Service
 public class ShowtimeService {
-    private final ShowtimeRepository showtimeRepository;
-
-    @Autowired
-    public ShowtimeService(ShowtimeRepository showtimeRepository) {
-        this.showtimeRepository = showtimeRepository;
+    public boolean addShowtime(String movieId, String screen, LocalDateTime startTime, int totalSeats) {
+        for (Showtime s : Database.showtimes.values()) {
+            if (s.screen.equals(screen)) {
+                LocalDateTime sStart = s.startTime;
+                LocalDateTime sEnd = s.startTime.plusHours(2);
+                LocalDateTime newEnd = startTime.plusHours(2);
+                boolean overlap = startTime.isBefore(sEnd) && sStart.isBefore(newEnd);
+                if (overlap) return false;
+            }
+        }
+        String id = UUID.randomUUID().toString();
+        Showtime newShowtime = new Showtime(id, movieId, screen, startTime, totalSeats);
+        Database.showtimes.put(id, newShowtime);
+        return true;
     }
 
     public List<Showtime> getAllShowtimes() {
-        return showtimeRepository.findAll();
+        return new ArrayList<>(Database.showtimes.values());
     }
 
-    public Showtime getShowtimeById(int id) {
-        return showtimeRepository.findById(id).orElse(null);
+    public List<Showtime> getShowtimesByScreen(String screen) {
+        List<Showtime> list = new ArrayList<>();
+        for (Showtime s : Database.showtimes.values()) {
+            if (s.screen.equals(screen)) {
+                list.add(s);
+            }
+        }
+        return list;
     }
+}
 
     public Showtime addShowtime(Showtime showtime) {
         return showtimeRepository.save(showtime);
