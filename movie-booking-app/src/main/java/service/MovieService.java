@@ -1,30 +1,34 @@
 package service;
 
 import model.Movie;
-import repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import database.Database;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import java.util.List;
-
-@Service
 public class MovieService {
-    private final MovieRepository movieRepository;
-
-    @Autowired
-    public MovieService(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public boolean addMovie(String name, String description, String rating) {
+        String id = UUID.randomUUID().toString();
+        Movie movie = new Movie(id, name, description, rating, true);
+        Database.movies.put(id, movie);
+        return true;
     }
 
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    public boolean removeMovie(String movieId) {
+        if (Database.movies.containsKey(movieId)) {
+            Database.movies.remove(movieId);
+            return true;
+        }
+        return false;
     }
 
-    public Movie getMovieById(int id) {
-        return movieRepository.findById(id).orElse(null);
+    public List<Movie> getCurrentMovies() {
+        return Database.movies.values().stream()
+            .filter(Movie::isActive)
+            .collect(Collectors.toList());
     }
 
-    public Movie addMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public String getMovieRating(String movieId) {
+        Movie movie = Database.movies.get(movieId);
+        return movie != null ? movie.rating : null;
     }
 }
