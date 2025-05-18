@@ -20,7 +20,6 @@ public class MovieController {
 
     @GetMapping
     public String getAllMovies(Model model) {
-        System.out.println(movieService.getAllMovies().toString());
         model.addAttribute("movies", movieService.getAllMovies());
         return "movie_list";
     }
