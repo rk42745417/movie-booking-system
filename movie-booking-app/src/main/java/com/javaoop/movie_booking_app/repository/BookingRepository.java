@@ -39,10 +39,10 @@ public class BookingRepository {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     bookings.add(new Booking(
-                        rs.getInt("id"),
-                        rs.getInt("user_id"),
-                        rs.getInt("session_id"),
-                        rs.getString("seat_label")
+                            rs.getInt("id"),
+                            rs.getInt("user_id"),
+                            rs.getInt("session_id"),
+                            rs.getString("seat_label")
                     ));
                 }
             }
@@ -77,10 +77,10 @@ public class BookingRepository {
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 bookings.add(new Booking(
-                    rs.getInt("id"),
-                    rs.getInt("user_id"),
-                    rs.getInt("session_id"),
-                    rs.getString("seat_label")
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getInt("session_id"),
+                        rs.getString("seat_label")
                 ));
             }
         } catch (SQLException e) {

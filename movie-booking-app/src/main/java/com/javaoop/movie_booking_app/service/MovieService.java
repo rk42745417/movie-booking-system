@@ -2,6 +2,7 @@ package com.javaoop.movie_booking_app.service;
 
 import com.javaoop.movie_booking_app.model.Movie;
 import database.Database;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,8 +24,8 @@ public class MovieService {
 
     public List<Movie> getCurrentMovies() {
         return Database.movies.values().stream()
-            .filter(Movie::isActive)
-            .collect(Collectors.toList());
+                .filter(Movie::isActive)
+                .collect(Collectors.toList());
     }
 
     public String getMovieRating(String movieId) {

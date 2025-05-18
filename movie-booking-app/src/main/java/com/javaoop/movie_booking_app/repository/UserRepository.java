@@ -19,8 +19,8 @@ public class UserRepository {
             pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"), 
-                                    rs.getDate("birthdate").toLocalDate(), rs.getBoolean("is_admin"));
+                    return new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"),
+                            rs.getDate("birthdate").toLocalDate(), rs.getBoolean("is_admin"));
                 }
             }
         } catch (SQLException e) {
@@ -41,7 +41,7 @@ public class UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-		return user;
+        return user;
     }
 
     // Find all users

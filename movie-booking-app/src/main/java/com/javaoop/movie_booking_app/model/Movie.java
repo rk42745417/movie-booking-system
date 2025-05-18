@@ -30,7 +30,7 @@ public class Movie {
     /**
      * Name of the movie.
      */
-    @Column(name = "title", nullable = false, length = 255)
+    @Column(name = "title", nullable = false)
     private String title;
 
     /**

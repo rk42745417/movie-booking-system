@@ -34,8 +34,8 @@ public class BookingService {
 
     public List<Ticket> getUserTickets(String userId) {
         return Database.tickets.values().stream()
-            .filter(t -> t.userId.equals(userId))
-            .collect(Collectors.toList());
+                .filter(t -> t.userId.equals(userId))
+                .collect(Collectors.toList());
     }
 
     public boolean cancelTicket(String ticketId) {

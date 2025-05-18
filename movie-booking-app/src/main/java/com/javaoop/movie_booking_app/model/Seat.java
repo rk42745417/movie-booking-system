@@ -11,16 +11,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+
 /**
  * Defines every seat within each hall, including its location.
  */
 @Entity
-@Table(name = "Seats",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uq_hall_row_number",
-                        columnNames = {"hall_id", "row_char", "seat_number_in_row"})
-        }
-)
+@Table(name = "Seats", uniqueConstraints = {@UniqueConstraint(name = "uq_hall_row_number", columnNames = {"hall_id", "row_char", "seat_number_in_row"})})
 public class Seat {
     /**
      * Uid for a seat.
@@ -93,11 +89,7 @@ public class Seat {
 
     @Override
     public String toString() {
-        return "Seat{" +
-                "seatId=" + seatId +
-                ", hallId=" + (hall != null ? hall.getHallId() : "null") + // Avoid NPE if hall is null
-                ", rowChar='" + rowChar + '\'' +
-                ", seatNumberInRow=" + seatNumberInRow +
-                '}';
+        return "Seat{" + "seatId=" + seatId + ", hallId=" + (hall != null ? hall.getHallId() : "null") + // Avoid NPE if hall is null
+                ", rowChar='" + rowChar + '\'' + ", seatNumberInRow=" + seatNumberInRow + '}';
     }
 }

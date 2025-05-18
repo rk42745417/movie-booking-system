@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+
 import java.time.LocalDate; // Using java.time.LocalDate for DATE type
 
 @Entity
@@ -25,13 +26,13 @@ public class Member {
     /**
      * Email address.
      */
-    @Column(name = "email", nullable = false, unique = true, length = 255)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     /**
      * Hashed password.
      */
-    @Column(name = "password_hash", nullable = false, length = 255)
+    @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
     /**

@@ -3,6 +3,7 @@ package com.javaoop.movie_booking_app.service;
 import com.javaoop.movie_booking_app.model.User;
 import model.Ticket;
 import database.Database;
+
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -28,14 +29,14 @@ public class UserService {
     public User login(String email, String password) {
         String encrypted = Base64.getEncoder().encodeToString(password.getBytes());
         return Database.users.values().stream()
-            .filter(u -> u.email.equals(email) && u.password.equals(encrypted))
-            .findFirst().orElse(null);
+                .filter(u -> u.email.equals(email) && u.password.equals(encrypted))
+                .findFirst().orElse(null);
     }
 
     public List<Ticket> getUserTickets(String userId) {
         return Database.tickets.values().stream()
-            .filter(t -> t.userId.equals(userId))
-            .collect(Collectors.toList());
+                .filter(t -> t.userId.equals(userId))
+                .collect(Collectors.toList());
     }
 }
 

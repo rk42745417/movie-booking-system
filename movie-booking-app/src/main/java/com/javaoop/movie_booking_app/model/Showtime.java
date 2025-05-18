@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+
 import java.time.LocalDateTime;
 
 /**
@@ -55,7 +56,8 @@ public class Showtime {
     private LocalDateTime startTime;
 
     /**
-     * Date and time the movie screening ends (calculated from start_time + movie_duration).*/
+     * Date and time the movie screening ends (calculated from start_time + movie_duration).
+     */
     @Column(name = "end_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime endTime;
