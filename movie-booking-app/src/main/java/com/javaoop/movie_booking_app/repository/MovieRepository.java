@@ -1,6 +1,6 @@
-package repository;
+package com.javaoop.movie_booking_app.repository;
 
-import model.Movie;
+import com.javaoop.movie_booking_app.model.Movie;
 
 import java.sql.*;
 import java.util.ArrayList;

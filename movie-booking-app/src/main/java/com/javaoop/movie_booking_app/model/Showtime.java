@@ -1,4 +1,4 @@
-package model;
+package com.javaoop.movie_booking_app.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

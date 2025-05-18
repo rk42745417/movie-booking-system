@@ -1,6 +1,6 @@
-package service;
+package com.javaoop.movie_booking_app.service;
 
-import model.Movie;
+import com.javaoop.movie_booking_app.model.Movie;
 import database.Database;
 import java.util.*;
 import java.util.stream.Collectors;

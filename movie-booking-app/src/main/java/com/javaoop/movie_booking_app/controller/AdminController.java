@@ -1,14 +1,14 @@
-package controller;
+package com.javaoop.movie_booking_app.controller;
 
-import service.MovieService;
-import service.ShowtimeService;
+import com.javaoop.movie_booking_app.service.MovieService;
+import com.javaoop.movie_booking_app.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import model.Movie;
-import model.Showtime;
+import com.javaoop.movie_booking_app.model.Movie;
+import com.javaoop.movie_booking_app.model.Showtime;
 
 @Controller
 public class AdminController {

@@ -1,11 +1,11 @@
-package service;
+package com.javaoop.movie_booking_app.service;
 
-import model.Movie;
-import model.User;
-import model.Booking;
-import repository.MovieRepository;
-import repository.UserRepository;
-import repository.BookingRepository;
+import com.javaoop.movie_booking_app.model.Movie;
+import com.javaoop.movie_booking_app.model.User;
+import com.javaoop.movie_booking_app.model.Booking;
+import com.javaoop.movie_booking_app.repository.MovieRepository;
+import com.javaoop.movie_booking_app.repository.UserRepository;
+import com.javaoop.movie_booking_app.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
-package controller;
+package com.javaoop.movie_booking_app.controller;
 
-import model.Booking;
-import model.User;
-import service.BookingService;
-import service.MovieService;
+import com.javaoop.movie_booking_app.model.Booking;
+import com.javaoop.movie_booking_app.model.User;
+import com.javaoop.movie_booking_app.service.BookingService;
+import com.javaoop.movie_booking_app.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,10 +1,12 @@
-package service;
+package com.javaoop.movie_booking_app.service;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import model.*;
+import com.javaoop.movie_booking_app.model.Movie;
+import com.javaoop.movie_booking_app.model.Showtime;
+import com.javaoop.movie_booking_app.model.User;
 import database.Database;
 
 public class BookingService {

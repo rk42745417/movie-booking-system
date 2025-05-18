@@ -1,10 +1,10 @@
-package repository;
+package com.javaoop.movie_booking_app.repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Theater;
+import com.javaoop.movie_booking_app.model.Theater;
 
 public class TheaterRepository {
     private static final String SELECT_ALL_THEATERS = "SELECT * FROM theaters";

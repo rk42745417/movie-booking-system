@@ -1,6 +1,6 @@
-package repository;
+package com.javaoop.movie_booking_app.repository;
 
-import model.Showtime;
+import com.javaoop.movie_booking_app.model.Showtime;
 
 import java.sql.*;
 import java.util.ArrayList;

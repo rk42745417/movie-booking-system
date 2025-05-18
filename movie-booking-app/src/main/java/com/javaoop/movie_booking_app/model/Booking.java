@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model;
+package com.javaoop.movie_booking_app.model;
 
 /**
  * 

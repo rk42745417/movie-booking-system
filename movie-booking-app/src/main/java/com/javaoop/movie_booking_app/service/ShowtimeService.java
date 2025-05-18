@@ -1,6 +1,6 @@
-package service;
+package com.javaoop.movie_booking_app.service;
 
-import model.Showtime;
+import com.javaoop.movie_booking_app.model.Showtime;
 import database.Database;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -35,7 +35,6 @@ public class ShowtimeService {
         }
         return list;
     }
-}
 
     public Showtime addShowtime(Showtime showtime) {
         return showtimeRepository.save(showtime);
