@@ -23,8 +23,16 @@ show databases;
 
 確認是否完成建立。
 
-完成後就可以嘗試執行專案啦！
+完成後就可以嘗試執行專案了。
 
 基本上就是找到 `movie-booking-app/src/main/java/com/javaoop/movie_booking_app/MovieBookingAppApplication.java`，然後像是在寫作業的時候直接執行那個 class 或 Main()。
 
-執行起來如果程式沒有終止掉（也就是紅色的停止鍵還亮著），那就能打開瀏覽器輸入網址 [localhost:8080/movies](http://localhost:8080) 看到結果囉。
+執行起來如果程式沒有終止掉（也就是紅色的停止鍵還亮著），那就能打開瀏覽器輸入網址 [localhost:8080/movies](http://localhost:8080) 看到結果。
+
+
+後話：看到結果後，可以嘗試在剛剛的 mysql 指令欄裡面輸入
+```mysql
+INSERT INTO movie_booking.movies(movie_id, title, is_active, duration_minutes, rating_category, synopsis)
+VALUES(5, '嗨', true, 150, '普遍級', '哈哈哈哈');
+```
+然後重新打開瀏覽器看看是否多了這個 movie。
