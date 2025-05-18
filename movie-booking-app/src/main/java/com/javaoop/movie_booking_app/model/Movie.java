@@ -12,7 +12,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 /**
- * Stores details about each movie. (電影)
+ * Stores details about each movie.
  */
 @Entity
 @Table(name = "Movies", indexes = {
@@ -58,10 +58,11 @@ public class Movie {
     private LocalDate releaseDate;
     */
 
-    /*
+    /**
+     * Indicates if the movieis currently available.
+     */
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;
-    */
 
     public Movie() {
     }

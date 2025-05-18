@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `Movies` (
   `duration_minutes` INT UNSIGNED NOT NULL COMMENT 'Length of the movie in minutes',
   `rating_category` ENUM('普遍級', '保護級', '限制級') NOT NULL COMMENT 'Movie rating. Used for age checks.',
   -- `release_date` DATE COMMENT 'The official release date of the movie',
-  -- `is_active` BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indicates if the movie is currently available',
+  `is_active` BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indicates if the movie is currently available',
   PRIMARY KEY (`movie_id`),
   INDEX `idx_title` (`title`)
 ) COMMENT = 'Stores details about each movie.';
