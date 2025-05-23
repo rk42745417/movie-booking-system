@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>訂票系統主畫面</title>
+  <link rel="stylesheet" href="4style.css">
+</head>
+<body style="background-color: rgb(55, 47, 64);">
+
+  <!-- 左側功能選單 -->
+  <div class="sidebar">
+    <h2>功能選單</h2>
+    <a href ="5訂票用戶＿電影資訊查詢.html" class="menu-button"> 🎬 上映電影 </a>
+    <a href ="5訂票用戶＿電影資訊查詢.html" class="menu-button"> 🎟️ 我要訂票 </a>
+    <a href ="9訂票用戶＿查詢訂單.html" class="menu-button"> 🧾 查詢訂單 </a>
+    <!--button class="menu-button" onclick="showSection('movies')">🎬 上映電影</button>
+    <button class="menu-button" onclick="showSection('booking')">🎟️ 我要訂票</button>
+    <button class="menu-button" onclick="showSection('orders')">🧾 查詢訂單</button-->
+  </div>
+
+  <!-- 右側主內容區 -->
+  <div class="main-content">
+    
+    <!-- 查詢電影區塊（預設顯示） -->
+    <div id="movies" class="section active">
+      <h2>🎬 熱門上映中</h2>
+
+      <!-- 電影卡片清單 -->
+      <div class="movie-grid">
+
+        <!-- 電影 1 -->
+        <div class="movie-card">
+          <img src="火線追緝令.jpeg" alt="電影海報">
+          <div class="info">
+            <h3>火線追緝令</h3>
+            <p>一場穿越銀河的科學旅程，尋找第二個地球。</p>
+            <div class="date">上映日：2025/05/20</div>
+            <button>立即訂票</button>
+          </div>
+        </div>
+
+        <!-- 電影 2 -->
+        <div class="movie-card">
+          <img src="史蒂芬金之猴子.jpeg" alt="電影海報">
+          <div class="info">
+            <h3>史蒂芬金之猴子</h3>
+            <p>當過去與現在交錯，一場謎團即將揭曉。</p>
+            <div class="date">上映日：2025/06/01</div>
+            <button>立即訂票</button>
+          </div>
+        </div>
+
+        <!-- 電影 3 -->
+        <div class="movie-card">
+          <img src="夜校女生.jpeg" alt="電影海報">
+          <div class="info">
+            <h3>夜校女生</h3>
+            <p>一家四口的奇幻暑假，充滿笑與淚的溫馨故事。</p>
+            <div class="date">上映日：2025/05/10</div>
+            <button>立即訂票</button>
+          </div>
+        </div>
+        <!-- 電影 4 -->
+        <div class="movie-card">
+          <img src="美國隊長.jpeg" alt="電影海報">
+          <div class="info">
+            <h3>美果隊長</h3>
+            <p>一家四口的奇幻暑假，充滿笑與淚的溫馨故事。</p>
+            <div class="date">上映日：2025/05/10</div>
+            <button>立即訂票</button>
+          </div>
+        </div>
+        <!-- 電影 5 -->
+        <div class="movie-card">
+          <img src="殺人預言.jpeg" alt="電影海報">
+          <div class="info">
+            <h3>殺人預言</h3>
+            <p>一家四口的奇幻暑假，充滿笑與淚的溫馨故事。</p>
+            <div class="date">上映日：2025/05/10</div>
+            <button>立即訂票</button>
+          </div>
+        </div>
+        <!-- 電影 6 -->
+        <div class="movie-card">
+            <img src="窒息倒數.jpeg" alt="電影海報">
+            <div class="info">
+                <h3>窒息倒數</h3>
+                <p>一家四口的奇幻暑假，充滿笑與淚的溫馨故事。</p>
+                <div class="date">上映日：2025/05/10</div>
+                <button>立即訂票</button>
+            </div>
+        </div>
+        <!-- 電影 7 -->
+        <div class="movie-card">
+            <img src="粗獷派建築師.jpeg" alt="電影海報">
+            <div class="info">
+                <h3>粗獷派建築師</h3>
+                <p>一家四口的奇幻暑假，充滿笑與淚的溫馨故事。</p>
+                <div class="date">上映日：2025/05/10</div>
+                <button>立即訂票</button>
+            </div>
+        </div>
+        <!-- 電影 8 -->
+        <div class="movie-card">
+            <img src="機動戰士.jpeg" alt="電影海報">
+            <div class="info">
+                <h3>機動戰士</h3>
+                <p>一家四口的奇幻暑假，充滿笑與淚的溫馨故事。</p>
+                <div class="date">上映日：2025/05/10</div>
+                <button>立即訂票</button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 訂票區塊 -->
+    <div id="booking" class="section">
+      <h2>訂票</h2>
+      <p>這裡可以放訂票表單</p>
+    </div>
+
+    <!-- 查詢訂單區塊 -->
+    <div id="orders" class="section">
+      <h2>查詢訂單</h2>
+      <p>這裡可以查詢歷史訂票紀錄</p>
+    </div>
+  </div>
+
+  <!-- JavaScript：切換顯示的區塊 -->
+  <script>
+    function showSection(id) {
+      // 把所有區塊隱藏
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      // 顯示指定的區塊
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

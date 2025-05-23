@@ -1,8 +1,22 @@
 
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #475aa5; /* 藍色 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #2d3e80; /* 滑鼠移上去的顏色變化 */
+}
 .button-link {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #475aa5; /* 綠色背景 */
+  background-color: #475aa5; /* 藍色背景 */
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -19,7 +33,7 @@ left: 50%;
 width: 500px;
 height: auto;
 transform: translate(-50%, -50%);
-background-color: #f0f0f0;
+background-color: #dbdbdb;
 padding: 50px;
 border-radius: 10px;
 text-align: center;
