@@ -3,20 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>電影列表</title>
-  <style>
-    .movie-card {
-      border: 1px solid #ccc;
-      padding: 16px;
-      margin: 12px;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-    }
-  </style>
+
+  <link rel="stylesheet" href="5style.css">
 </head>
 <body>
-  <h1>🎬 電影清單</h1>
-  <div id="movie-list"></div>
+  <div class="sidebar">
+    <h2>功能選單</h2>
+    
+    <a href ="5訂票用戶＿電影資訊查詢.html" class="menu-button"> 🎬 上映電影 </a>
+    <a href ="5訂票用戶＿電影資訊查詢.html" class="menu-button"> 🎟️ 我要訂票 </a>
+    <a href ="9訂票用戶＿查詢訂單.html" class="menu-button"> 🧾 查詢訂單 </a>
+    
+  </div>
 
+  <!--h1 id="page-title"></h1>
+
+  <div id="movie-list"></div-->
+
+  <main id="content">
+    <h1 id="page-title">🎬 電影清單</h1>
+    <div id="movie-list"></div>
+  </main>
 
   <script src="5.js"></script>
 </body>
