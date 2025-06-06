@@ -1,31 +1,40 @@
-/**
- * 
- */
 package com.javaoop.gym_booking_app.controller;
 
-import model.Coach;
+import com.javaoop.gym_booking_app.model.Course;
 import com.javaoop.gym_booking_app.service.CoachService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.javaoop.gym_booking_app.service.ServiceResult;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * 
- */
+import java.time.LocalDateTime;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/coaches")
+@RequiredArgsConstructor
 public class CoachController {
+
     private final CoachService coachService;
 
-    @Autowired
-    public CoachController(CoachService coachService) {
-        this.coachService = coachService;
+    /* ---------- 建立課程 ---------- */
+    @PostMapping("/{coachId}/courses")
+    public ResponseEntity<?> createCourse(@PathVariable Long coachId,
+                                          @RequestBody CreateCourseReq req) {
+        ServiceResult rs = coachService.createCourse(
+                coachId, req.title(), req.description(), req.roomId(), req.capacity(),
+                req.startTime(), req.endTime());
+        return rs.success() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
     }
 
-    @PostMapping("/add")
-    public Coach addCoach(@RequestBody Coach coach) {
-        return coachService.addCoach(coach);
+    /* ---------- 列出教練課程 ---------- */
+    @GetMapping("/{coachId}/courses")
+    public List<Course> listCoachCourses(@PathVariable Long coachId) {
+        return coachService.listCourses(coachId);
     }
 
-    @GetMapping("/{coachId}")
-    public Coach getCoach(@PathVariable Long coachId) {
-        return coachService.getCoachById(coachId);
-    }
+    /* DTO */
+    public record CreateCourseReq(String title, String description,
+                                  Long roomId, Integer capacity,
+                                  LocalDateTime startTime, LocalDateTime endTime) {}
 }

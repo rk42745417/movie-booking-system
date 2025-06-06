@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>訂單查詢（營運人員）</title>
+  <style>
+    .search-bar {
+      margin-bottom: 20px;
+    }
+    .search-bar input {
+      padding: 6px;
+      margin-right: 10px;
+    }
+    .order-card {
+      border: 1px solid #ccc;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+    }
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>使用者訂單紀錄查詢</h1>
+
+  <div class="search-bar">
+    <input type="text" id="userEmailInput" placeholder="輸入使用者 email">
+    <input type="text" id="sessionInput" placeholder="輸入電影場次 ID">
+  </div>
+
+  <div id="order-container"></div>
+
+  <script>
+    async function fetchOrders() {
+      const email = document.getElementById("userEmailInput").value.trim();
+      const sessionId = document.getElementById("sessionInput").value.trim();
+
+      // 建立查詢參數
+      const params = new URLSearchParams();
+      if (email) params.append("user_email", email);
+      if (sessionId) params.append("session_id", sessionId);
+
+      const res = await fetch(`https://your-api-url.com/orders?${params.toString()}`);
+      const orders = await res.json();
+
+      const container = document.getElementById("order-container");
+      container.innerHTML = "";
+
+      if (orders.length === 0) {
+        container.innerHTML = "<p>查無符合的訂單。</p>";
+        return;
+      }
+
+      orders.forEach(order => {
+        const div = document.createElement("div");
+        div.className = "order-card";
+
+        div.innerHTML = `
+          <div><span class="label">使用者：</span>${order.user_email}</div>
+          <div><span class="label">訂單編號：</span>${order.order_id}</div>
+          <div><span class="label">電影：</span>${order.movie_title_zh} (${order.movie_title_en})</div>
+          <div><span class="label">座位：</span>${order.seats.join(", ")}</div>
+          <div><span class="label">狀態：</span>${order.status}</div>
+          <div><span class="label">建立時間：</span>${new Date(order.created_at).toLocaleString()}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // 加入即時監聽
+    document.getElementById("userEmailInput").addEventListener("input", fetchOrders);
+    document.getElementById("sessionInput").addEventListener("input", fetchOrders);
+
+    // 預設載入全部訂單
+    fetchOrders();
+  </script>
+</body>
+</html>
+<!--預期後端支援的查詢格式，後端會根據 query 參數篩選並回傳符合條件的訂單。
+GET /orders
+GET /orders?user_email=user@example.com
+GET /orders?session_id=fcen14513804
+GET /orders?user_email=user@example.com&session_id=fcen14513804
+-->

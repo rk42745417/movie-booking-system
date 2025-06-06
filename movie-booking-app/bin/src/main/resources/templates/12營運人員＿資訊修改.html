@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>電影後台管理</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .movie-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 20px;
+      background-color: #f9f9f9;
+    }
+    label { display: block; margin-top: 8px; font-weight: bold; }
+    input, textarea {
+      width: 100%;
+      margin-top: 2px;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      font-weight: bold;
+    }
+    h2 { border-bottom: 2px solid #ccc; padding-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <h1>營運人員後台：電影編輯管理</h1>
+
+  <!-- 新增電影表單 -->
+  <div class="movie-card">
+    <h2>➕ 新增電影</h2>
+    <label>atmovies_id：
+      <input type="text" id="new-atmovies_id">
+    </label>
+    <label>imdb_id：
+      <input type="text" id="new-imdb_id">
+    </label>
+    <label>中文片名：
+      <input type="text" id="new-title_zh">
+    </label>
+    <label>英文片名：
+      <input type="text" id="new-title_en">
+    </label>
+    <label>分級：
+      <input type="text" id="new-classification">
+    </label>
+    <label>片長（分鐘）：
+      <input type="number" id="new-length">
+    </label>
+    <label>簡介：
+      <textarea id="new-summary" rows="4"></textarea>
+    </label>
+    <button onclick="addMovie()">新增電影</button>
+  </div>
+
+  <!-- 現有電影列表 -->
+  <h2>🎬 所有電影</h2>
+  <div id="movies-container">載入中...</div>
+
+  <script>
+    async function fetchMovies() {
+      const container = document.getElementById("movies-container");
+      container.innerHTML = "載入中...";
+      try {
+        const response = await fetch('https://your-api-url.com/movies'); // 替換你的 API
+        const movies = await response.json();
+        container.innerHTML = "";
+
+        movies.forEach(movie => {
+          const div = document.createElement("div");
+          div.className = "movie-card";
+          div.innerHTML = `
+            <label>中文片名：
+              <input type="text" id="title_zh-${movie.atmovies_id}" value="${movie.title_zh}">
+            </label>
+            <label>英文片名：
+              <input type="text" id="title_en-${movie.atmovies_id}" value="${movie.title_en}">
+            </label>
+            <label>分級：
+              <input type="text" id="class-${movie.atmovies_id}" value="${movie.classification}">
+            </label>
+            <label>片長（分鐘）：
+              <input type="number" id="length-${movie.atmovies_id}" value="${movie.length}">
+            </label>
+            <label>簡介：
+              <textarea id="summary-${movie.atmovies_id}" rows="4">${movie.summary}</textarea>
+            </label>
+            <button onclick="updateMovie('${movie.atmovies_id}')">儲存</button>
+            <button onclick="deleteMovie('${movie.atmovies_id}')" style="margin-left: 10px; background-color: red; color: white;">刪除</button>
+
+          `;
+          container.appendChild(div);
+        });
+      } catch (error) {
+        container.innerHTML = "載入失敗：" + error.message;
+      }
+    }
+
+    async function updateMovie(id) {
+      const data = {
+        title_zh: document.getElementById(`title_zh-${id}`).value,
+        title_en: document.getElementById(`title_en-${id}`).value,
+        classification: document.getElementById(`class-${id}`).value,
+        length: parseInt(document.getElementById(`length-${id}`).value),
+        summary: document.getElementById(`summary-${id}`).value
+      };
+
+      try {
+        const response = await fetch(`https://your-api-url.com/movies/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error("儲存失敗");
+        alert("儲存成功！");
+      } catch (err) {
+        alert("錯誤：" + err.message);
+      }
+    }
+
+    async function addMovie() {
+      const data = {
+        atmovies_id: document.getElementById("new-atmovies_id").value,
+        imdb_id: document.getElementById("new-imdb_id").value,
+        title_zh: document.getElementById("new-title_zh").value,
+        title_en: document.getElementById("new-title_en").value,
+        classification: document.getElementById("new-classification").value,
+        length: parseInt(document.getElementById("new-length").value),
+        summary: document.getElementById("new-summary").value
+      };
+
+      try {
+        const response = await fetch('https://your-api-url.com/movies', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!response.ok) throw new Error("新增失敗");
+        alert("新增成功！");
+        fetchMovies(); // 重新載入列表
+      } catch (err) {
+        alert("錯誤：" + err.message);
+      }
+    }
+
+    async function deleteMovie(id) {
+    if (!confirm(`確定要刪除電影（ID: ${id}）嗎？`)) return;
+
+    try {
+      const response = await fetch(`https://your-api-url.com/movies/${id}`, {
+        method: 'DELETE'
+      });
+      if (!response.ok) throw new Error("刪除失敗");
+      alert("刪除成功！");
+      fetchMovies(); // 重新載入
+    } catch (err) {
+      alert("錯誤：" + err.message);
+    }
+  }
+    window.addEventListener('DOMContentLoaded', fetchMovies);
+  </script>
+</body>
+</html>
