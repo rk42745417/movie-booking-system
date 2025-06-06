@@ -1,10 +1,10 @@
 /**
  * 
  */
-package controller;
+package com.javaoop.gym_booking_app.controller;
 
 import model.Member;
-import service.MemberService;
+import com.javaoop.gym_booking_app.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 /**

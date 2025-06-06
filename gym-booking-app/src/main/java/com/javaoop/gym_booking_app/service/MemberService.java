@@ -1,4 +1,4 @@
-package service;
+package com.javaoop.gym_booking_app.service;
 
 import model.Member;
 import model.Reservation;

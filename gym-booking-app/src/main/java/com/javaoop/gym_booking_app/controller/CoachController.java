@@ -1,10 +1,10 @@
 /**
  * 
  */
-package controller;
+package com.javaoop.gym_booking_app.controller;
 
 import model.Coach;
-import service.CoachService;
+import com.javaoop.gym_booking_app.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

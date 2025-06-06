@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller;
+package com.javaoop.gym_booking_app.controller;
 
 import model.CourseStatus;
 import service.CourseService;
