@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健身預約系統</title>
+  <style>
+    /* 變數 */
+    :root {
+      --accent: #8e44ad;
+      --text: #333;
+      --bg: #fff;
+      --muted: #f4f1ff;
+      --shape1: rgba(142, 68, 173, 0.1);
+      --shape2: rgba(142, 68, 173, 0.15);
+      --shape3: rgba(142, 68, 173, 0.08);
+      --radius: 8px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: var(--muted);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    /* 動畫影格 */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+      50% { transform: translateY(-20px) translateX(10px) rotate(15deg); }
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* 動畫幾何圖形：置於最底層 */
+    .shape {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.7;
+    }
+    .shape.circle {
+      width: 150px;
+      height: 150px;
+      background: var(--shape1);
+      border-radius: 50%;
+      top: 15%;
+      left: -80px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .shape.large-circle {
+      width: 300px;
+      height: 300px;
+      background: var(--shape2);
+      border-radius: 50%;
+      bottom: -120px;
+      right: 5%;
+      animation: float 12s ease-in-out infinite;
+    }
+    .shape.triangle {
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 100px solid var(--shape3);
+      top: 5%;
+      right: 25%;
+      animation: spin 20s linear infinite;
+    }
+    .shape.square {
+      width: 100px;
+      height: 100px;
+      background: var(--shape2);
+      border-radius: var(--radius);
+      bottom: 30%;
+      left: 10%;
+      animation: spin 15s linear infinite;
+    }
+    /* 課程方框金屬光澤紫色斜線條 */
+    .course-item {
+      background: var(--bg);
+      position: relative;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 120px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 2;
+    }
+    .course-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .course-item .title { font-size: 18px; font-weight: 600; z-index: 1; }
+    .course-item::before,
+    .course-item::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 120%;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background-clip: content-box;
+    }
+    .course-item::before {
+      top: -10%;
+      right: 15px;
+      transform: rotate(25deg);
+    }
+    .course-item::after {
+      top: -10%;
+      right: 30px;
+      transform: rotate(25deg);
+    }
+    .course-item:hover::before,
+    .course-item:hover::after {
+      opacity: 1;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background: var(--bg);
+      border-bottom: 4px solid var(--accent);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .logo { font-size: 24px; font-weight: bold; }
+    .menu-btn { width: 28px; height: 20px; position: relative; cursor: pointer; transition: transform 0.4s ease; }
+    .menu-btn span { position: absolute; height: 3px; width: 100%; background: var(--text); left: 0; }
+    .menu-btn span:nth-child(1) { top: 0; }
+    .menu-btn span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-btn span:nth-child(3) { bottom: 0; }
+
+    /* 主內容 */
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 40px 32px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .status {
+      background: var(--bg);
+      border-left: 4px solid var(--accent);
+      padding: 16px;
+      margin-bottom: 24px;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    .announcement {
+      background: var(--bg);
+      position: relative;
+      padding: 0 16px 16px;
+      margin-bottom: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .announcement::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(60deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
+      transform: rotate(25deg);
+      transition: transform 0.7s ease;
+    }
+    .announcement:hover::before {
+      transform: translateX(50%) translateY(50%) rotate(25deg);
+    }
+    .announcement h2 {
+      margin: 16px 0 8px;
+      padding: 4px 12px;
+      background: var(--accent);
+      color: #fff;
+      display: inline-block;
+      border-radius: var(--radius);
+    }
+    .announcement .scroll { max-height: 240px; overflow-y: auto; padding: 0 16px; }
+    .announcement p { margin: 8px 0; }
+    .courses h2 { color: var(--accent); text-align: center; }
+    .course-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .course-list a { text-decoration: none; color: inherit; }
+    .course-item {
+      background: var(--bg);
+      position: relative;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 120px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 2;
+    }
+    .course-item::before {
+      content: '';
+      position: absolute;
+      top: -100%; left: -100%;
+      width: 200%; height: 200%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+      transform: translateX(-100%) translateY(-100%) rotate(25deg);
+      transition: transform 0.7s ease;
+    }
+    .course-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .course-item:hover::before {
+      transform: translateX(0) translateY(0) rotate(25deg);
+    }
+    .course-item .title { font-size: 18px; font-weight: 600; z-index: 1; }
+
+    /* 選單 */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 10;
+    }
+    .overlay.active { display: block; }
+    .menu-content {
+      position: fixed;
+      top: 0; right: 0;
+      width: 280px; height: 100%;
+      background: var(--bg);
+      box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+      z-index: 15;
+    }
+    .overlay.active .menu-content { transform: translateX(0); }
+    .menu-content h3 { margin: 24px 0; color: var(--accent); font-size: 24px; text-align: center; }
+    .menu-content a { display: block; text-decoration: none; color: var(--text); font-size: 18px; padding: 12px 24px; border-bottom: 1px solid #ddd; transition: color 0.3s; }
+    .menu-content a:hover { color: var(--accent); }
+    .menu-content .close-btn { display: block; text-align: right; padding: 12px 24px; cursor: pointer; color: #888; }
+
+    /* Footer */
+    .site-footer { background: var(--accent); color: #fff; padding: 40px 5%; text-align: center; }
+    .site-footer p { margin: 8px 0; }
+    @media (max-width: 768px) { .site-footer { text-align: center; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><strong>OOPL GYM</strong></div>
+    <div class="menu-btn" id="openMenuBtn"><span></span><span></span><span></span></div>
+  </header>
+
+  <main>
+    <!-- 動畫幾何圖形 -->
+    <div class="shape circle"></div>
+    <div class="shape large-circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape square"></div>
+
+    <div class="status">健身房/游泳池目前人數：<span id="currentCount">0</span></div>
+    <div class="announcement">
+      <h2>最新公告</h2>
+      <div class="scroll">
+        <p>蛋黃</p>
+        <p>我是小尾巴</p>
+        <p>我是bibo</p>
+        <p>寶寶</p>
+        <p>生日快樂</p>
+        <p>愛你</p>
+        <p>我不想寫作業</p>
+        <p>好難</p>
+        <p>我哪會</p>
+        <p>寶寶抱抱</p>
+        <p>想你了</p>
+        <p>跟大家分享莓果乳酸好喝</p>
+        <p>加氣泡水更好喝</p>
+        <p>迷克夏新品好期待</p>
+        <p>今天沒有遛狗ㄟ</p>
+        <p>甚麼時候才要放假</p>
+        <p>好想追劇</p>
+        <p>今天演講課大睡覺</p>
+        <p>這不知道第幾個</p>
+        <p>好累</p>
+      </div>
+    </div>
+    <section class="courses">
+      <h2>課程資訊</h2>
+      <div class="course-list">
+        <a href="test.html" class="course-item"><div class="title">游泳課程</div></a>
+        <a href="ball.html" class="course-item"><div class="title">球類課程</div></a>
+        <a href="gym.html" class="course-item"><div class="title">健身房課程</div></a>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay" id="menuOverlay">
+    <div class="menu-content">
+      <h3>選單</h3>
+      <a href="index.html">主頁</a>
+      <a href="announce.html">優惠與公告</a>
+      <a href="venue.html">場館資訊</a>
+      <a href="transport.html">交通指引</a>
+      <a href="info.html">中心簡介</a>
+      <a href="usage.html">使用須知</a>
+      <a href="signup.html">線上報名</a>
+      <a href="contact.html">聯絡我們</a>
+      <div class="close-btn" id="closeMenuBtn">關閉</div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>地址：台北市大安區羅斯福路4段1號</p>
+    <p>客服專線｜1234-567-890</p>
+    <p>服務時間｜週一至週五 9:00-12:00 · 13:00-18:00</p>
+  </footer>
+
+  <script>
+    const openBtn = document.getElementById('openMenuBtn');
+    const overlay = document.getElementById('menuOverlay');
+    const closeBtn = document.getElementById('closeMenuBtn');
+    openBtn.addEventListener('click', () => { overlay.classList.toggle('active'); openBtn.classList.toggle('active'); });
+    closeBtn.addEventListener('click', () => { overlay.classList.remove('active'); openBtn.classList.remove('active'); });
+    overlay.addEventListener('click', e => { if (e.target === overlay) { overlay.classList.remove('active'); openBtn.classList.remove('active'); } });
+    document.querySelectorAll('.course-item').forEach(item => { item.addEventListener('click', e => { e.preventDefault(); item.classList.add('active'); const link = item.getAttribute('href'); setTimeout(() => { item.classList.remove('active'); window.location.href = link; }, 600); }); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { overlay.classList.remove('active'); openBtn.classList.remove('active'); } });
+  </script>
+</body>
+</html>
