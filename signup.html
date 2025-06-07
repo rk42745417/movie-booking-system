@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>會員登入 - OOPL GYM</title>
+  <style>
+    :root{--accent:#8e44ad;--bg:#fff;--muted:#f4f1ff;--text:#333;--radius:10px}
+    *{box-sizing:border-box;font-family:"Helvetica Neue",Arial,sans-serif}
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--muted);color:var(--text)}
+    .logo{font-size:28px;font-weight:700;color:var(--accent);margin-bottom:24px;text-decoration:none}
+    .card{width:100%;max-width:380px;background:var(--bg);padding:32px 28px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+    h1{font-size:22px;margin:0 0 24px;text-align:center;color:var(--accent)}
+    label{display:block;font-size:14px;margin-bottom:6px}
+    input{width:100%;padding:10px 12px;margin-bottom:16px;border:1px solid #ccc;border-radius:var(--radius);font-size:15px}
+    input:focus{outline:none;border-color:var(--accent)}
+    button{width:100%;padding:12px 0;border:none;border-radius:var(--radius);background:var(--accent);color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .25s}
+    button:hover{opacity:.85}
+    .msg{margin-top:16px;font-size:14px;text-align:center}
+    .error{color:#c0392b}
+    .success{color:#27ae60}
+    .link{margin-top:20px;text-align:center;font-size:14px}
+    .link a{color:var(--accent);text-decoration:none}
+    .link a:hover{text-decoration:underline}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spinner{display:inline-block;width:16px;height:16px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-left:8px}
+  </style>
+</head>
+<body>
+  <a href="index.html" class="logo">OOPL&nbsp;GYM</a>
+  <div class="card">
+    <h1>會員登入</h1>
+    <form id="loginForm" novalidate>
+      <label for="username">帳號 / Email</label>
+      <input id="username" name="username" type="text" placeholder="請輸入帳號" required />
+
+      <label for="password">密碼</label>
+      <input id="password" name="password" type="password" placeholder="請輸入密碼" required />
+
+      <button type="submit" id="submitBtn">登入</button>
+      <div id="msg" class="msg"></div>
+    </form>
+    <p class="link">還沒有帳號？<a href="register.html">立即註冊</a></p>
+    <p class="link">教練登入？<a href="coachlogin.html">點此前往</a></p>
+
+  </div>
+
+<script>
+const apiBase='http://localhost:8080/api/v1';
+const form=document.getElementById('loginForm');
+const msg=document.getElementById('msg');
+const btn=document.getElementById('submitBtn');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  msg.textContent = '';
+  const username = form.username.value.trim();
+  const password = form.password.value;
+  if (!username || !password) {
+    showMsg('請填完整帳號與密碼', 'error');
+    return;
+  }
+
+  // === 本地無資料庫：若輸入 student/student 直接通過 ===
+  if (username === 'student' && password === 'student') {
+    localStorage.setItem('authToken', 'dev-local-token');
+    showMsg('登入成功！', 'success');
+    setTimeout(() => location.href = 'reservation.html', 600);
+    return; // 跳過下面的 fetch
+  }
+
+  toggleLoading(true);
+  try {
+    const res = await fetch(`${apiBase}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem('authToken', data.token);
+      showMsg('登入成功！', 'success');
+      setTimeout(() => location.href = 'index.html', 800);
+    } else {
+      const err = await res.json().catch(() => ({ message: '登入失敗' }));
+      throw new Error(err.message || '登入失敗');
+    }
+  } catch (err) {
+    showMsg(err.message, 'error');
+  }
+  toggleLoading(false);
+});
+
+
+function showMsg(text,type){msg.textContent=text;msg.className=`msg ${type}`}
+function toggleLoading(loading){
+  if(loading){
+    btn.disabled=true;
+    btn.innerHTML='處理中 <span class="spinner"></span>';
+  }else{
+    btn.disabled=false;
+    btn.textContent='登入';
+  }
+}
+</script>
+</body>
+</html>
