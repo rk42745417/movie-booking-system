@@ -1,6 +1,6 @@
 -- Using InnoDB engine for transaction support and foreign key constraints
 -- SET default_storage_engine=InnoDB;
-
+USE movie_booking;
 -- -----------------------------------------------------
 -- Table `Members` (訂票用戶)
 -- -----------------------------------------------------

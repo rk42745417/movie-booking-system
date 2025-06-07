@@ -1,0 +1,1324 @@
+[ {
+  "showtimeId" : 1,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 2,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 7, 11, 30 ],
+  "endTime" : [ 2025, 6, 7, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 3,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 7, 14, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 4,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 5,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 7, 11, 0 ],
+  "endTime" : [ 2025, 6, 7, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 6,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 7, 13, 0 ],
+  "endTime" : [ 2025, 6, 7, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 7,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 7, 15, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 8,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 9,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 7, 11, 30 ],
+  "endTime" : [ 2025, 6, 7, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 10,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 7, 14, 0 ],
+  "endTime" : [ 2025, 6, 7, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 11,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 12,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 7, 11, 0 ],
+  "endTime" : [ 2025, 6, 7, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 13,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 7, 13, 0 ],
+  "endTime" : [ 2025, 6, 7, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 14,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 7, 15, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 15,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 16,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 7, 11, 0 ],
+  "endTime" : [ 2025, 6, 7, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 17,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 7, 13, 0 ],
+  "endTime" : [ 2025, 6, 7, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 18,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 7, 15, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 19,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 20,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 7, 11, 0 ],
+  "endTime" : [ 2025, 6, 7, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 21,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 7, 13, 0 ],
+  "endTime" : [ 2025, 6, 7, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 22,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 7, 15, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 23,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 24,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 7, 11, 30 ],
+  "endTime" : [ 2025, 6, 7, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 25,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 7, 14, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 26,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 7, 9, 0 ],
+  "endTime" : [ 2025, 6, 7, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 27,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 7, 13, 0 ],
+  "endTime" : [ 2025, 6, 7, 16, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 28,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 29,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 8, 11, 30 ],
+  "endTime" : [ 2025, 6, 8, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 30,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 8, 14, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 31,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 32,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 8, 11, 0 ],
+  "endTime" : [ 2025, 6, 8, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 33,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 8, 13, 0 ],
+  "endTime" : [ 2025, 6, 8, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 34,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 8, 15, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 35,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 36,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 8, 11, 30 ],
+  "endTime" : [ 2025, 6, 8, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 37,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 8, 14, 0 ],
+  "endTime" : [ 2025, 6, 8, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 38,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 39,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 8, 11, 0 ],
+  "endTime" : [ 2025, 6, 8, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 40,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 8, 13, 0 ],
+  "endTime" : [ 2025, 6, 8, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 41,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 8, 15, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 42,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 43,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 8, 11, 0 ],
+  "endTime" : [ 2025, 6, 8, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 44,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 8, 13, 0 ],
+  "endTime" : [ 2025, 6, 8, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 45,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 8, 15, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 46,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 47,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 8, 11, 0 ],
+  "endTime" : [ 2025, 6, 8, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 48,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 8, 13, 0 ],
+  "endTime" : [ 2025, 6, 8, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 49,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 8, 15, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 50,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 51,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 8, 11, 30 ],
+  "endTime" : [ 2025, 6, 8, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 52,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 8, 14, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 53,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 8, 9, 0 ],
+  "endTime" : [ 2025, 6, 8, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 54,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 8, 13, 0 ],
+  "endTime" : [ 2025, 6, 8, 16, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 55,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 56,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 9, 11, 30 ],
+  "endTime" : [ 2025, 6, 9, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 57,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 9, 14, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 58,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 59,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 9, 11, 0 ],
+  "endTime" : [ 2025, 6, 9, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 60,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 9, 13, 0 ],
+  "endTime" : [ 2025, 6, 9, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 61,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 9, 15, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 62,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 63,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 9, 11, 30 ],
+  "endTime" : [ 2025, 6, 9, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 64,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 9, 14, 0 ],
+  "endTime" : [ 2025, 6, 9, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 65,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 66,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 9, 11, 0 ],
+  "endTime" : [ 2025, 6, 9, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 67,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 9, 13, 0 ],
+  "endTime" : [ 2025, 6, 9, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 68,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 9, 15, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 69,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 70,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 9, 11, 0 ],
+  "endTime" : [ 2025, 6, 9, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 71,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 9, 13, 0 ],
+  "endTime" : [ 2025, 6, 9, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 72,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 9, 15, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 73,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 74,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 9, 11, 0 ],
+  "endTime" : [ 2025, 6, 9, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 75,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 9, 13, 0 ],
+  "endTime" : [ 2025, 6, 9, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 76,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 9, 15, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 77,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 78,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 9, 11, 30 ],
+  "endTime" : [ 2025, 6, 9, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 79,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 9, 14, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 80,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 9, 9, 0 ],
+  "endTime" : [ 2025, 6, 9, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 81,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 9, 13, 0 ],
+  "endTime" : [ 2025, 6, 9, 16, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 82,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 83,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 10, 11, 30 ],
+  "endTime" : [ 2025, 6, 10, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 84,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 10, 14, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 85,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 86,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 10, 11, 0 ],
+  "endTime" : [ 2025, 6, 10, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 87,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 10, 13, 0 ],
+  "endTime" : [ 2025, 6, 10, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 88,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 10, 15, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 89,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 90,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 10, 11, 30 ],
+  "endTime" : [ 2025, 6, 10, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 91,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 10, 14, 0 ],
+  "endTime" : [ 2025, 6, 10, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 92,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 93,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 10, 11, 0 ],
+  "endTime" : [ 2025, 6, 10, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 94,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 10, 13, 0 ],
+  "endTime" : [ 2025, 6, 10, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 95,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 10, 15, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 96,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 97,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 10, 11, 0 ],
+  "endTime" : [ 2025, 6, 10, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 98,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 10, 13, 0 ],
+  "endTime" : [ 2025, 6, 10, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 99,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 10, 15, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 100,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 101,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 10, 11, 0 ],
+  "endTime" : [ 2025, 6, 10, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 102,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 10, 13, 0 ],
+  "endTime" : [ 2025, 6, 10, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 103,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 10, 15, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 104,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 105,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 10, 11, 30 ],
+  "endTime" : [ 2025, 6, 10, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 106,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 10, 14, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 107,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 10, 9, 0 ],
+  "endTime" : [ 2025, 6, 10, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 108,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 10, 13, 0 ],
+  "endTime" : [ 2025, 6, 10, 16, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 109,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 110,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 11, 11, 30 ],
+  "endTime" : [ 2025, 6, 11, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 111,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 11, 14, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 112,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 113,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 11, 11, 0 ],
+  "endTime" : [ 2025, 6, 11, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 114,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 11, 13, 0 ],
+  "endTime" : [ 2025, 6, 11, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 115,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 11, 15, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 116,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 117,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 11, 11, 30 ],
+  "endTime" : [ 2025, 6, 11, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 118,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 11, 14, 0 ],
+  "endTime" : [ 2025, 6, 11, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 119,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 120,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 11, 11, 0 ],
+  "endTime" : [ 2025, 6, 11, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 121,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 11, 13, 0 ],
+  "endTime" : [ 2025, 6, 11, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 122,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 11, 15, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 123,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 124,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 11, 11, 0 ],
+  "endTime" : [ 2025, 6, 11, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 125,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 11, 13, 0 ],
+  "endTime" : [ 2025, 6, 11, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 126,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 11, 15, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 127,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 128,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 11, 11, 0 ],
+  "endTime" : [ 2025, 6, 11, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 129,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 11, 13, 0 ],
+  "endTime" : [ 2025, 6, 11, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 130,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 11, 15, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 131,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 132,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 11, 11, 30 ],
+  "endTime" : [ 2025, 6, 11, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 133,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 11, 14, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 134,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 11, 9, 0 ],
+  "endTime" : [ 2025, 6, 11, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 135,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 11, 13, 0 ],
+  "endTime" : [ 2025, 6, 11, 16, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 136,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 137,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 12, 11, 30 ],
+  "endTime" : [ 2025, 6, 12, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 138,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 12, 14, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 139,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 140,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 12, 11, 0 ],
+  "endTime" : [ 2025, 6, 12, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 141,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 12, 13, 0 ],
+  "endTime" : [ 2025, 6, 12, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 142,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 12, 15, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 143,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 144,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 12, 11, 30 ],
+  "endTime" : [ 2025, 6, 12, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 145,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 12, 14, 0 ],
+  "endTime" : [ 2025, 6, 12, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 146,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 147,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 12, 11, 0 ],
+  "endTime" : [ 2025, 6, 12, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 148,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 12, 13, 0 ],
+  "endTime" : [ 2025, 6, 12, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 149,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 12, 15, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 150,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 151,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 12, 11, 0 ],
+  "endTime" : [ 2025, 6, 12, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 152,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 12, 13, 0 ],
+  "endTime" : [ 2025, 6, 12, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 153,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 12, 15, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 154,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 155,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 12, 11, 0 ],
+  "endTime" : [ 2025, 6, 12, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 156,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 12, 13, 0 ],
+  "endTime" : [ 2025, 6, 12, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 157,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 12, 15, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 158,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 159,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 12, 11, 30 ],
+  "endTime" : [ 2025, 6, 12, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 160,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 12, 14, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 161,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 12, 9, 0 ],
+  "endTime" : [ 2025, 6, 12, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 162,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 12, 13, 0 ],
+  "endTime" : [ 2025, 6, 12, 16, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 163,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 11, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 164,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 13, 11, 30 ],
+  "endTime" : [ 2025, 6, 13, 13, 41 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 165,
+  "movieId" : 1,
+  "title" : "美國隊長：無畏新世界",
+  "startTime" : [ 2025, 6, 13, 14, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 11 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 166,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 10, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 167,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 13, 11, 0 ],
+  "endTime" : [ 2025, 6, 13, 12, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 168,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 13, 13, 0 ],
+  "endTime" : [ 2025, 6, 13, 14, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 169,
+  "movieId" : 2,
+  "title" : "機動戰士Gundam GquuuuuuX -Beginning-",
+  "startTime" : [ 2025, 6, 13, 15, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 21 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 170,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 10, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 171,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 13, 11, 30 ],
+  "endTime" : [ 2025, 6, 13, 13, 19 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 172,
+  "movieId" : 3,
+  "title" : "夜校女生",
+  "startTime" : [ 2025, 6, 13, 14, 0 ],
+  "endTime" : [ 2025, 6, 13, 15, 49 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 173,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 10, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 174,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 13, 11, 0 ],
+  "endTime" : [ 2025, 6, 13, 12, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 175,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 13, 13, 0 ],
+  "endTime" : [ 2025, 6, 13, 14, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 176,
+  "movieId" : 4,
+  "title" : "史蒂芬金之猴子",
+  "startTime" : [ 2025, 6, 13, 15, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 38 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 177,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 10, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 178,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 13, 11, 0 ],
+  "endTime" : [ 2025, 6, 13, 12, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 179,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 13, 13, 0 ],
+  "endTime" : [ 2025, 6, 13, 14, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 180,
+  "movieId" : 5,
+  "title" : "殺人預言",
+  "startTime" : [ 2025, 6, 13, 15, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 39 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 181,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 10, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 182,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 13, 11, 0 ],
+  "endTime" : [ 2025, 6, 13, 12, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 183,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 13, 13, 0 ],
+  "endTime" : [ 2025, 6, 13, 14, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 184,
+  "movieId" : 6,
+  "title" : "窒息倒數",
+  "startTime" : [ 2025, 6, 13, 15, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 33 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 185,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 11, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 186,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 13, 11, 30 ],
+  "endTime" : [ 2025, 6, 13, 13, 36 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 187,
+  "movieId" : 7,
+  "title" : "火線追緝令",
+  "startTime" : [ 2025, 6, 13, 14, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 6 ],
+  "hallType" : "small_room"
+}, {
+  "showtimeId" : 188,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 13, 9, 0 ],
+  "endTime" : [ 2025, 6, 13, 12, 35 ],
+  "hallType" : "big_room"
+}, {
+  "showtimeId" : 189,
+  "movieId" : 8,
+  "title" : "粗獷派建築師",
+  "startTime" : [ 2025, 6, 13, 13, 0 ],
+  "endTime" : [ 2025, 6, 13, 16, 35 ],
+  "hallType" : "big_room"
+} ]

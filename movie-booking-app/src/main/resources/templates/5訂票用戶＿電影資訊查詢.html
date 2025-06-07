@@ -3,22 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>電影列表</title>
-
   <link rel="stylesheet" href="5style.css">
 </head>
 <body>
   <div class="sidebar">
     <h2>功能選單</h2>
-    
-    <a href ="5訂票用戶＿電影資訊查詢.html" class="menu-button"> 🎬 上映電影 </a>
-    <a href ="5訂票用戶＿電影資訊查詢.html" class="menu-button"> 🎟️ 我要訂票 </a>
-    <a href ="9訂票用戶＿查詢訂單.html" class="menu-button"> 🧾 查詢訂單 </a>
-    
+	<!-- Correct: Only run JS, stay on same page -->
+	<a href="#" id="btn-load-movies" class="menu-button"> 🎬 上映電影 </a>
+	<!-- OK: Navigate to new HTML pages -->
+	<a href="/booking-page" class="menu-button"> 🎟️ 我要訂票 </a>
+	<a href="9訂票用戶＿查詢訂單.html" class="menu-button"> 🧾 查詢訂單 </a>
   </div>
-
-  <!--h1 id="page-title"></h1>
-
-  <div id="movie-list"></div-->
 
   <main id="content">
     <h1 id="page-title">🎬 電影清單</h1>

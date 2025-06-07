@@ -1,0 +1,66 @@
+[
+  {
+    "movie_id": null,
+    "title": "美國隊長：無畏新世界",
+    "synopsis": "漫威電影宇宙的第35部電影，新一任美國隊長、同時也是獵鷹的前美隊得力助手山姆威爾森，扛起保衛美國的重責大任，也象徵嶄新時代正式開啟，在新世界新秩序的衝突升級下，他能否奮力扛起盾牌？",
+    "duration_minutes": 131,
+    "rating_category": "保護級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "機動戰士Gundam GquuuuuuX -Beginning-",
+    "synopsis": "由鶴卷和哉執導，庵野秀明與榎戶洋司負責故事腳本，日本票房冠軍，是由製作《新世紀福音戰士》的khara與《機動戰士》SUNRISE兩家公司聯手的全新企劃。",
+    "duration_minutes": 81,
+    "rating_category": "普遍級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "夜校女生",
+    "synopsis": "莊景燊執導，陳姸霏、項婕如、邱以太主演，攜手共譜「登大人」的成長痛。",
+    "duration_minutes": 109,
+    "rating_category": "普遍級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "史蒂芬金之猴子",
+    "synopsis": "改編自史蒂芬金1980年的同名短篇故事，溫子仁監製。《分歧者》席歐詹姆斯一人分飾兩角，對抗史上最兇殘詛咒！發條聲響起，離奇死亡事件即將展開！",
+    "duration_minutes": 98,
+    "rating_category": "限制級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "殺人預言",
+    "synopsis": "《白頭山：半島浩劫》河正宇、《緊急迫降》金南佶、《諜影殺機》劉多仁主演， 一本暢銷小說竟預言了我弟的死！",
+    "duration_minutes": 99,
+    "rating_category": "限制級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "窒息倒數",
+    "synopsis": "改編真實海底災難事件，一段充滿驚心動魄又扣人心弦的災難救援，先從屏住呼吸開始…",
+    "duration_minutes": 93,
+    "rating_category": "普遍級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "火線追緝令",
+    "synopsis": "首開先例引經據典舖陳劇情，包括心理學家的推陳分析，警匪雙方鬥智的曲折過程一一呈現無遺。由大衛芬奇執導，布萊德彼特與摩根佛里曼兩大巨星聯手，凱文史貝西則扮演瘋狂殺手。",
+    "duration_minutes": 126,
+    "rating_category": "保護級",
+    "is_active": true
+  },
+  {
+    "movie_id": null,
+    "title": "粗獷派建築師",
+    "synopsis": "2025奧斯卡10項大獎提名，2024威尼斯影展最佳導演獎，獲得2025金球獎最佳影片、最佳導演、最佳男主角三項大獎，《戰地琴人》安卓亞布洛迪、《愛的萬物論》費莉絲蒂瓊斯主演。",
+    "duration_minutes": 215,
+    "rating_category": "保護級",
+    "is_active": true
+  }
+]

@@ -1,55 +1,107 @@
 package com.javaoop.movie_booking_app.service;
 
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.javaoop.movie_booking_app.model.BookedTicket;
+import com.javaoop.movie_booking_app.model.Booking;
+import com.javaoop.movie_booking_app.model.Seat;
+import com.javaoop.movie_booking_app.repository.BookedTicketRepository;
+import com.javaoop.movie_booking_app.repository.BookingRepository;
+import com.javaoop.movie_booking_app.repository.SeatRepository;
+import com.javaoop.movie_booking_app.model.BookingStatus;
 
-import com.javaoop.movie_booking_app.model.Movie;
-import com.javaoop.movie_booking_app.model.Showtime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class BookingService {
-//    public boolean bookTicket(String userId, String showtimeId, int count, List<String> seats) {
-//        Showtime showtime = Database.showtimes.get(showtimeId);
-//        Movie movie = Database.movies.get(showtime.movieId);
-//        User user = Database.users.get(userId);
-//
-//        if (showtime == null || movie == null || user == null) return false;
-//
-//        // 年齡驗證
-//        if (movie.rating.equals("R") && user.age < 18) return false;
-//        if (movie.rating.equals("PG-13") && user.age < 13) return false;
-//
-//        // 座位檢查
-//        if (showtime.availableSeats < count) return false;
-//
-//        // 建立訂單
-//        showtime.availableSeats -= count;
-//        String ticketId = UUID.randomUUID().toString();
-//        Ticket ticket = new Ticket(ticketId, userId, showtimeId, seats);
-//        Database.tickets.put(ticketId, ticket);
-//        return true;
-//    }
-//
-//    public List<Ticket> getUserTickets(String userId) {
-//        return Database.tickets.values().stream()
-//                .filter(t -> t.userId.equals(userId))
-//                .collect(Collectors.toList());
-//    }
-//
-//    public boolean cancelTicket(String ticketId) {
-//        Ticket ticket = Database.tickets.get(ticketId);
-//        if (ticket == null || ticket.isCanceled) return false;
-//
-//        Showtime showtime = Database.showtimes.get(ticket.showtimeId);
-//        if (showtime == null) return false;
-//
-//        LocalDateTime now = LocalDateTime.now();
-//        if (now.isAfter(showtime.startTime.minusMinutes(30))) {
-//            return false; // 無法退票：距離開場不到30分鐘
-//        }
-//
-//        ticket.isCanceled = true;
-//        showtime.availableSeats += ticket.seatNumbers.size();
-//        return true;
-//    }
+
+    private final BookingRepository bookingRepository;
+    private final BookedTicketRepository bookedTicketRepository;
+    private final SeatRepository seatRepository;
+
+    @Autowired
+    public BookingService(BookingRepository bookingRepository,
+                          BookedTicketRepository bookedTicketRepository,
+                          SeatRepository seatRepository) {
+        this.bookingRepository = bookingRepository;
+        this.bookedTicketRepository = bookedTicketRepository;
+        this.seatRepository = seatRepository;
+    }
+
+    public Booking saveBooking(Booking booking) {
+        return bookingRepository.save(booking);
+    }
+
+    public Optional<Booking> getBookingById(Long id) {
+        return bookingRepository.findById(id);
+    }
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
+    }
+
+    /**
+     * Cancels a booking by setting status to CANCELLED (does not delete).
+     */
+    public void cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new IllegalArgumentException("Booking ID not found."));
+        booking.setStatus(BookingStatus.CANCELLED);
+        bookingRepository.save(booking);
+    }
+
+    /**
+     * Checks if all given seat IDs are available for the showtime.
+     * A seat is unavailable if it already has a booked ticket under the same showtime.
+     */
+    public boolean areSeatsAvailable(Long showtimeId, List<Long> seatIds) {
+        for (Long seatId : seatIds) {
+            boolean isBooked = bookedTicketRepository.existsByBooking_Showtime_ShowtimeIdAndSeat_SeatId(showtimeId, seatId);
+            if (isBooked) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Adds a single booked ticket linked to a booking.
+     */
+    public BookedTicket addBookedTicket(Long bookingId, Long seatId, String ticketType) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid booking ID"));
+        Seat seat = seatRepository.findById(seatId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid seat ID"));
+
+        BookedTicket ticket = new BookedTicket();
+        ticket.setBooking(booking);
+        ticket.setSeat(seat);
+        ticket.setTicketType(ticketType);
+
+        return bookedTicketRepository.save(ticket);
+    }
+
+    /**
+     * Adds multiple booked tickets in batch for efficiency.
+     */
+    public void addBookedTickets(Long bookingId, List<BookedTicket> tickets) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid booking ID"));
+        for (BookedTicket ticket : tickets) {
+            ticket.setBooking(booking);
+        }
+        bookedTicketRepository.saveAll(tickets);
+    }
+
+    /**
+     * Retrieves booked tickets by booking ID.
+     */
+    public List<BookedTicket> getBookedTicketsByBookingId(Long bookingId) {
+        return bookedTicketRepository.findByBookingBookingId(bookingId);
+    }
 }
+
+
+
