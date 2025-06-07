@@ -1,21 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin_layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Home</title>
-    <link rel="stylesheet" href="/css/auth.css">
+    <title>電影選單</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+    </th:block>
 </head>
 <body>
-<h2>Welcome, Admin!</h2>
-<h3>Manage Movies:</h3>
-<ul>
-    <li><a href="/admin/movie/add">Add New Movie</a></li>
-    <li><a href="/admin/movie/list">View All Movies</a></li>
-</ul>
-<h3>Manage Bookings:</h3>
-<ul>
-    <li><a href="/admin/bookings">View All Bookings</a></li>
-</ul>
+<section layout:fragment="content">
+    <!-- 查詢電影區塊（預設顯示） -->
+    <div id="movies" class="section active">
+        <h2>🎬 所有電影</h2>
+
+        <!-- 電影卡片清單 -->
+        <div class="movie-grid">
+            <div th:each="movie : ${movies}" class="movie-card">
+                <a th:href="@{/admin/movie/{id}(id=${movie.movieId})}">
+                    <img th:src="@{'/images/' + ${movie.poster}}">
+                    <div class="info">
+                        <h3 th:text="${movie.title}"></h3>
+                        <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
+                        <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
+                        <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
+                        <p>是否正在上映：
+                            <span th:if="${movie.isActive}" style="color: greenyellow;">是</span>
+                            <span th:unless="${movie.isActive}" style="color: firebrick;">否</span>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 </body>
 </html>

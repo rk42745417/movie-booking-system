@@ -23,6 +23,10 @@ public class SecurityConfig {
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/favicon.ico").permitAll()
                 // Allow global pages
                 .requestMatchers("/user/login", "/user/register").permitAll()
+                // Allow admin pages (since we don't implement authentication for operations now)
+                .requestMatchers("/admin/**", "/admin").permitAll()
+                // For local test
+                .requestMatchers("/error", "/error/**").permitAll()
                 // Deny others
                 .anyRequest().authenticated()
         ).formLogin(form -> form

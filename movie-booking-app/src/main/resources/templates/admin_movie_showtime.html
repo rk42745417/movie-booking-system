@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin_layout}">
+<head>
+    <title>電影操作</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+    </th:block>
+</head>
+<body>
+<section layout:fragment="content">
+    <div id="movies" class="section active">
+        <h2 th:text="${movie.title} + ' 的出演場次'"></h2>
+        <div class="movie-grid">
+            <form th:action="@{/admin/{id}/showtime(id=${id})}" th:object="${new_showtime}" method="post"
+                  class="movie-card">
+                <label for="hall_id">放映廳編號</label>
+                <input id="hall_id" name="hall_id" th:field="*{hallId}" required>
+                <br/><br/>
+                <label for="start_time">開始時間</label>
+                <input id="start_time" name="start_time" type="datetime-local" th:field="*{startTime}" required>
+                <br/><br/>
+                <button id="btn" type="submit" class="button">增加場次</button>
+            </form>
+            <div th:each="showtime : ${showtimes}" class="movie-card">
+                <a th:href="@{/admin/{showtime}/(showtime=${showtime.showtimeId})}">
+                    <div class="info">
+                        <h3>
+                            <span th:text="${showtime.startTime}"></span> ~ <span th:text="${showtime.endTime}"></span>
+                        </h3>
+                        <p><strong>放映廳編號：</strong> <span th:text="${showtime.getHall().hallId}"></span></p>
+                        <p><strong>放映廳類型：</strong> <span th:text="${showtime.getHall().hallType}"></span></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

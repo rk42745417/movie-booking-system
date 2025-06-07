@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title layout:title-pattern="$CONTENT_TITLE | 營運人員">營運人員</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <th:block layout:fragment="css"></th:block>
+</head>
+<body style="background-color: rgb(55, 47, 64);">
+
+<!-- 左側功能選單 -->
+<nav class="sidebar">
+    <h2>功能選單</h2>
+    <a th:href="@{/admin}" class="menu-button"> 🎬 電影資訊修改 </a>
+    <a href="13營運人員＿訂票狀態查詢.html" class="menu-button"> 🧾 訂票狀態查詢 </a>
+</nav>
+
+<!-- 右側主內容區 -->
+<div class="main-content">
+    <div th:if="${successMessage}" class="alert alert-success">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <main layout:fragment="content">
+        Default Content -- it will be replaced in every other HTMLs.
+    </main>
+</div>
+
+
+</body>
+</html>

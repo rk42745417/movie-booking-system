@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin_layout}">
+<head>
+    <title>電影操作</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+    </th:block>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="movie-card">
+        <img th:src="@{'/images/' + ${movie.poster}}">
+        <div class="info">
+            <h3 th:text="${movie.title}"></h3>
+            <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
+            <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
+            <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
+            <form th:action="@{/admin/movie/{id}(id=${id})}" method="post">
+                <label for="active">是否正在上映</label>
+                <input id="active" name="active" type="checkbox" th:checked="${movie.isActive}">
+                <button id="btn" type="submit" class="button">更新上映狀態</button>
+            </form>
+            <a th:href="@{/admin/movie/{id}/showtime(id=${id})}">查看電影場次</a>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

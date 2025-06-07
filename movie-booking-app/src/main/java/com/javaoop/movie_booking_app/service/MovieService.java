@@ -6,6 +6,7 @@ import com.javaoop.movie_booking_app.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -40,5 +41,15 @@ public class MovieService {
 
     public Optional<Movie> getMovie(Long movieId) {
         return movieRepository.findById(movieId);
+    }
+
+    public void updateActiveState(Long movieId, boolean isActive) throws IllegalStateException {
+        Optional<Movie> movie = movieRepository.findById(movieId);
+        if (movie.isPresent()) {
+            movie.get().setActive(isActive);
+            movieRepository.save(movie.get());
+            return;
+        }
+        throw new IllegalStateException("電影不存在");
     }
 }
