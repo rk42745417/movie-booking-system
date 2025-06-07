@@ -3,7 +3,6 @@ package com.javaoop.gym_booking_app.controller;
 import com.javaoop.gym_booking_app.model.*;
 import com.javaoop.gym_booking_app.service.MemberService;
 import com.javaoop.gym_booking_app.service.ServiceResult;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +10,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
-@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
     /* ---------- 註冊 ---------- */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
-        ServiceResult rs = memberService.register(
+        ServiceResult<Long> rs = memberService.register(
                 req.email(), req.password(), req.fullName(),
                 req.dateOfBirth(), req.gender(), req.phone());
-        return rs.success() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
+        return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
     }
 
     /* ---------- 登入 ---------- */
