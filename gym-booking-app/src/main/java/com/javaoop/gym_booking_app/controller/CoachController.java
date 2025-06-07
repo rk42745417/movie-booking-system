@@ -1,42 +1,26 @@
 package com.javaoop.gym_booking_app.controller;
 
 import com.javaoop.gym_booking_app.model.Course;
-import com.javaoop.gym_booking_app.service.CoachService;
-import com.javaoop.gym_booking_app.service.ServiceResult;
+import com.javaoop.gym_booking_app.service.CourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/coaches")
+@RequestMapping("/api/v1/coach")
 public class CoachController {
 
-    private final CoachService coachService;
+    private final CourseService courseService;
 
-    public CoachController(CoachService coachService) {
-        this.coachService = coachService;
+    public CoachController(CourseService courseService) {
+        this.courseService = courseService;
     }
 
-    /* ---------- 建立課程 ---------- */
-    @PostMapping("/{coachId}/courses")
-    public ResponseEntity<?> createCourse(@PathVariable Long coachId,
-                                          @RequestBody CreateCourseReq req) {
-        ServiceResult<Long> rs = coachService.createCourse(
-                coachId, req.title(), req.description(), req.roomId(), req.capacity(),
-                req.startTime(), req.endTime());
-        return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
+    /** 教練：列出所有課程（或改成特定教練 ownCourses(coachId)） */
+    @GetMapping("/courses")
+    public ResponseEntity<List<Course>> listCourses() {
+        List<Course> list = courseService.getAllCourses();
+        return ResponseEntity.ok(list);
     }
-
-    /* ---------- 列出教練課程 ---------- */
-    @GetMapping("/{coachId}/courses")
-    public List<Course> listCoachCourses(@PathVariable Long coachId) {
-        return coachService.listCourses(coachId);
-    }
-
-    /* DTO */
-    public record CreateCourseReq(String title, String description,
-                                  Long roomId, Integer capacity,
-                                  LocalDateTime startTime, LocalDateTime endTime) {}
 }

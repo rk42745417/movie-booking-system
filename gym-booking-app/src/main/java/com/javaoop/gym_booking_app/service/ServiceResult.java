@@ -30,4 +30,11 @@ public class ServiceResult<T> {
     public boolean isSuccess()   { return success; }
     public String  getMessage()  { return message; }
     public T       getData()     { return data; }
+    
+    public static <T> ServiceResult<T> created(T data) {
+    	  return new ServiceResult<>(true, null, data);
+    	}
+    	public static <T> ServiceResult<T> unauthorized(String message) {
+    	  return new ServiceResult<>(false, message, null);
+    	}
 }

@@ -1,5 +1,6 @@
 package com.javaoop.gym_booking_app.controller;
 
+import dto.CourseRequest;
 import com.javaoop.gym_booking_app.model.Course;
 import com.javaoop.gym_booking_app.service.CourseService;
 import com.javaoop.gym_booking_app.service.ServiceResult;
@@ -9,36 +10,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/courses")
+@RequestMapping("/api/v1/courses")
 public class CourseController {
 
     private final CourseService courseService;
-
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
-    /* ---------- 查詢開放課程 ---------- */
-    @GetMapping("/open")
-    public List<Course> openCourses() {
-        return courseService.listOpenCourses();
+    @GetMapping
+    public ResponseEntity<List<Course>> all() {
+        return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    /* ---------- 預約課程 ---------- */
-    @PostMapping("/{courseId}/reserve")
-    public ResponseEntity<?> reserve(@PathVariable Long courseId, @RequestBody ReserveReq req) {
-        ServiceResult<Long> rs = courseService.reserveCourse(req.memberId(), courseId);
-        return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
+    @PostMapping
+    public ResponseEntity<ServiceResult<Long>> create(
+            @RequestBody CourseRequest req,
+            @RequestHeader("Authorization") String authHeader
+    ) {
+        // TODO: 從 authHeader 拿到 coachId（例如 decode JWT）
+        Long coachId = /* extractCoachId(authHeader) */ 1L;
+        ServiceResult<Long> rs = courseService.createCourse(
+            coachId,
+            req.roomId(),
+            req.title(),
+            req.description(),
+            req.capacity(),
+            req.startTime(),
+            req.endTime(),
+            req.status(),
+            req.tags()
+        );
+        return rs.isSuccess()
+                ? ResponseEntity.ok(rs)
+                : ResponseEntity.badRequest().body(rs);
     }
-
-    /* ---------- 取消預約 ---------- */
-    @DeleteMapping("/reservations/{reservationId}")
-    public ResponseEntity<?> cancel(@PathVariable Long reservationId,
-                                    @RequestParam Long memberId) {
-        ServiceResult<Long> rs = courseService.cancelReservation(reservationId, memberId);
-        return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
-    }
-
-    /* DTO */
-    public record ReserveReq(Long memberId) {}
 }
