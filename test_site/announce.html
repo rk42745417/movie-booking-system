@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>優惠與公告 - OOPL GYM</title>
+  <style>
+    :root {
+      --accent: #8e44ad;
+      --text: #333;
+      --bg: #fff;
+      --muted: #f4f1ff;
+      --shape1: rgba(142, 68, 173, 0.1);
+      --shape2: rgba(142, 68, 173, 0.15);
+      --shape3: rgba(142, 68, 173, 0.08);
+      --radius: 8px;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: var(--muted);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* 背景動畫 */
+    @keyframes float { 0%,100%{transform:translateY(0) translateX(0) rotate(0deg);}50%{transform:translateY(-20px) translateX(10px) rotate(15deg);} }
+    @keyframes spin { 0%{transform:rotate(0deg);}100%{transform:rotate(360deg);} }
+    .shape { position: absolute; z-index: 0; opacity: 0.7; }
+    .circle { width:150px; height:150px; background:var(--shape1); border-radius:50%; top:15%; left:-80px; animation:float 8s ease-in-out infinite; }
+    .large-circle { width:300px; height:300px; background:var(--shape2); border-radius:50%; bottom:-120px; right:5%; animation:float 12s ease-in-out infinite; }
+    .triangle { width:0; height:0; border-left:60px solid transparent; border-right:60px solid transparent; border-bottom:100px solid var(--shape3); top:5%; right:25%; animation:spin 20s linear infinite; }
+    .square { width:100px; height:100px; background:var(--shape2); border-radius:var(--radius); bottom:30%; left:10%; animation:spin 15s linear infinite; }
+
+    /* Header & Menu */
+    header { padding:16px 32px; background:var(--bg); border-bottom:4px solid var(--accent); display:flex; justify-content:space-between; align-items:center; position:relative; z-index:2; }
+    .logo { font-size:24px; font-weight:bold; color:#000; text-decoration:none; }
+    .menu-btn { width:28px; height:20px; cursor:pointer; position:relative; }
+    .menu-btn span { position:absolute; height:3px; width:100%; background:var(--text); left:0; }
+    .menu-btn span:nth-child(1){top:0;} .menu-btn span:nth-child(2){top:50%; transform:translateY(-50%);} .menu-btn span:nth-child(3){bottom:0;}
+
+    .overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:10; }
+    .overlay.active{display:block;}
+    .menu-content { position:fixed; top:0; right:0; width:280px; height:100%; background:var(--bg); box-shadow:-4px 0 12px rgba(0,0,0,0.2); transform:translateX(100%); transition:transform .4s ease; z-index:15; }
+    .overlay.active .menu-content{transform:translateX(0);}
+    .menu-content h3{margin:24px 0;color:var(--accent);font-size:24px;text-align:center;}
+    .menu-content a{display:block;text-decoration:none;color:var(--text);font-size:18px;padding:12px 24px;border-bottom:1px solid #ddd;transition:color .3s;}
+    .menu-content a:hover{color:var(--accent);}
+    .close-btn{display:block;text-align:right;padding:12px 24px;cursor:pointer;color:#888;}
+
+    main { flex:1; position:relative; z-index:1; max-width:900px; margin:24px auto; padding:0 16px; animation:fadeIn 1s ease-in-out; }
+    .page-title{font-size:28px;color:var(--accent);margin-bottom:16px;text-align:center;animation:fadeInUp 1s ease-in-out;}
+    .announcement-card{background:var(--bg);padding:20px;margin-bottom:20px;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.05);animation:fadeInUp 1s ease-in-out;animation-fill-mode:both;}
+    .announcement-card h2{color:var(--accent);margin-top:0;font-size:20px;}
+    .announcement-card p{line-height:1.6;margin:8px 0;}
+
+    footer { background:var(--accent); color:#fff; text-align:center; padding:16px; position:relative; z-index:1; }
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  </style>
+</head>
+<body>
+  <!-- 背景幾何圖形 -->
+  <div class="shape circle"></div>
+  <div class="shape large-circle"></div>
+  <div class="shape triangle"></div>
+  <div class="shape square"></div>
+
+  <header>
+    <a href="index.html" class="logo"><strong>OOPL GYM</strong></a>
+    <div class="menu-btn" id="openMenuBtn"><span></span><span></span><span></span></div>
+  </header>
+
+  <!-- 選單 -->
+  <div class="overlay" id="menuOverlay">
+    <div class="menu-content">
+      <h3>選單</h3>
+      <a href="index.html">主頁</a>
+      <a href="announce.html">優惠與公告</a>
+      <a href="transport.html">交通指引</a>
+      <a href="venue.html">場館資訊</a>
+      <a href="info.html">中心簡介</a>
+      <a href="usage.html">使用須知</a>
+      <a href="signup.html">線上報名</a>
+      <a href="contact.html">聯絡我們</a>
+      <div class="close-btn" id="closeMenuBtn">關閉</div>
+    </div>
+  </div>
+
+  <!-- 內容區 -->
+  <main>
+    <h1 class="page-title"><strong>優惠與公告</strong></h1>
+
+    <div class="announcement-card">
+      <h2>🎉 新會員首月半價</h2>
+      <p>凡 6 月新加入會員者，首月費用享 5 折優惠，機會難得，歡迎洽詢櫃台！</p>
+    </div>
+
+    <div class="announcement-card">
+      <h2>📢 端午連假營運時間公告</h2>
+      <p>6/8～6/10（六～一）營業時間調整為 10:00－18:00，敬請配合。</p>
+    </div>
+
+    <div class="announcement-card">
+      <h2>🔥 夏季團課開跑！</h2>
+      <p>6 月起開放報名「燃脂有氧」、「肌力雕塑」、「TRX 訓練」等團體課程，限量名額，先搶先贏！</p>
+    </div>
+    <div class="announcement-card">
+      <h2>🎉 暑期早鳥優惠開跑囉！</h2>
+      <p>即日起至 6 月 30 日止，凡預約 7 月至 8 月場地享 8 折優惠！歡迎提早預約，享有最佳時段。</p>
+    </div>
+    <div class="announcement-card">
+      <h2>🌟 營業時間調整通知</h2>
+      <p>因應政府防疫措施，健身房營業時間調整為早上6:00至晚上10:00，請會員配合</p>
+    </div>
+
+
+  </main>
+
+  <footer>
+    <p>地址：台北市大安區羅斯福路4段1號</p>
+    <p>客服專線：1234-567-890</p>
+    <p>服務時間｜週一至週五 9:00-12:00 · 13:00-18:00</p>
+  </footer>
+
+  <!-- JS 控制選單開關 -->
+  <script>
+    const openBtn = document.getElementById('openMenuBtn');
+    const overlay = document.getElementById('menuOverlay');
+    const closeBtn = document.getElementById('closeMenuBtn');
+    openBtn.addEventListener('click', () => {
+      overlay.classList.toggle('active');
+      openBtn.classList.toggle('active');
+    });
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      openBtn.classList.remove('active');
+    });
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        openBtn.classList.remove('active');
+      }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        overlay.classList.remove('active');
+        openBtn.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
