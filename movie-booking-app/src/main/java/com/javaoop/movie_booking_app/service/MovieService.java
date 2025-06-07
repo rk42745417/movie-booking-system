@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
+
 @Service
-public class MovieService {
+public class MovieService{
     private final MovieRepository movieRepository;
 
     @Autowired
@@ -41,5 +43,10 @@ public class MovieService {
 
     public Optional<Movie> getMovie(Long movieId) {
         return movieRepository.findById(movieId);
+    }
+    
+    public Movie getMovieById(Long movieId) {
+        return movieRepository.findById(movieId)
+                .orElseThrow(() -> new NoSuchElementException("找不到 movieId = " + movieId + " 的電影"));
     }
 }

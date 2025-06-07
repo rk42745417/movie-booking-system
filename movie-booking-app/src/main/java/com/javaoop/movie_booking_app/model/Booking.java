@@ -1,11 +1,14 @@
 package com.javaoop.movie_booking_app.model;
 
+import java.util.List;
+
+import com.javaoop.movie_booking_app.controller.BookingController.SeatRequest;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -91,9 +94,6 @@ public class Booking {
         this.member = member;
     }
 
-    public Showtime getShowtime() {
-        return showtime;
-    }
 
     public void setShowtime(Showtime showtime) {
         this.showtime = showtime;
@@ -138,4 +138,5 @@ public class Booking {
                 // (totalPrice != null ? ", totalPrice=" + totalPrice : "") + // if uncommented
                 '}';
     }
+
 }

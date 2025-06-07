@@ -46,6 +46,9 @@
         <!--            <groupId>org.springframework.boot</groupId>-->
         <!--            <artifactId>spring-boot-starter-security</artifactId>-->
         <!--        </dependency>-->
+        
+            	
+    	<!-- Thymeleaf (if you're using .html files directly) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -80,7 +83,37 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+       
+	    <!-- MySQL JDBC Driver -->
+	    <dependency>
+	        <groupId>mysql</groupId>
+	        <artifactId>mysql-connector-java</artifactId>
+	        <version>8.0.33</version>
+	    </dependency>
+	
+	    <!-- Gson for JSON parsing -->
+	    <dependency>
+	        <groupId>com.google.code.gson</groupId>
+	        <artifactId>gson</artifactId>
+    	</dependency>
+    	
+    	<!-- Jackson Core, for SessionTimeGenerator-->
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-databind</artifactId>
+	    </dependency>
+	    <!-- Jackson Annotations, for SessionTimeGenerator -->
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-annotations</artifactId>
+	    </dependency>
+	    <!-- Jackson Java 8 Time module, for SessionTimeGenerator -->
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.datatype</groupId>
+	        <artifactId>jackson-datatype-jsr310</artifactId>
+	    </dependency>
     </dependencies>
+ 
 
     <build>
         <plugins>

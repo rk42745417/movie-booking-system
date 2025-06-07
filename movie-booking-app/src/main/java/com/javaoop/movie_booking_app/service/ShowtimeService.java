@@ -1,43 +1,25 @@
 package com.javaoop.movie_booking_app.service;
 
 import com.javaoop.movie_booking_app.model.Showtime;
+import com.javaoop.movie_booking_app.repository.ShowtimeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Optional;
 
+@Service
 public class ShowtimeService {
-//    public boolean addShowtime(String movieId, String screen, LocalDateTime startTime, int totalSeats) {
-//        for (Showtime s : Database.showtimes.values()) {
-//            if (s.screen.equals(screen)) {
-//                LocalDateTime sStart = s.startTime;
-//                LocalDateTime sEnd = s.startTime.plusHours(2);
-//                LocalDateTime newEnd = startTime.plusHours(2);
-//                boolean overlap = startTime.isBefore(sEnd) && sStart.isBefore(newEnd);
-//                if (overlap) return false;
-//            }
-//        }
-//        String id = UUID.randomUUID().toString();
-//        Showtime newShowtime = new Showtime(id, movieId, screen, startTime, totalSeats);
-//        Database.showtimes.put(id, newShowtime);
-//        return true;
-//    }
-//
-//    public List<Showtime> getAllShowtimes() {
-//        return new ArrayList<>(Database.showtimes.values());
-//    }
-//
-//    public List<Showtime> getShowtimesByScreen(String screen) {
-//        List<Showtime> list = new ArrayList<>();
-//        for (Showtime s : Database.showtimes.values()) {
-//            if (s.screen.equals(screen)) {
-//                list.add(s);
-//            }
-//        }
-//        return list;
-//    }
-//
-//    public Showtime addShowtime(Showtime showtime) {
-//        return showtimeRepository.save(showtime);
-//    }
-}
 
+    private final ShowtimeRepository showtimeRepository;
+
+    @Autowired
+    public ShowtimeService(ShowtimeRepository showtimeRepository) {
+        this.showtimeRepository = showtimeRepository;
+    }
+
+    public Showtime findByStartTime(LocalDateTime sessionTime) {
+        Optional<Showtime> result = showtimeRepository.findByStartTime(sessionTime);
+        return result.orElse(null);
+    }
+}

@@ -1,0 +1,72 @@
+/* 6style.css */
+
+body {
+  background-color: rgb(55, 47, 64);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(197, 206, 229);
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+select#session-time, input#ticket-count {
+  width: 220px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 2px solid rgb(101, 94, 123);
+  background-color: rgb(70, 62, 90);
+  color: rgb(197, 206, 229);
+  outline: none;
+  transition: border-color 0.3s ease;
+  margin-bottom: 25px;
+}
+
+select#session-time:hover, input#ticket-count:hover,
+select#session-time:focus, input#ticket-count:focus {
+  border-color: rgb(147, 126, 229);
+  background-color: rgb(85, 75, 110);
+}
+
+button#next-btn {
+  padding: 12px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(55, 47, 64);
+  background: rgb(147, 126, 229);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(147, 126, 229, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+button#next-btn:hover {
+  background-color: rgb(173, 154, 255);
+  box-shadow: 0 6px 14px rgba(173, 154, 255, 0.7);
+}
+
+button#next-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 7px rgba(147, 126, 229, 0.4);
+}
+
+@media (max-width: 480px) {
+  select#session-time, input#ticket-count {
+    width: 90vw;
+  }
+
+  button#next-btn {
+    width: 90vw;
+    padding: 14px 0;
+  }
+}
