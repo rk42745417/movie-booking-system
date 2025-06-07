@@ -21,14 +21,21 @@ public class MemberController {
     /* ---------- 註冊 ---------- */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
-        ServiceResult<Long> rs = memberService.register(
-                req.email(), req.password(), req.fullName(),
-                req.dateOfBirth(), req.gender(), req.phone());
-        return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
-    }
-    
-    
 
+        ServiceResult<Long> rs = memberService.register(
+                req.email(),
+                req.password(),
+                req.fullName(),
+                req.dateOfBirth(),
+                req.gender(),
+                req.phone()
+        );
+
+        return rs.isSuccess()
+                ? ResponseEntity.ok(rs)
+                : ResponseEntity.badRequest().body(rs);
+    }
+   
     /* ---------- 登入 ---------- */
     @PostMapping("/login")
     public ResponseEntity<Member> login(@RequestBody LoginRequest req) {
