@@ -5,12 +5,8 @@ import com.javaoop.movie_booking_app.model.Member;
 import com.javaoop.movie_booking_app.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.net.PasswordAuthentication;
-import java.time.LocalDate;
 
 @Service
 public class MemberService {
@@ -33,6 +29,14 @@ public class MemberService {
         String passwordHash = passwordEncoder.encode(registrationDto.getPassword());
         memberRepository.save(new Member(registrationDto.getEmail(), passwordHash,
                 registrationDto.getBirthday()));
+    }
+
+    @Transactional
+    public void changePassword(String email, String newPassword) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(IllegalStateException::new);
+        String passwordHash = passwordEncoder.encode(newPassword);
+        member.setPasswordHash(passwordHash);
+        memberRepository.save(member);
     }
 }
 

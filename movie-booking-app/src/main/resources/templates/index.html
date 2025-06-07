@@ -17,10 +17,18 @@
     <form th:action="@{/user/logout}" method="post" style="display: inline;">
         <button type="submit" class="menu-button">登出</button>
     </form>
+    <a th:href="@{/user/change_password}" class="menu-button"> 修改密碼 </a>
 </div>
 
 <!-- 右側主內容區 -->
 <div class="main-content">
+    <div th:if="${successMessage}" class="alert alert-success">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
     <h1>
         您好，<span sec:authentication="name"></span>
     </h1>

@@ -9,6 +9,14 @@
 <div class="center-box_left">
     <h2>會員登入</h2>
     <form th:action="@{/user/login}" method="post">
+        <div th:if="${successMessage}" class="alert alert-success">
+            <p th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
         <label for="username">Email</label>
         <input id="username" name="username" type="email" placeholder="請輸入帳號">
         <br/> <br/>

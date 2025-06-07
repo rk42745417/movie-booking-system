@@ -12,7 +12,7 @@
     <p></p>
     <form th:action="@{/user/register}" th:object="${user}" method="post">
         <label for="email">電子郵件</label>
-        <span th:if="${#fields.hasErrors('email')}" th:erros="*{email}"></span>
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         <input id="email" type="email" th:field="*{email}" required>
         <br/><br/>
         <label for="birthday">出生年月日</label>
