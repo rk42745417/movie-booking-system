@@ -17,7 +17,7 @@ public class MovieController {
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
-
+    
     @GetMapping
     public String getAllMovies(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());

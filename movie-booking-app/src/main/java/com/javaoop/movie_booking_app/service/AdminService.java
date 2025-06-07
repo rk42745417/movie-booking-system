@@ -1,14 +1,6 @@
 package com.javaoop.movie_booking_app.service;
 
-import com.javaoop.movie_booking_app.model.Movie;
-import com.javaoop.movie_booking_app.model.Booking;
-import com.javaoop.movie_booking_app.repository.MovieRepository;
-import com.javaoop.movie_booking_app.repository.UserRepository;
-import com.javaoop.movie_booking_app.repository.BookingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AdminService {
