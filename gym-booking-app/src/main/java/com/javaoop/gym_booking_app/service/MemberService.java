@@ -63,6 +63,13 @@ public class MemberService {
                 .filter(m -> passwordEncoder.matches(rawPassword, m.getPasswordHash()))
                 .orElse(null);
     }
+    
+    public ServiceResult<Member> loginAsResult(String email, String rawPassword) {
+        return memberRepository.findByEmail(email)
+                .filter(m -> passwordEncoder.matches(rawPassword, m.getPasswordHash()))
+                .map(m -> ServiceResult.ok(m))
+                .orElse(ServiceResult.fail("帳號或密碼錯誤"));
+    }
 
     /* -------- 查詢預約 -------- */
     @Transactional(readOnly = true)
@@ -70,3 +77,4 @@ public class MemberService {
         return reservationRepository.findByMemberId(memberId);
     }
 }
+
