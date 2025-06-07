@@ -1,39 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie List</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>上映電影</title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/move_list.css}">
+    </th:block>
 </head>
 <body>
-<h1>Movies</h1>
 
-<div th:if="${movies.isEmpty()}">
-    <p>No movies found</p>
-</div>
+<section layout:fragment="content">
+    <h1 id="page-title">🎬 上映中電影清單</h1>
+    <div id="movie-list">
+        <p th:if="${movies.isEmpty()}">
+            現在沒有上映中的電影
+        </p>
+        <div th:unless="${movies.isEmpty()}">
+            <div th:each="movie : ${movies}" class="movie-card">
+                <img alt="poster" th:src="@{'/images/' + ${movie.poster}}">
+                <h2 th:text="${movie.title}"></h2>
+                <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
+                <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
+                <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
+                <a th:href="@{/movie/shows/{id}(id=${movie.movieId})}" class="button-link"> 查詢場次 </a>
+            </div>
+        </div>
+    </div>
 
-<table th:unless="${movies.isEmpty()}">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Duration (min)</th>
-        <th>Rating</th>
-        <th>Synopsis</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="movie : ${movies}">
-        <td th:text="${movie.movieId}">1</td>
-        <td th:text="${movie.title}">Movie Title</td>
-        <td th:text="${movie.durationMinutes}">120</td>
-        <td th:text="${movie.ratingCategory.toString()}">Rating</td>
-        <td th:text="${movie.synopsis}">Synopsis here...</td>
-    </tr>
-    </tbody>
-</table>
+</section>
 
-<a href="/user-home">Back to Home</a>
 </body>
 </html>

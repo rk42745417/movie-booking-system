@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title layout:title-pattern="$CONTENT_TITLE | 訂票系統">訂票系統</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <th:block layout:fragment="css"></th:block>
+</head>
+<body style="background-color: rgb(55, 47, 64);">
+
+<!-- 左側功能選單 -->
+<nav class="sidebar">
+    <h2>功能選單</h2>
+    <a th:href="@{/}" class="menu-button">首頁</a>
+    <a th:href="@{/movie}" class="menu-button"> 🎬 上映電影 </a>
+    <a href="9訂票用戶＿查詢訂單.html" class="menu-button"> 🧾 查詢訂單 </a>
+    <form th:action="@{/user/logout}" method="post" style="display: inline;">
+        <button type="submit" class="menu-button">登出</button>
+    </form>
+    <a th:href="@{/user/change_password}" class="menu-button"> 修改密碼 </a>
+</nav>
+
+<!-- 右側主內容區 -->
+<div class="main-content">
+    <div th:if="${successMessage}" class="alert alert-success">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <main layout:fragment="content">
+        Default Content -- it will be replaced in every other HTMLs.
+    </main>
+</div>
+
+
+</body>
+</html>

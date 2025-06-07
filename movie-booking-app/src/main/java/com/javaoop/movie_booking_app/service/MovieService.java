@@ -18,11 +18,6 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public Movie addMovie(String title, String synopsis, Integer durationMinutes, RatingCategory ratingCategory) {
-        Movie movie = new Movie(title, synopsis, durationMinutes, ratingCategory);
-        return movieRepository.save(movie);
-    }
-
     @Transactional
     public void removeMovie(Long movieId) {
         if (movieRepository.findById(movieId).isEmpty()) {
@@ -37,6 +32,10 @@ public class MovieService {
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
+    }
+
+    public List<Movie> getAllActiveMovies() {
+        return movieRepository.findByIsActive(true);
     }
 
     public Optional<Movie> getMovie(Long movieId) {

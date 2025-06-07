@@ -11,6 +11,7 @@ import com.javaoop.movie_booking_app.model.Movie;
 import com.javaoop.movie_booking_app.model.Showtime;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 //    private final MovieService movieService;
 //    private final ShowtimeService showtimeService;

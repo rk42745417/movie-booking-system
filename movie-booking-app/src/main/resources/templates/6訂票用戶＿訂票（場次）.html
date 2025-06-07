@@ -1,61 +1,63 @@
-</html>
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>選擇場次</title>
-  <link rel="stylesheet" href="style.css">
+    <title>選擇場次</title>
 </head>
-<body style="background-color: rgb(55, 47, 64);">
-  <h2 style="color: rgb(197, 206, 229);">請選擇場次時間：</h2>
-  <select id="session-time">
-    <option value="2025-05-18T14:00">5月18日 14:00</option>
-    <option value="2025-05-18T17:00">5月18日 17:00</option>
-    <option value="2025-05-18T20:00">5月18日 20:00</option>
-  </select>
 
-  <h2 style="color: rgb(197, 206, 229);">請輸入張數：</h2>
-  <input type="number" id="ticket-count" min="1" value="1">
+<body>
+<section layout:fragment="content">
+    <h2 style="color: rgb(197, 206, 229);">請選擇場次時間：</h2>
+    <select id="session-time">
+        <option value="2025-05-18T14:00">5月18日 14:00</option>
+        <option value="2025-05-18T17:00">5月18日 17:00</option>
+        <option value="2025-05-18T20:00">5月18日 20:00</option>
+    </select>
 
-  <br><br>
-  
+    <h2 style="color: rgb(197, 206, 229);">請輸入張數：</h2>
+    <input type="number" id="ticket-count" min="1" value="1">
+
+    <br><br>
+
     <!--button id="next-btn">下一步</button-->
     <a href="8訂票用戶＿訂票（小廳座位）.html" class="button-link"> 下一步</a>
+</section>
 
-  <script>
+<script>
     document.getElementById("next-btn").addEventListener("click", function () {
-      const selectedTime = document.getElementById("session-time").value;
-      const ticketCount = parseInt(document.getElementById("ticket-count").value);
+        const selectedTime = document.getElementById("session-time").value;
+        const ticketCount = parseInt(document.getElementById("ticket-count").value);
 
-      if (!selectedTime || ticketCount <= 0) {
-        alert("請選擇場次並輸入正確的張數！");
-        return;
-      }
-
-      // 傳送資料到後端
-      fetch("/api/select-session", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          session_time: selectedTime,
-          tickets: ticketCount
-        })
-      })
-      .then(res => {
-        if (res.ok) {
-          // 成功後跳轉座位選擇頁
-          window.location.href = `seats.html?time=${encodeURIComponent(selectedTime)}&tickets=${ticketCount}`;
-        } else {
-          alert("送出失敗");
+        if (!selectedTime || ticketCount <= 0) {
+            alert("請選擇場次並輸入正確的張數！");
+            return;
         }
-      })
-      .catch(err => {
-        console.error("錯誤：", err);
-        alert("連線錯誤");
-      });
+
+        // 傳送資料到後端
+        fetch("/api/select-session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                session_time: selectedTime,
+                tickets: ticketCount
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    // 成功後跳轉座位選擇頁
+                    window.location.href = `seats.html?time=${encodeURIComponent(selectedTime)}&tickets=${ticketCount}`;
+                } else {
+                    alert("送出失敗");
+                }
+            })
+            .catch(err => {
+                console.error("錯誤：", err);
+                alert("連線錯誤");
+            });
     });
-  </script>
+</script>
 </body>
 </html>

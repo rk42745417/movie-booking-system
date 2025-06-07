@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/movies")
+@RequestMapping("/movie")
 public class MovieController {
     private final MovieService movieService;
 
@@ -17,17 +17,17 @@ public class MovieController {
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
-    
+
     @GetMapping
     public String getAllMovies(Model model) {
-        model.addAttribute("movies", movieService.getAllMovies());
+        model.addAttribute("movies", movieService.getAllActiveMovies());
         return "movie_list";
     }
 
-//    @GetMapping("/{id}")
-//    public String getMovieDetails(@PathVariable Long id, Model model) {
-//        model.addAttribute("movie", movieService.getMovie(id));
-//        return "movie_details";
-//    }
+    @GetMapping("/shows/{id}")
+    public String getShowTimesOfMovie(@PathVariable Long id, Model model) {
+        model.addAttribute("movie", movieService.getMovie(id));
+        return "show_times";
+    }
 }
 

@@ -34,6 +34,18 @@ public class Movie {
     private String title;
 
     /**
+     * English name of the movie.
+     */
+    @Column(name = "en_title", nullable = false)
+    private String enTitle;
+
+    /**
+     * Filename of poster image
+     */
+    @Column(name = "poster", nullable = false)
+    private String poster;
+
+    /**
      * Brief description of the movie.
      */
     @Lob // For TEXT or CLOB types, indicates a large object
@@ -59,7 +71,7 @@ public class Movie {
     */
 
     /**
-     * Indicates if the movieis currently available.
+     * Indicates if the movie is currently available.
      */
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;
@@ -67,8 +79,10 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String title, String synopsis, Integer durationMinutes, RatingCategory ratingCategory) {
+    public Movie(String title, String enTitle, String poster, String synopsis, Integer durationMinutes, RatingCategory ratingCategory) {
         this.title = title;
+        this.enTitle = enTitle;
+        this.poster = poster;
         this.synopsis = synopsis;
         this.durationMinutes = durationMinutes;
         this.ratingCategory = ratingCategory;
@@ -88,6 +102,22 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getEnTitle() {
+        return enTitle;
+    }
+
+    public void setEnTitle(String enTitle) {
+        this.enTitle = enTitle;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     public String getSynopsis() {
@@ -122,6 +152,7 @@ public class Movie {
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
+    */
 
     public boolean isActive() {
         return isActive;
@@ -130,7 +161,6 @@ public class Movie {
     public void setActive(boolean active) {
         isActive = active;
     }
-    */
 
     @Override
     public String toString() {
