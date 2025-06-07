@@ -31,8 +31,8 @@
   <div class="card">
     <h1>會員登入</h1>
     <form id="loginForm" novalidate>
-      <label for="username">帳號 / Email</label>
-      <input id="username" name="username" type="text" placeholder="請輸入帳號" required />
+      <label for="email">帳號 / Email</label>
+      <input id="email" name="email" type="text" placeholder="請輸入帳號" required />
 
       <label for="password">密碼</label>
       <input id="password" name="password" type="password" placeholder="請輸入密碼" required />
@@ -54,15 +54,15 @@ const btn=document.getElementById('submitBtn');
 form.addEventListener('submit', async e => {
   e.preventDefault();
   msg.textContent = '';
-  const username = form.username.value.trim();
+  const email = form.email.value.trim();
   const password = form.password.value;
-  if (!username || !password) {
+  if (!email || !password) {
     showMsg('請填完整帳號與密碼', 'error');
     return;
   }
 
   // === 本地無資料庫：若輸入 student/student 直接通過 ===
-  if (username === 'student' && password === 'student') {
+  if (email === 'student' && password === 'student') {
     localStorage.setItem('authToken', 'dev-local-token');
     showMsg('登入成功！', 'success');
     setTimeout(() => location.href = 'reservation.html', 600);
@@ -74,7 +74,7 @@ form.addEventListener('submit', async e => {
     const res = await fetch(`${apiBase}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ email, password })
     });
     if (res.ok) {
       const data = await res.json();
