@@ -1,0 +1,126 @@
+/* 全域設定：避免邊界問題 */
+* {
+    box-sizing: border-box;
+}
+
+/* 基本排版：橫向兩欄佈局 */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    height: 100vh; /* 滿版高 */
+}
+
+/* 左側選單欄樣式 */
+.sidebar {
+    width: 200px;
+    background-color: #22162e;
+    color: white;
+    padding: 20px;
+}
+
+/* 功能標題 */
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* 選單按鈕樣式 */
+.menu-button {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    border: none;
+    text-align: left;
+    padding: 10px 0;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 滑鼠移上去效果 */
+.menu-button:hover {
+    background-color: #475aa5;
+}
+
+/* 右側主內容區塊樣式 */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: rgb(55, 47, 64);
+    overflow-y: auto;
+}
+
+/* 各功能區塊（預設隱藏） */
+.section {
+    display: none;
+}
+
+/* 顯示中區塊 */
+.section.active {
+    display: block;
+}
+
+/* 電影卡片區塊：格狀排列 */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* 單張電影卡片樣式 */
+.movie-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+/* 滑鼠移上卡片時稍微放大 */
+.movie-card:hover {
+    transform: scale(1.02);
+}
+
+/* 海報圖 */
+.movie-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* 卡片內文區 */
+.movie-card .info {
+    padding: 15px;
+}
+
+.movie-card h3 {
+    margin: 0 0 10px;
+}
+
+.movie-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.movie-card .date {
+    font-size: 13px;
+    color: #999;
+    margin-top: 5px;
+}
+
+/* 訂票按鈕 */
+.movie-card button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #475aa5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.movie-card button:hover {
+    background-color: #2d3e80;
+}

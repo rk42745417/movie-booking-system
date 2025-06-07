@@ -1,0 +1,70 @@
+package com.javaoop.gym_booking_app.service;
+
+import com.javaoop.gym_booking_app.model.*;
+import com.javaoop.gym_booking_app.repository.MemberRepository;
+import com.javaoop.gym_booking_app.repository.ReservationRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
+/**
+ * 會員相關業務：註冊、登入、查詢預約紀錄。
+ * 使用 Spring Data JPA + Constructor Injection。
+ */
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class MemberService {
+
+    private final MemberRepository memberRepository;
+    private final ReservationRepository reservationRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    /* -------- 註冊 -------- */
+    public ServiceResult register(String email, String rawPassword,
+                                  String fullName, String dobStr,
+                                  Gender gender, String phone) {
+
+        if (memberRepository.findByEmail(email).isPresent())
+            return ServiceResult.fail("Email 已被註冊");
+
+        LocalDate dob = null;
+        if (dobStr != null && !dobStr.isBlank()) {
+            try { dob = LocalDate.parse(dobStr); }
+            catch (DateTimeParseException e) { return ServiceResult.fail("生日格式錯誤"); }
+        }
+
+        Member m = new Member();
+        m.setEmail(email);
+        m.setPasswordHash(passwordEncoder.encode(rawPassword));
+        m.setFullName(fullName);
+        m.setDateOfBirth(dob);
+        m.setGender(gender);
+        m.setPhone(phone);
+        m.setRole(Role.MEMBER);
+        m.setCreatedAt(LocalDateTime.now());
+        m.setActive(true);
+
+        m = memberRepository.save(m);
+        return ServiceResult.success(m.getId());
+    }
+
+    /* -------- 登入 -------- */
+    public Member login(String email, String rawPassword) {
+        return memberRepository.findByEmail(email)
+                .filter(m -> passwordEncoder.matches(rawPassword, m.getPasswordHash()))
+                .orElse(null);
+    }
+
+    /* -------- 查詢會員預約 -------- */
+    @Transactional(readOnly = true)
+    public List<Reservation> getMemberReservations(Long memberId) {
+        return reservationRepository.findByMemberId(memberId);
+    }
+}
