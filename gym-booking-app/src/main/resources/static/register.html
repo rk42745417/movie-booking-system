@@ -88,7 +88,7 @@ form.addEventListener('submit',async e=>{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
     });
-    if(res.ok){show('註冊成功！自動跳轉登入…','success');setTimeout(()=>location.href='login.html',1200);} 
+    if(res.ok){show('註冊成功！自動跳轉登入…','success');setTimeout(()=>location.href='signup.html',1200);} 
     else{const err=await res.json().catch(()=>({message:'註冊失敗'}));throw new Error(err.message);}
   }catch(err){show(err.message,'error');}
   toggle(false);
