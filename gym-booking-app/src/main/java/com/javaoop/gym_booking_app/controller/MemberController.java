@@ -26,6 +26,8 @@ public class MemberController {
                 req.dateOfBirth(), req.gender(), req.phone());
         return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
     }
+    
+    
 
     /* ---------- 登入 ---------- */
     @PostMapping("/login")
