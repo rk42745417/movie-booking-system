@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>會員註冊 - OOPL GYM</title>
+  <style>
+    :root{--accent:#8e44ad;--bg:#fff;--muted:#f4f1ff;--text:#333;--radius:10px}
+    *{box-sizing:border-box;font-family:"Helvetica Neue",Arial,sans-serif}
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--muted);color:var(--text)}
+    .logo{font-size:28px;font-weight:700;color:var(--accent);margin-bottom:24px;text-decoration:none}
+    .card{width:100%;max-width:440px;background:var(--bg);padding:32px 28px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+    h1{font-size:22px;margin:0 0 24px;text-align:center;color:var(--accent)}
+    label{display:block;font-size:14px;margin-bottom:6px}
+    input,select{width:100%;padding:10px 12px;margin-bottom:16px;border:1px solid #ccc;border-radius:var(--radius);font-size:15px}
+    input:focus,select:focus{outline:none;border-color:var(--accent)}
+    button{width:100%;padding:12px 0;border:none;border-radius:var(--radius);background:var(--accent);color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:opacity .25s}
+    button:hover{opacity:.85}
+    .msg{margin-top:16px;font-size:14px;text-align:center}
+    .error{color:#c0392b}.success{color:#27ae60}
+    .link{margin-top:20px;text-align:center;font-size:14px}
+    .link a{color:var(--accent);text-decoration:none}
+    .link a:hover{text-decoration:underline}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spinner{display:inline-block;width:16px;height:16px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-left:8px}
+  </style>
+</head>
+<body>
+  <a href="index.html" class="logo">OOPL&nbsp;GYM</a>
+  <div class="card">
+    <h1>會員註冊</h1>
+    <form id="regForm" novalidate>
+      <label for="email">Email <small>(必填 / 登入帳號)</small></label>
+      <input id="email" name="email" type="email" placeholder="your@mail.com" required />
+
+      <label for="fullName">姓名 <small>(必填)</small></label>
+      <input id="fullName" name="fullName" type="text" placeholder="中文或英文姓名" required />
+
+      <label for="phone">電話 <small>(必填)</small></label>
+      <input id="phone" name="phone" type="tel" placeholder="0912345678" pattern="[0-9]{10}" required />
+
+      <label for="dob">生日 <small>(YYYY‑MM‑DD)</small></label>
+      <input id="dob" name="dateOfBirth" type="date" required />
+
+      <label for="gender">性別 <small>(必填)</small></label>
+      <select id="gender" name="gender" required>
+        <option value="">請選擇</option>
+        <option value="MALE">男</option>
+        <option value="FEMALE">女</option>
+        <option value="OTHER">其他</option>
+      </select>
+
+      <label for="password">密碼 <small>(至少 6 字)</small></label>
+      <input id="password" name="password" type="password" minlength="6" placeholder="設定密碼" required />
+
+      <label for="confirm">確認密碼</label>
+      <input id="confirm" type="password" placeholder="再次輸入密碼" required />
+
+      <button type="submit" id="regBtn">註冊</button>
+      <div id="msg" class="msg"></div>
+    </form>
+    <p class="link">返回登入<a href="signup.html">立即登入</a></p>
+    <p class="link">教練登入？<a href="coachlogin.html">點此前往</a></p>
+  </div>
+
+<script>
+const apiBase='http://localhost:8080/api/v1';
+const form=document.getElementById('regForm');
+const msg=document.getElementById('msg');
+const btn=document.getElementById('regBtn');
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  msg.textContent='';
+  const payload={
+    email:       form.email.value.trim(),
+    fullName:    form.fullName.value.trim(),
+    phone:       form.phone.value.trim(),
+    dateOfBirth: form.dob.value,
+    gender:      form.gender.value,
+    password:    form.password.value
+  };
+  if(Object.values(payload).some(v=>!v)){show('請完整填寫所有欄位','error');return;}
+  if(payload.password!==form.confirm.value){show('兩次密碼不一致','error');return;}
+  toggle(true);
+  try{
+    const res=await fetch(`${apiBase}/auth/register`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if(res.ok){show('註冊成功！自動跳轉登入…','success');setTimeout(()=>location.href='login.html',1200);} 
+    else{const err=await res.json().catch(()=>({message:'註冊失敗'}));throw new Error(err.message);}
+  }catch(err){show(err.message,'error');}
+  toggle(false);
+});
+
+function show(t,c){msg.textContent=t;msg.className=`msg ${c}`}
+function toggle(l){btn.disabled=l;btn.innerHTML=l?'處理中 <span class="spinner"></span>':'註冊';}
+</script>
+</body>
+</html>

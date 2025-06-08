@@ -1,0 +1,321 @@
+<!DOCTYPE html> 
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>課程預約 - OOPL GYM</title>
+  <style>
+    :root{--accent:#8e44ad;--bg:#fff;--muted:#f4f1ff;--text:#333;--radius:10px}
+    *{box-sizing:border-box;font-family:"Helvetica Neue",Arial,sans-serif}
+    body{margin:0;min-height:100vh;background:var(--muted);color:var(--text)}
+    .header{display:flex;align-items:center;justify-content:space-between;padding:24px 36px;background:var(--bg);border-bottom:4px solid var(--accent);}
+    .logo{font-size:26px;font-weight:700;color:var(--accent);text-decoration:none}
+    .logout{color:var(--accent);background:none;border:none;cursor:pointer;font-size:15px;}
+    main{max-width:980px;margin:32px auto;padding:0 16px}
+    h1{font-size:26px;color:var(--accent);margin:0 0 18px}
+    .tab-group{display:flex;gap:18px;margin-bottom:22px}
+    .tab{background:#ede6ff;padding:10px 24px;border-radius:var(--radius) var(--radius) 0 0;font-size:16px;cursor:pointer;opacity:.85;border:none;color:#8e44ad}
+    .tab.active{background:var(--bg);box-shadow:0 -4px 12px rgba(0,0,0,0.03);font-weight:700;opacity:1}
+    .card{background:var(--bg);padding:24px 14px 16px 14px;border-radius:var(--radius);box-shadow:0 4px 14px rgba(0,0,0,.07);}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 8px;border-bottom:1px solid #eee;text-align:left;font-size:15px;}
+    th{background:#ece4ff}
+    .btn{padding:7px 14px;border:none;border-radius:var(--radius);background:var(--accent);color:#fff;font-size:14px;cursor:pointer}
+    .btn:disabled{background:#bdbdbd;cursor:not-allowed}
+    .success{color:#27ae60}
+    .error{color:#c0392b}
+    /* 行事曆 */
+    .calendar{margin:16px auto 0;max-width:360px}
+    .cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+    .cal-btn{background:none;border:none;font-size:18px;color:var(--accent);cursor:pointer;}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+    .cal-day,.cal-cell{height:38px;display:flex;align-items:center;justify-content:center;font-size:15px}
+    .cal-day{font-weight:700}
+    .cal-cell{background:#f8f5fd;border-radius:8px;cursor:pointer;transition:.2s}
+    .cal-cell.has-course{background:#d1b4f7;color:#512b7f;font-weight:600;}
+    .cal-cell.selected{background:#8e44ad;color:#fff;font-weight:700;}
+    .cal-cell:hover{outline:2px solid #8e44ad}
+    .today{border:1.5px solid #8e44ad}
+    .calendar-legend{font-size:13px;color:#666;margin:10px 0 0 0;text-align:right}
+    .day-courses{margin:10px 0 0 0}
+    .day-courses h3{font-size:18px;margin:8px 0}
+    .day-courses ul{padding:0;margin:0;list-style:none}
+    .day-courses li{margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid #ece4ff}
+    @media (max-width:700px){
+      main{padding:0 2px}
+      .calendar{max-width:99vw}
+      .card{padding:9px 2px 10px 2px;}
+      th,td{font-size:13px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="logo"><strong>OOPL&nbsp;GYM</strong></a>
+    <button class="logout" id="logoutBtn">登出</button>
+  </div>
+  <main>
+    <h1>課程預約系統</h1>
+    <div class="tab-group">
+      <button class="tab active" id="tab-available">可報名課程</button>
+      <button class="tab" id="tab-my">我的預約</button>
+      <button class="tab" id="tab-calendar">行事曆</button>
+    </div>
+    <div id="msg"></div>
+    <!-- 可報名課程 -->
+    <div class="card" id="panel-available">
+      <table id="courseTable">
+        <thead>
+          <tr>
+            <th>課程名稱</th>
+            <th>教練</th>
+            <th>開始</th>
+            <th>結束</th>
+            <th>名額</th>
+            <th>狀態</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <!-- 我的預約 -->
+    <div class="card" id="panel-my" style="display:none">
+      <table id="myTable">
+        <thead>
+          <tr>
+            <th>課程名稱</th>
+            <th>教練</th>
+            <th>開始</th>
+            <th>結束</th>
+            <th>名額</th>
+            <th>狀態</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <!-- 行事曆 -->
+    <div class="card" id="panel-calendar" style="display:none">
+      <div class="calendar" id="calendar"></div>
+      <div class="calendar-legend">紫色：當日有課程</div>
+      <div class="day-courses" id="dayCourses" style="display:none"></div>
+    </div>
+  </main>
+
+<script>
+const apiBase = 'http://localhost:8080/api/v1';
+const token = localStorage.getItem('authToken');
+if (!token) location.href = 'login.html';
+
+const msg = document.getElementById('msg');
+const tableBody = document.querySelector('#courseTable tbody');
+const myBody = document.querySelector('#myTable tbody');
+const headers = { 'Authorization': `Bearer ${token}` };
+
+// ===== Tab 切換 =====
+const panels = {
+  'available': document.getElementById('panel-available'),
+  'my': document.getElementById('panel-my'),
+  'calendar': document.getElementById('panel-calendar')
+};
+document.getElementById('tab-available').onclick = () => showPanel('available');
+document.getElementById('tab-my').onclick = () => showPanel('my');
+document.getElementById('tab-calendar').onclick = () => showPanel('calendar');
+function showPanel(key) {
+  for(const k in panels) panels[k].style.display = (k===key) ? '' : 'none';
+  document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
+  document.getElementById('tab-'+key).classList.add('active');
+  msg.textContent = '';
+  if(key==='available') loadCourses();
+  if(key==='my') loadMyCourses();
+  if(key==='calendar') renderCalendar();
+}
+
+// ===== 格式化 =====
+function fmt(t) { return t ? t.replace('T',' ').substring(0,16) : ''; }
+
+// ===== 可報名課程 =====
+async function loadCourses() {
+  tableBody.innerHTML = '';
+  try {
+    const res = await fetch(`${apiBase}/courses/open`, { headers });
+    if (!res.ok) throw new Error(await res.text());
+    const list = await res.json();
+    if (!list.length) {
+      tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center">目前沒有可報名的課程</td></tr>';
+      return;
+    }
+    list.forEach(c => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${c.title}</td>
+        <td>${c.coach?.name||''}</td>
+        <td>${fmt(c.startTime)}</td>
+        <td>${fmt(c.endTime)}</td>
+        <td>${c.reservedCount||0}/${c.capacity}</td>
+        <td>${c.status}</td>
+        <td>
+          <button class="btn" ${c.status!=='OPEN'||(c.reservedCount||0)>=c.capacity?'disabled':''} onclick="signup(${c.id},this)">報名</button>
+        </td>
+      `;
+      tableBody.appendChild(tr);
+    });
+  } catch (e) {
+    msg.innerHTML = `<div class="error">讀取課程失敗：${e.message}</div>`;
+  }
+}
+
+// ===== 我的預約課程 =====
+async function loadMyCourses() {
+  myBody.innerHTML = '';
+  try {
+    const res = await fetch(`${apiBase}/reservations/my`, { headers });
+    if (!res.ok) throw new Error(await res.text());
+    const list = await res.json();
+    if (!list.length) {
+      myBody.innerHTML = '<tr><td colspan="7" style="text-align:center">你目前沒有報名課程</td></tr>';
+      return;
+    }
+    list.forEach(r => {
+      const c = r.course || {};
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${c.title||''}</td>
+        <td>${c.coach?.name||''}</td>
+        <td>${fmt(c.startTime)}</td>
+        <td>${fmt(c.endTime)}</td>
+        <td>${c.capacity}</td>
+        <td>${c.status}</td>
+        <td>
+          <button class="btn" onclick="cancelReservation(${r.id},this)">取消</button>
+        </td>
+      `;
+      myBody.appendChild(tr);
+    });
+  } catch (e) {
+    msg.innerHTML = `<div class="error">讀取我的預約失敗：${e.message}</div>`;
+  }
+}
+
+// ===== 取消預約 =====
+window.cancelReservation = async function(resvId, btn) {
+  if (!confirm('確定要取消這筆預約嗎？')) return;
+  btn.disabled = true;
+  btn.textContent = '處理中...';
+  msg.textContent = '';
+  try {
+    const res = await fetch(`${apiBase}/reservations/${resvId}`, { method:'DELETE', headers });
+    if (!res.ok) throw new Error('取消失敗');
+    msg.innerHTML = `<div class="success">已取消預約</div>`;
+    loadMyCourses();
+    loadCourses();
+  } catch (e) {
+    msg.innerHTML = `<div class="error">${e.message}</div>`;
+  }
+}
+
+// ===== 課程報名 =====
+window.signup = async function(courseId, btn) {
+  if (!confirm('確定要報名這門課程？')) return;
+  btn.disabled = true;
+  btn.textContent = '處理中...';
+  msg.textContent = '';
+  try {
+    const res = await fetch(`${apiBase}/reservations`, {
+      method: 'POST',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ courseId })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(()=>'');
+
+      throw new Error((err && err.message) || '報名失敗');
+    }
+    msg.innerHTML = `<div class="success">報名成功！</div>`;
+    loadCourses();
+    loadMyCourses();
+  } catch (e) {
+    msg.innerHTML = `<div class="error">${e.message}</div>`;
+  }
+}
+
+// ===== 行事曆（簡易） =====
+let calendarCourses = [];
+let currentMonth = null;
+
+async function renderCalendar() {
+  // 取所有課程（含已報名）
+  if(!calendarCourses.length){
+    try{
+      const res = await fetch(`${apiBase}/courses/open`,{headers});
+      if(res.ok) calendarCourses = await res.json();
+    }catch{}
+  }
+  // 日期
+  const cal = document.getElementById('calendar');
+  const today = new Date();
+  const refDate = currentMonth || new Date(today.getFullYear(), today.getMonth(), 1);
+  currentMonth = refDate;
+  // 月曆資料
+  const y = refDate.getFullYear(), m = refDate.getMonth();
+  const first = new Date(y, m, 1), last = new Date(y, m+1, 0);
+  let html = `<div class="cal-header">
+    <button class="cal-btn" onclick="calPrev()">&lt;</button>
+    <span>${y}年${m+1}月</span>
+    <button class="cal-btn" onclick="calNext()">&gt;</button>
+  </div>
+  <div class="cal-grid">
+    <div class="cal-day">日</div><div class="cal-day">一</div><div class="cal-day">二</div><div class="cal-day">三</div><div class="cal-day">四</div><div class="cal-day">五</div><div class="cal-day">六</div>`;
+  for(let i=0;i<first.getDay();i++) html += `<div></div>`;
+  for(let d=1;d<=last.getDate();d++){
+    const dateStr = `${y}-${(m+1).toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
+    const hasCourse = calendarCourses.some(c=>c.startTime?.startsWith(dateStr));
+    const isToday = today.getFullYear()===y && today.getMonth()===m && today.getDate()===d;
+    html += `<div class="cal-cell${hasCourse?' has-course':''}${isToday?' today':''}" data-date="${dateStr}" onclick="showDayCourses('${dateStr}',this)">${d}</div>`;
+  }
+  html += "</div>";
+  cal.innerHTML = html;
+}
+window.calPrev = function(){
+  if(!currentMonth)return;
+  currentMonth = new Date(currentMonth.getFullYear(),currentMonth.getMonth()-1,1);
+  renderCalendar();
+};
+window.calNext = function(){
+  if(!currentMonth)return;
+  currentMonth = new Date(currentMonth.getFullYear(),currentMonth.getMonth()+1,1);
+  renderCalendar();
+};
+window.showDayCourses = function(dateStr,cell){
+  document.querySelectorAll('.cal-cell').forEach(c=>c.classList.remove('selected'));
+  cell.classList.add('selected');
+  const day = document.getElementById('dayCourses');
+  const todayList = calendarCourses.filter(c=>c.startTime?.startsWith(dateStr));
+  if(!todayList.length){ day.style.display='none'; return; }
+  let html = `<h3>${dateStr} 的課程</h3><ul>`;
+  todayList.forEach(c=>{
+    html += `<li>
+      <b>${c.title}</b> / ${c.coach?.name||''}
+      <br>時間：${fmt(c.startTime)} - ${fmt(c.endTime)}
+      <br>名額：${c.reservedCount||0}/${c.capacity}
+      <br>狀態：${c.status}
+    </li>`;
+  });
+  html += "</ul>";
+  day.innerHTML = html;
+  day.style.display = '';
+};
+
+document.getElementById('logoutBtn').onclick = () => {
+  localStorage.removeItem('authToken');
+  location.href = 'signup.html';
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadCourses();
+});
+</script>
+</body>
+</html>

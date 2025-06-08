@@ -1,40 +1,32 @@
 package com.javaoop.gym_booking_app.controller;
 
 import com.javaoop.gym_booking_app.model.Course;
-import com.javaoop.gym_booking_app.service.CoachService;
-import com.javaoop.gym_booking_app.service.ServiceResult;
-import lombok.RequiredArgsConstructor;
+import com.javaoop.gym_booking_app.service.CourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/coaches")
-@RequiredArgsConstructor
+@RequestMapping("/api/v1/coach")
 public class CoachController {
 
-    private final CoachService coachService;
+    private final CourseService courseService;
 
-    /* ---------- 建立課程 ---------- */
-    @PostMapping("/{coachId}/courses")
-    public ResponseEntity<?> createCourse(@PathVariable Long coachId,
-                                          @RequestBody CreateCourseReq req) {
-        ServiceResult rs = coachService.createCourse(
-                coachId, req.title(), req.description(), req.roomId(), req.capacity(),
-                req.startTime(), req.endTime());
-        return rs.success() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
+    public CoachController(CourseService courseService) {
+        this.courseService = courseService;
     }
 
-    /* ---------- 列出教練課程 ---------- */
-    @GetMapping("/{coachId}/courses")
-    public List<Course> listCoachCourses(@PathVariable Long coachId) {
-        return coachService.listCourses(coachId);
+    /** ➊ 仍保留列出全部（如果你還需要） */
+    @GetMapping("/courses")
+    public ResponseEntity<List<Course>> listCourses() {
+        return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    /* DTO */
-    public record CreateCourseReq(String title, String description,
-                                  Long roomId, Integer capacity,
-                                  LocalDateTime startTime, LocalDateTime endTime) {}
+    /** ➋ 給前端「儀表板」用的即將開課清單 */
+    @GetMapping("/courses/upcoming")
+    public ResponseEntity<List<CourseService.CourseSummary>> upcoming() {
+        return ResponseEntity.ok(
+                courseService.upcoming(java.time.LocalDateTime.now()));
+    }
 }

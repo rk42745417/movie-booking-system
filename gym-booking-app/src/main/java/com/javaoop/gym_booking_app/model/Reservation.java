@@ -3,6 +3,9 @@ package com.javaoop.gym_booking_app.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 /**
  * Represents a member's reservation for a specific course.

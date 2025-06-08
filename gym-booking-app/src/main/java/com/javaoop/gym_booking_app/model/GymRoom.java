@@ -3,6 +3,9 @@ package com.javaoop.gym_booking_app.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
 /**
  * Represents a room or location in the gym where courses are held.
