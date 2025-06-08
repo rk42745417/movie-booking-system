@@ -15,7 +15,7 @@
     <h2>功能選單</h2>
     <a th:href="@{/}" class="menu-button">首頁</a>
     <a th:href="@{/movie}" class="menu-button"> 🎬 上映電影 </a>
-    <a href="9訂票用戶＿查詢訂單.html" class="menu-button"> 🧾 查詢訂單 </a>
+    <a th:href="@{/booking}" class="menu-button"> 🧾 查詢訂單 </a>
     <form th:action="@{/user/logout}" method="post" style="display: inline;">
         <button type="submit" class="menu-button">登出</button>
     </form>

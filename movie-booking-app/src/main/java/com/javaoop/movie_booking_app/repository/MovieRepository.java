@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<Movie> findByIsActive(boolean isActive);
+
+    List<Movie> findByTitle(String title);
 }
 
 

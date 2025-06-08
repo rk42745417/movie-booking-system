@@ -2,6 +2,7 @@ package com.javaoop.movie_booking_app.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ public class RegistrationDto {
     @NotEmpty
     private String password;
 
+    @NotNull
     private LocalDate birthday;
 
     public String getEmail() {

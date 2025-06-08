@@ -1,11 +1,6 @@
 package com.javaoop.movie_booking_app.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * Stores information about the cinema halls.
@@ -29,21 +24,15 @@ public class Hall {
     /**
      * Type of hall, e.g., Large, Small.
      */
-    @Column(name = "hall_type", length = 50)
-    private String hallType;
-
-    /**
-     * Total number of seats in the hall.
-     */
-    @Column(name = "total_seats", nullable = false)
-    private Integer totalSeats;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "hall_type", nullable = false, length = 20)
+    private HallType hallType;
 
     public Hall() {
     }
 
-    public Hall(String hallType, Integer totalSeats) {
+    public Hall(HallType hallType) {
         this.hallType = hallType;
-        this.totalSeats = totalSeats;
     }
 
     public Long getHallId() {
@@ -64,20 +53,12 @@ public class Hall {
     }
     */
 
-    public String getHallType() {
+    public HallType getHallType() {
         return hallType;
     }
 
-    public void setHallType(String hallType) {
+    public void setHallType(HallType hallType) {
         this.hallType = hallType;
-    }
-
-    public Integer getTotalSeats() {
-        return totalSeats;
-    }
-
-    public void setTotalSeats(Integer totalSeats) {
-        this.totalSeats = totalSeats;
     }
 
     @Override
@@ -86,7 +67,6 @@ public class Hall {
                 "hallId=" + hallId +
                 // (name != null ? ", name='" + name + '\'' : "") + // if uncommented
                 ", hallType='" + hallType + '\'' +
-                ", totalSeats=" + totalSeats +
                 '}';
     }
 }

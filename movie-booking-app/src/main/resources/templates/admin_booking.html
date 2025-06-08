@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="zh"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+      layout:decorate="~{admin_layout}">
 <head>
     <title>訂票列表</title>
 
@@ -12,10 +12,10 @@
 <body>
 
 <section layout:fragment="content">
-    <h1>我的電影票</h1>
+    <h1>所有電影票</h1>
 
     <div th:if="${#lists.isEmpty(bookings)}">
-        <p>你目前沒有任何訂單</p>
+        <p>目前沒有任何訂單</p>
     </div>
 
     <table th:unless="${#lists.isEmpty(bookings)}">
@@ -59,16 +59,19 @@
                     CONFIRMED
                 </span>
             </td>
-
             <td>
-                <div th:if="${booking.status.name() == 'PENDING' and #temporals.createNow().isBefore(booking.showtime.startTime.minusMinutes(30))}">
-                    <form th:action="@{/booking/cancel}" method="post"
-                          onsubmit="return confirm('你確定你要取消訂票嗎？');">
+                <form th:action="@{/admin/booking}" method="post">
+                    <input type="hidden" name="bookingId" th:value="${booking.bookingId}"/>
+                    <input type="hidden" name="showtimeId" th:value="${showtimeId}"/>
 
-                        <input type="hidden" name="bookingId" th:value="${booking.bookingId}"/>
-                        <button type="submit">取消</button>
-                    </form>
-                </div>
+                    <select name="status">
+                        <option th:each="stat : ${allStatuses}"
+                                th:value="${stat}"
+                                th:text="${stat}"
+                                th:selected="${stat == booking.status}"></option>
+                    </select>
+                    <button type="submit">更新</button>
+                </form>
             </td>
         </tr>
         </tbody>

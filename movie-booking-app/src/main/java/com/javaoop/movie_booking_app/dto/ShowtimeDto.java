@@ -1,13 +1,14 @@
 package com.javaoop.movie_booking_app.dto;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public class NewShowtimeDto {
-    @NotEmpty
+public class ShowtimeDto {
+    @NotNull
     private Long hallId;
 
+    @NotNull
     private LocalDateTime startTime;
 
     public void setHallId(Long hallId) {

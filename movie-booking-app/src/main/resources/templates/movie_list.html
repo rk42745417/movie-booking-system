@@ -6,25 +6,25 @@
     <title>上映電影</title>
 
     <th:block layout:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/move_list.css}">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
     </th:block>
 </head>
 <body>
 
 <section layout:fragment="content">
     <h1 id="page-title">🎬 上映中電影清單</h1>
-    <div id="movie-list">
+    <div>
         <p th:if="${movies.isEmpty()}">
             現在沒有上映中的電影
         </p>
-        <div th:unless="${movies.isEmpty()}">
+        <div th:unless="${movies.isEmpty()}" class="movie-grid">
             <div th:each="movie : ${movies}" class="movie-card">
                 <img alt="poster" th:src="@{'/images/' + ${movie.poster}}">
                 <h2 th:text="${movie.title}"></h2>
                 <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
                 <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
                 <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
-                <a th:href="@{/movie/shows/{id}(id=${movie.movieId})}" class="button-link"> 查詢場次 </a>
+                <a th:href="@{/movie/{id}/showtime(id=${movie.movieId})}" class="button-link"> 查詢場次 </a>
             </div>
         </div>
     </div>

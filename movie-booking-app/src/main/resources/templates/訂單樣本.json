@@ -1,9 +1,0 @@
-{
-  "order_id": "ORD123456",
-  "user_email": "user@example.com",
-  "movie_title_zh": "火線追緝令",
-  "movie_title_en": "Seven",
-  "seats": ["A1", "A2", "A3"],
-  "status": "已付款",
-  "created_at": "2025-05-20T15:30:00Z"
-}

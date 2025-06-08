@@ -1,18 +1,9 @@
 package com.javaoop.movie_booking_app.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Stores the main information for each ticket booking.
@@ -59,17 +50,36 @@ public class Booking {
     @Column(name = "status", nullable = false, length = 20)
     private BookingStatus status = BookingStatus.PENDING;
 
+    /**
+     * Type of the ticket
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 20)
+    private TicketType type;
+
     /*
     @Column(name = "total_price", precision = 10, scale = 2)
     private BigDecimal totalPrice;
     */
 
+    /**
+     * The set of seats included in this booking.
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "Booking_Seats", // Name of the intermediate table
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
+    private Set<Seat> seats = new HashSet<>();
+
     public Booking() {
     }
 
-    public Booking(Member member, Showtime showtime) {
+    public Booking(Member member, Showtime showtime, TicketType type) {
         this.member = member;
         this.showtime = showtime;
+        this.type = type;
         // bookingTime would be set automatically if @CreationTimestamp is used
         // status is already defaulted
     }
@@ -126,6 +136,22 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
     */
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
+    }
+
+    public TicketType getType() {
+        return type;
+    }
+
+    public void setType(TicketType type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {

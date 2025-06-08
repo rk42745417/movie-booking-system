@@ -13,10 +13,17 @@
     <div id="movies" class="section active">
         <h2 th:text="${movie.title} + ' 的出演場次'"></h2>
         <div class="movie-grid">
-            <form th:action="@{/admin/{id}/showtime(id=${id})}" th:object="${new_showtime}" method="post"
+            <form th:action="@{/admin/movie/{id}/showtime(id=${id})}" th:object="${new_showtime}" method="post"
                   class="movie-card">
+                <h3>新增場次</h3>
                 <label for="hall_id">放映廳編號</label>
-                <input id="hall_id" name="hall_id" th:field="*{hallId}" required>
+                <select id="hall_id" name="hall_id" th:field="*{hallId}" required>
+                    <option value="">-- 請選擇放映廳 --</option>
+                    <option th:each="hall : ${hall_option}"
+                            th:value="${hall.getHallId()}"
+                            th:text="${hall.getHallId()} + ' - ' + (${hall.getHallType().name() == T(com.javaoop.movie_booking_app.model.HallType).BIG.name() ? '大廳' : '小廳'})"
+                    ></option>
+                </select>
                 <br/><br/>
                 <label for="start_time">開始時間</label>
                 <input id="start_time" name="start_time" type="datetime-local" th:field="*{startTime}" required>
@@ -24,15 +31,22 @@
                 <button id="btn" type="submit" class="button">增加場次</button>
             </form>
             <div th:each="showtime : ${showtimes}" class="movie-card">
-                <a th:href="@{/admin/{showtime}/(showtime=${showtime.showtimeId})}">
-                    <div class="info">
-                        <h3>
-                            <span th:text="${showtime.startTime}"></span> ~ <span th:text="${showtime.endTime}"></span>
-                        </h3>
-                        <p><strong>放映廳編號：</strong> <span th:text="${showtime.getHall().hallId}"></span></p>
-                        <p><strong>放映廳類型：</strong> <span th:text="${showtime.getHall().hallType}"></span></p>
-                    </div>
-                </a>
+                <div class="info">
+                    <h6>
+                        <span th:text="${showtime.startTime}"></span> ~ <span th:text="${showtime.endTime}"></span>
+                    </h6>
+                    <p><strong>放映廳編號：</strong> <span th:text="${showtime.getHall().hallId}"></span></p>
+                    <p><strong>放映廳類型：</strong>
+                        <span th:text="${showtime.getHall().getHallType().name() == T(com.javaoop.movie_booking_app.model.HallType).BIG.name() ? '大廳' : '小廳'}"></span>
+                    </p>
+                    <a th:href="@{/admin/showtime/{showtime}(showtime=${showtime.showtimeId})}">
+                        修改場次
+                    </a>
+                    <br>
+                    <a th:href="@{/admin/booking/{showtime}(showtime=${showtime.showtimeId})}">
+                        查看訂票狀況
+                    </a>
+                </div>
             </div>
         </div>
     </div>

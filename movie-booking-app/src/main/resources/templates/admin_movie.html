@@ -14,8 +14,8 @@
         <img th:src="@{'/images/' + ${movie.poster}}">
         <div class="info">
             <h3 th:text="${movie.title}"></h3>
-            <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
             <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
+            <p><strong>分級：</strong> <span th:text="${movie.ratingCategory.name()}"></span></p>
             <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
             <form th:action="@{/admin/movie/{id}(id=${id})}" method="post">
                 <label for="active">是否正在上映</label>

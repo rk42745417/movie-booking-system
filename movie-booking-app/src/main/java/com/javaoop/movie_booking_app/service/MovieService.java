@@ -19,18 +19,6 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    @Transactional
-    public void removeMovie(Long movieId) {
-        if (movieRepository.findById(movieId).isEmpty()) {
-            throw new IllegalStateException("Movie not exists");
-        }
-        movieRepository.deleteById(movieId);
-    }
-
-    public List<Movie> getCurrentMovies() {
-        return movieRepository.findByIsActive(true);
-    }
-
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }

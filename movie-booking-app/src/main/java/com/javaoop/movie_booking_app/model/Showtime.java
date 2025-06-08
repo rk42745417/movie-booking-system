@@ -52,14 +52,12 @@ public class Showtime {
      * Date and time the movie screening starts.
      */
     @Column(name = "start_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime startTime;
 
     /**
      * Date and time the movie screening ends (calculated from start_time + movie_duration).
      */
     @Column(name = "end_time", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime endTime;
 
     public Showtime() {

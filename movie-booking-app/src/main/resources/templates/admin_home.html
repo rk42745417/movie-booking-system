@@ -17,19 +17,20 @@
         <!-- 電影卡片清單 -->
         <div class="movie-grid">
             <div th:each="movie : ${movies}" class="movie-card">
-                <a th:href="@{/admin/movie/{id}(id=${movie.movieId})}">
-                    <img th:src="@{'/images/' + ${movie.poster}}">
-                    <div class="info">
-                        <h3 th:text="${movie.title}"></h3>
-                        <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
-                        <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
-                        <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
-                        <p>是否正在上映：
-                            <span th:if="${movie.isActive}" style="color: greenyellow;">是</span>
-                            <span th:unless="${movie.isActive}" style="color: firebrick;">否</span>
-                        </p>
-                    </div>
-                </a>
+                <img th:src="@{'/images/' + ${movie.poster}}">
+                <div class="info">
+                    <h3 th:text="${movie.title}"></h3>
+                    <p><strong>分級：</strong> <span th:text="${movie.ratingCategory}"></span></p>
+                    <p><strong>片長：</strong> <span th:text="${movie.durationMinutes}"></span> 分鐘</p>
+                    <p><strong>簡介：</strong> <span th:text="${movie.synopsis}"></span></p>
+                    <p>是否正在上映：
+                        <span th:if="${movie.isActive}" style="color: limegreen;">是</span>
+                        <span th:unless="${movie.isActive}" style="color: firebrick;">否</span>
+                    </p>
+                    <a th:href="@{/admin/movie/{id}(id=${movie.movieId})}">
+                        進到調整頁面
+                    </a>
+                </div>
             </div>
         </div>
     </div>

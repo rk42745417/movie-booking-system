@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+    background-color: #c4afe1;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.status {
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.status-CONFIRMED {
+    background-color: #28a745;
+}
+
+.status-PENDING {
+    background-color: #ffc107;
+    color: black;
+}
+
+.status-CANCELLED {
+    background-color: #dc3545;
+}
+
+td form {
+    margin: 0;
+}
+
+td button {
+    padding: 5px 10px;
+    cursor: pointer;
+}

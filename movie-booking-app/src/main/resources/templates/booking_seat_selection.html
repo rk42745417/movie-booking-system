@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>選擇座位</title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/booking_select.css}">
+    </th:block>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+    <h1>Select Seats for <span th:text="${showtime.movie.title}">Movie Title</span></h1>
+    <h3 th:text="${#temporals.format(showtime.startTime, 'MMM dd, yyyy - HH:mm')}">Showtime</h3>
+    <h4>片長：<span th:text="${showtime.movie.durationMinutes}"></span> 分鐘</h4>
+
+    <div th:if="${#fields.hasErrors('bookingForm.seatIds')}" class="error">
+        <p th:errors="*{bookingForm.seatIds}"></p>
+    </div>
+
+    <div class="screen">螢幕</div>
+
+    <form th:action="@{/booking/create/{id}(id=${showtime.showtimeId})}" th:object="${bookingForm}" method="post">
+        <div class="seat-grid">
+            <div th:each="rowEntry : ${seatsByRow}" class="seat-row">
+                <div class="row-label" th:text="${rowEntry.key}">A</div>
+
+                <div th:each="seat : ${rowEntry.value}" class="seat"
+                     th:classappend="${bookedSeatIds.contains(seat.seatId)} ? 'booked' : 'available'">
+
+                    <input type="checkbox" th:id="'seat-' + ${seat.seatId}" name="seatIds"
+                           th:value="${seat.seatId}"
+                           th:disabled="${bookedSeatIds.contains(seat.seatId)}"/>
+
+                    <label th:for="'seat-' + ${seat.seatId}" th:text="${seat.number}"></label>
+                </div>
+            </div>
+        </div>
+        <label for="hall_id">票種</label>
+        <select id="hall_id" name="hall_id" th:field="*{type}" required>
+            <option value="ADULT">成人</option>
+            <option value="CHILDREN">孩童</option>
+        </select>
+
+        <button type="submit" style="margin-top: 20px;">預訂座位</button>
+    </form>
+</section>
+
+</body>
+</html>

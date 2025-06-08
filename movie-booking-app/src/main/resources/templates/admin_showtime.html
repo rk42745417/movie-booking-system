@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin_layout}">
+<head>
+    <title>上映場次操作</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/index.css}">
+    </th:block>
+</head>
+<body>
+<section layout:fragment="content">
+    <div id="movies" class="section active">
+        <h2 th:text="上映場次編輯"></h2>
+        <div class="movie-grid">
+            <h3>電影：<span th:text="${showtime.getMovie().getTitle()}"></span></h3>
+            <span class="movie-card">
+                <img th:src="@{'/images/' + ${showtime.getMovie().poster}}">
+            </span>
+
+            <form th:action="@{/admin/showtime/{id}(id=${showtime.getShowtimeId()})}" th:object="${showtimeForm}"
+                  method="post"
+                  class="movie-card">
+                <!--                <h3>新增場次</h3>-->
+                <label for="hall_id">放映廳編號</label>
+                <select id="hall_id" name="hall_id" th:field="*{hallId}" required>
+                    <option th:each="hall : ${hall_option}"
+                            th:value="${hall.getHallId()}"
+                            th:text="${hall.getHallId()} + ' - ' + (${hall.getHallType().name() == T(com.javaoop.movie_booking_app.model.HallType).BIG.name() ? '大廳' : '小廳'})"
+                    ></option>
+                </select>
+                <br/><br/>
+                <label for="startTime">開始時間</label>
+                <input id="startTime" name="startTime" type="datetime-local"
+                       th:value="${showtimeForm.getStartTime().toString()}" required>
+                <br/><br/>
+                <button id="btn" type="submit" class="button">更新場次</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

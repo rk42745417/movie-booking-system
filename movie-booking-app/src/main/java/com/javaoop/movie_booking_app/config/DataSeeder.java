@@ -1,22 +1,48 @@
 package com.javaoop.movie_booking_app.config;
 
+import com.javaoop.movie_booking_app.model.Hall;
+import com.javaoop.movie_booking_app.model.HallType;
 import com.javaoop.movie_booking_app.model.Movie;
 import com.javaoop.movie_booking_app.model.RatingCategory;
+import com.javaoop.movie_booking_app.repository.HallRepository;
 import com.javaoop.movie_booking_app.repository.MovieRepository;
+import com.javaoop.movie_booking_app.service.HallService;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
     private final MovieRepository movieRepository;
+    private final HallService hallService;
 
-    public DataSeeder(MovieRepository movieRepository) {
+    public DataSeeder(MovieRepository movieRepository, HallService hallService) {
         this.movieRepository = movieRepository;
+        this.hallService = hallService;
+    }
+
+    private void tryInsertHall(Long order, Hall hall) {
+        if (hallService.getHallById(order).isPresent()) {
+            return;
+        }
+        hallService.createHall(hall);
+    }
+
+    private void seedHalls() {
+        Hall hall = new Hall(HallType.BIG);
+        tryInsertHall(1L, hall);
+
+        hall = new Hall(HallType.SMALL);
+        tryInsertHall(2L, hall);
+    }
+
+    private void tryInsertMovie(Movie movie) {
+        if (!movieRepository.findByTitle(movie.getTitle()).isEmpty())
+            return;
+        movieRepository.save(movie);
     }
 
     private void seedMovies() {
-        movieRepository.deleteAll();
-
         Movie movie = new Movie(
                 "美國隊長：無畏新世界",
                 "Captain America: Brave New World",
@@ -25,7 +51,7 @@ public class DataSeeder implements CommandLineRunner {
                 118,
                 RatingCategory.保護級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "機動戰士Gundam GquuuuuuX -Beginning-",
@@ -35,7 +61,7 @@ public class DataSeeder implements CommandLineRunner {
                 81,
                 RatingCategory.普遍級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "夜校女生",
@@ -45,7 +71,7 @@ public class DataSeeder implements CommandLineRunner {
                 109,
                 RatingCategory.普遍級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "史蒂芬金之猴子",
@@ -55,7 +81,7 @@ public class DataSeeder implements CommandLineRunner {
                 98,
                 RatingCategory.限制級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "殺人預言",
@@ -65,7 +91,7 @@ public class DataSeeder implements CommandLineRunner {
                 99,
                 RatingCategory.輔導級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "窒息倒數",
@@ -75,7 +101,7 @@ public class DataSeeder implements CommandLineRunner {
                 93,
                 RatingCategory.普遍級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "火線追緝令",
@@ -85,7 +111,7 @@ public class DataSeeder implements CommandLineRunner {
                 126,
                 RatingCategory.保護級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
 
         movie = new Movie(
                 "粗獷派建築師",
@@ -95,11 +121,12 @@ public class DataSeeder implements CommandLineRunner {
                 215,
                 RatingCategory.保護級
         );
-        movieRepository.save(movie);
+        tryInsertMovie(movie);
     }
 
     @Override
     public void run(String... args) throws Exception {
         seedMovies();
+        seedHalls();
     }
 }

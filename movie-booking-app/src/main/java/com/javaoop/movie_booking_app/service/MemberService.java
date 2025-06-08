@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -37,6 +39,10 @@ public class MemberService {
         String passwordHash = passwordEncoder.encode(newPassword);
         member.setPasswordHash(passwordHash);
         memberRepository.save(member);
+    }
+
+    public Optional<Member> getByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 }
 
