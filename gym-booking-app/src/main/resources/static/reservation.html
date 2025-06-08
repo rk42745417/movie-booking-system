@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
@@ -47,12 +47,6 @@
       .card{padding:9px 2px 10px 2px;}
       th,td{font-size:13px;}
     }
-
-
-
-
-    
-
   </style>
 </head>
 <body>
@@ -75,7 +69,6 @@
           <tr>
             <th>課程名稱</th>
             <th>教練</th>
-            <th>教室</th>
             <th>開始</th>
             <th>結束</th>
             <th>名額</th>
@@ -93,7 +86,6 @@
           <tr>
             <th>課程名稱</th>
             <th>教練</th>
-            <th>教室</th>
             <th>開始</th>
             <th>結束</th>
             <th>名額</th>
@@ -110,11 +102,7 @@
       <div class="calendar-legend">紫色：當日有課程</div>
       <div class="day-courses" id="dayCourses" style="display:none"></div>
     </div>
-
-
   </main>
-
-
 
 <script>
 const apiBase = 'http://localhost:8080/api/v1';
@@ -156,7 +144,7 @@ async function loadCourses() {
     if (!res.ok) throw new Error(await res.text());
     const list = await res.json();
     if (!list.length) {
-      tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center">目前沒有可報名的課程</td></tr>';
+      tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center">目前沒有可報名的課程</td></tr>';
       return;
     }
     list.forEach(c => {
@@ -164,7 +152,6 @@ async function loadCourses() {
       tr.innerHTML = `
         <td>${c.title}</td>
         <td>${c.coach?.name||''}</td>
-        <td>${c.room?.name||''}</td>
         <td>${fmt(c.startTime)}</td>
         <td>${fmt(c.endTime)}</td>
         <td>${c.reservedCount||0}/${c.capacity}</td>
@@ -188,7 +175,7 @@ async function loadMyCourses() {
     if (!res.ok) throw new Error(await res.text());
     const list = await res.json();
     if (!list.length) {
-      myBody.innerHTML = '<tr><td colspan="8" style="text-align:center">你目前沒有報名課程</td></tr>';
+      myBody.innerHTML = '<tr><td colspan="7" style="text-align:center">你目前沒有報名課程</td></tr>';
       return;
     }
     list.forEach(r => {
@@ -197,7 +184,6 @@ async function loadMyCourses() {
       tr.innerHTML = `
         <td>${c.title||''}</td>
         <td>${c.coach?.name||''}</td>
-        <td>${c.room?.name||''}</td>
         <td>${fmt(c.startTime)}</td>
         <td>${fmt(c.endTime)}</td>
         <td>${c.capacity}</td>
@@ -244,6 +230,7 @@ window.signup = async function(courseId, btn) {
     });
     if (!res.ok) {
       const err = await res.json().catch(()=>'');
+
       throw new Error((err && err.message) || '報名失敗');
     }
     msg.innerHTML = `<div class="success">報名成功！</div>`;
@@ -310,7 +297,7 @@ window.showDayCourses = function(dateStr,cell){
   let html = `<h3>${dateStr} 的課程</h3><ul>`;
   todayList.forEach(c=>{
     html += `<li>
-      <b>${c.title}</b> / ${c.coach?.name||''} @${c.room?.name||''}
+      <b>${c.title}</b> / ${c.coach?.name||''}
       <br>時間：${fmt(c.startTime)} - ${fmt(c.endTime)}
       <br>名額：${c.reservedCount||0}/${c.capacity}
       <br>狀態：${c.status}

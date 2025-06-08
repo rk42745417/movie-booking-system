@@ -7,6 +7,9 @@ import com.javaoop.gym_booking_app.service.ServiceResult;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
@@ -30,12 +33,21 @@ public class AuthController {
 
     /* ---------- 登入 ---------- */
     @PostMapping("/login")
-    public ResponseEntity<ServiceResult<Member>> login(@RequestBody LoginRequest req) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
         ServiceResult<Member> rs = memberService.loginAsResult(req.email(), req.password());
-        return rs.isSuccess()
-                ? ResponseEntity.ok(rs)
-                : ResponseEntity.status(401).body(rs);
+        if (rs.isSuccess() && rs.getData() != null) {
+            // 用 email 當作 token 回傳
+            Map<String, Object> result = new HashMap<>();
+            result.put("token", rs.getData().getEmail());
+            result.put("member", rs.getData());
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(401).body(
+                Map.of("message", rs.getMessage() != null ? rs.getMessage() : "登入失敗")
+            );
+        }
     }
+
 
     /* --------- DTO --------- */
     public record RegisterRequest(
@@ -47,4 +59,9 @@ public class AuthController {
             String phone) {}
 
     public record LoginRequest(String email, String password) {}
+
+
+
+
+    
 }

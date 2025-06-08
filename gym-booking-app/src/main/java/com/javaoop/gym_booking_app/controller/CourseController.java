@@ -16,6 +16,15 @@ public class CourseController {
     private final CourseService courseService;
     public CourseController(CourseService courseService) { this.courseService = courseService; }
 
+
+    // 取得所有開放中課程（你可依需求篩選 status）
+    @GetMapping("/open")
+    public ResponseEntity<List<Course>> openCourses() {
+        // 範例只回傳所有課程，也可以改成只回傳 status = OPEN 的課程
+        return ResponseEntity.ok(courseService.getAllCourses());
+    }
+
+
     /* 取得全部課程 */
     @GetMapping
     public ResponseEntity<List<Course>> all() {
