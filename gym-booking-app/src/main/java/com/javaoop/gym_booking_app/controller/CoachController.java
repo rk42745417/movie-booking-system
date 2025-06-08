@@ -17,10 +17,9 @@ public class CoachController {
         this.courseService = courseService;
     }
 
-    /** 教練：列出所有課程（或改成特定教練 ownCourses(coachId)） */
+    /** 取得所有課程（或改成 getCoursesByCoach(coachId)） */
     @GetMapping("/courses")
     public ResponseEntity<List<Course>> listCourses() {
-        List<Course> list = courseService.getAllCourses();
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(courseService.getAllCourses());
     }
 }

@@ -9,9 +9,10 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
-    // Example of a custom query: find all courses within a given time range
-    List<Course> findByStartTimeBetween(LocalDateTime start, LocalDateTime end);
 
-    // Find all courses taught by a specific coach
+    /** 舊有：依教練查詢 */
     List<Course> findByCoachId(Long coachId);
+
+    /** 新增：查詢「某時間之後」的課程，依開始時間排序 */
+    List<Course> findByStartTimeAfterOrderByStartTimeAsc(LocalDateTime from);
 }
