@@ -17,9 +17,16 @@ public class CoachController {
         this.courseService = courseService;
     }
 
-    /** 取得所有課程（或改成 getCoursesByCoach(coachId)） */
+    /** ➊ 仍保留列出全部（如果你還需要） */
     @GetMapping("/courses")
     public ResponseEntity<List<Course>> listCourses() {
         return ResponseEntity.ok(courseService.getAllCourses());
+    }
+
+    /** ➋ 給前端「儀表板」用的即將開課清單 */
+    @GetMapping("/courses/upcoming")
+    public ResponseEntity<List<CourseService.CourseSummary>> upcoming() {
+        return ResponseEntity.ok(
+                courseService.upcoming(java.time.LocalDateTime.now()));
     }
 }

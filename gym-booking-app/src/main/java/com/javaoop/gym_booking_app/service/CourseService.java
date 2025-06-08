@@ -85,4 +85,27 @@ public class CourseService {
         
         
     }
+    /* ------------ 只回傳需要給前端的欄位 ------------ */
+    public record CourseSummary(
+            Long id,
+            String title,
+            LocalDateTime startTime,
+            LocalDateTime endTime,
+            Integer capacity,
+            CourseStatus status
+    ) {}
+
+    @Transactional(readOnly = true)
+    public List<CourseSummary> upcoming(LocalDateTime from) {
+        return courseRepo.findAll().stream()
+                .filter(c -> c.getStartTime().isAfter(from))
+                .map(c -> new CourseSummary(
+                        c.getId(),
+                        c.getTitle(),
+                        c.getStartTime(),
+                        c.getEndTime(),
+                        c.getCapacity(),
+                        c.getStatus()))
+                .toList();
+    }
 }

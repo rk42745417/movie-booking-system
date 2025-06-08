@@ -31,4 +31,10 @@ public class CourseController {
         return rs.isSuccess() ? ResponseEntity.ok(rs)
                               : ResponseEntity.badRequest().body(rs);
     }
+    
+    @GetMapping("/courses/upcoming")
+    public ResponseEntity<List<CourseService.CourseSummary>> upcoming() {
+        return ResponseEntity.ok(
+                courseService.upcoming(java.time.LocalDateTime.now()));
+    }
 }
