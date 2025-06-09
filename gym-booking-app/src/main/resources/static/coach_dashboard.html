@@ -39,6 +39,7 @@
     form .actions {margin-top:20px}
     @keyframes spin{to{transform:rotate(360deg)}}
     .spinner{display:inline-block;width:14px;height:14px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-left:6px}
+    select.status-sel{font-size:13px;padding:4px 8px;border-radius:8px;border:1px solid #ccc}
   </style>
 </head>
 <body>
@@ -57,6 +58,7 @@
     <ul>
       <li data-screen="dashboard" class="active">儀表板</li>
       <li data-screen="addCourse">新增課程</li>
+      <li data-screen="announcements">公告管理</li>
     </ul>
   </nav>
 
@@ -65,7 +67,7 @@
     <!-- Dashboard -->
     <section id="dashboard" class="screen">
       <h1>即將開始的課程</h1>
-      <button class="btn refresh" data-target="upcoming">重新整理</button>
+      <button class="btn refresh" onclick="loadDashboard()">重新整理</button>
       <div class="card">
         <table id="upcomingTable">
           <thead>
@@ -75,6 +77,7 @@
               <th>結束</th>
               <th>報名/名額</th>
               <th>狀態</th>
+              <th>調整</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -118,18 +121,32 @@
         </form>
       </div>
     </section>
+
+    <!-- Announcements 管理 -->
+    <section id="announcements" class="screen" style="display:none">
+      <h1>公告管理</h1>
+      <div class="card">
+        <form id="annForm" style="margin-bottom:24px;display:flex;gap:12px;">
+          <input type="text" name="title" id="annTitle" placeholder="輸入公告標題" style="flex:1" required>
+          <input type="text" name="content" id="annContent" placeholder="輸入公告內文" style="flex:1" required>
+          <button type="submit" class="btn">新增公告</button>
+        </form>
+        <ul id="annList" style="padding-left:0;list-style:none"></ul>
+      </div>
+    </section>
   </main>
 
 <script>
 const apiBase = 'http://localhost:8080/api/v1';
 const token = localStorage.getItem('coachToken');
-if (!token) {
-  location.href = 'coachlogin.html';
-}
+if (!token) location.href = 'coachlogin.html';
 const headers = {
   'Authorization': `Bearer ${token}`,
   'Content-Type': 'application/json'
 };
+
+// 設置教練名稱
+fetch(`${apiBase}/coach/me`, {headers}).then(r=>r.ok? r.json():null).then(d=>{if(d?.name)document.getElementById('coachName').textContent=d.name;});
 
 // 登出
 document.getElementById('logoutBtn').onclick = () => {
@@ -137,14 +154,21 @@ document.getElementById('logoutBtn').onclick = () => {
   location.href = 'coachlogin.html';
 };
 
+// 取得分頁面板
+const panels = {
+  'dashboard': document.getElementById('dashboard'),
+  'addCourse': document.getElementById('addCourse'),
+  'announcements': document.getElementById('announcements')
+};
 // 側邊欄切換
 for (const li of document.querySelectorAll('nav li')) {
   li.onclick = () => {
     document.querySelector('nav li.active').classList.remove('active');
     li.classList.add('active');
-    document.querySelectorAll('.screen')
-      .forEach(s => s.style.display = s.id === li.dataset.screen ? 'block' : 'none');
+    for (const k in panels)
+      panels[k].style.display = (li.dataset.screen === k ? 'block' : 'none');
     if (li.dataset.screen === 'dashboard') loadDashboard();
+    if (li.dataset.screen === 'announcements') loadAnnouncements();
   };
 }
 
@@ -155,7 +179,7 @@ function validTime() {
   return new Date(end) > new Date(start);
 }
 
-// 送出表單：POST /courses
+// 送出課程表單
 document.getElementById('courseForm').addEventListener('submit', async e => {
   e.preventDefault();
   if (!validTime()) {
@@ -169,8 +193,7 @@ document.getElementById('courseForm').addEventListener('submit', async e => {
     startTime: document.getElementById('startTime').value,
     endTime: document.getElementById('endTime').value,
     status: document.getElementById('status').value,
-    tags: document.getElementById('tags').value
-      .split(',').map(t => t.trim()).filter(t => t)
+    tags: document.getElementById('tags').value.split(',').map(t=>t.trim()).filter(t=>t)
   };
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -183,8 +206,8 @@ document.getElementById('courseForm').addEventListener('submit', async e => {
     });
     if (!res.ok) throw new Error(await res.text());
     alert('新增成功');
-    // 切回儀表板並重新載入
     document.querySelector('nav li[data-screen="dashboard"]').click();
+    loadDashboard();
   } catch (e) {
     alert('新增失敗: ' + e.message);
   } finally {
@@ -193,13 +216,14 @@ document.getElementById('courseForm').addEventListener('submit', async e => {
   }
 });
 
-// 載入即將開始的課程：GET /courses → 篩 upcoming
+// 載入即將開始的課程
 async function loadDashboard() {
   const tbody = document.querySelector('#upcomingTable tbody');
   tbody.innerHTML = '';
   try {
     const res = await fetch(`${apiBase}/courses`, { headers });
     if (!res.ok) throw new Error(await res.text());
+    tbody.innerHTML = '';
     const list = await res.json();
     const upcoming = list.filter(c => new Date(c.startTime) > new Date());
     upcoming.forEach(c => {
@@ -210,15 +234,111 @@ async function loadDashboard() {
         <td>${c.endTime.replace('T',' ').substring(0,16)}</td>
         <td>${c.reservedCount||0}/${c.capacity}</td>
         <td><span class="pill ${c.status}">${c.status}</span></td>
+        <td>
+        <form id="update-status-${c.id}">
+          <select name="status" required>
+            <option value="OPEN"${c.status === "OPEN" ? " selected" : ""}>OPEN</option>
+            <option value="CLOSED"${c.status === "CLOSED" ? " selected" : ""}>CLOSED</option>
+            <option value="CANCELED"${c.status === "CANCELED" ? " selected" : ""}>CANCELED</option>
+          </select>
+          <button type="submit" class="btn">更改狀態</button>
+        </form>
+        </td>
       `;
       tbody.appendChild(tr);
+
+      // 更改狀態
+      document.getElementById(`update-status-${c.id}`).addEventListener('submit', async e => {
+        e.preventDefault();
+        const formData = new FormData(document.getElementById(`update-status-${c.id}`));
+        if (!formData.has('status')) return;
+        try {
+          const res = await fetch(`${apiBase}/courses/update`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ id: c.id, status: formData.get('status') }),
+          });
+          if (!res.ok) throw new Error(await res.text());
+          await loadDashboard();
+        } catch (e) {
+          alert('更改狀態失敗：' + e.message);
+        }
+      });
     });
   } catch (e) {
     alert('讀取失敗: ' + e.message);
   }
 }
 
-// 啟動時先載入一次
+// ===== 公告管理 =====
+// 載入公告
+async function loadAnnouncements() {
+  const ul = document.getElementById('annList');
+  ul.innerHTML = '';
+  try {
+    const res = await fetch(`${apiBase}/announcements`, { headers });
+    if (!res.ok) throw new Error(await res.text());
+    const list = await res.json();
+    if (!list.length) {
+      ul.innerHTML = '<li style="color:#aaa">目前沒有公告</li>';
+      return;
+    }
+    list.forEach(a => {
+      const li = document.createElement('li');
+      li.style.display = 'flex';
+      li.style.alignItems = 'center';
+      li.style.justifyContent = 'space-between';
+      li.style.borderBottom = '1px solid #ece4ff';
+      li.style.padding = '6px 0';
+      li.innerHTML = `
+        <div style="display: flex; flex-direction: column;">
+          <h4>${a.title}</h4>
+          <span>${a.content}</span>
+        </div>
+        <button class="btn sm" onclick="deleteAnn(${a.id})">刪除</button>
+      `;
+      ul.appendChild(li);
+    });
+  } catch (e) {
+    ul.innerHTML = `<li style="color:#c0392b">載入失敗：${e.message}</li>`;
+  }
+}
+
+// 新增公告
+document.getElementById('annForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const formData = new FormData(document.getElementById('annForm'));
+  const content = formData.get('content');
+  const title = formData.get('title');
+  if (!title) return;
+  try {
+    const res = await fetch(`${apiBase}/announcements`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ title, content })
+    });
+    if (!res.ok) throw new Error(await res.text());
+    await loadAnnouncements();
+  } catch (e) {
+    alert('新增公告失敗：' + e.message);
+  }
+});
+
+// 刪除公告
+window.deleteAnn = async function(id) {
+  if (!confirm('確定要刪除這則公告？')) return;
+  try {
+    const res = await fetch(`${apiBase}/announcements/${id}`, {
+      method: 'DELETE',
+      headers
+    });
+    if (!res.ok) throw new Error(await res.text());
+    await loadAnnouncements();
+  } catch (e) {
+    alert('刪除失敗：' + e.message);
+  }
+};
+
 window.addEventListener('DOMContentLoaded', () => {
   loadDashboard();
 });

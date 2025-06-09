@@ -157,7 +157,7 @@ async function loadCourses() {
         <td>${c.reservedCount||0}/${c.capacity}</td>
         <td>${c.status}</td>
         <td>
-          <button class="btn" ${c.status!=='OPEN'||(c.reservedCount||0)>=c.capacity?'disabled':''} onclick="signup(${c.id},this)">報名</button>
+          <button class="btn" ${c.status!=='OPEN'||(c.reservedCount||0)>=c.capacity?'disabled':''} onclick="login(${c.id},this)">報名</button>
         </td>
       `;
       tableBody.appendChild(tr);
@@ -217,7 +217,7 @@ window.cancelReservation = async function(resvId, btn) {
 }
 
 // ===== 課程報名 =====
-window.signup = async function(courseId, btn) {
+window.login = async function(courseId, btn) {
   if (!confirm('確定要報名這門課程？')) return;
   btn.disabled = true;
   btn.textContent = '處理中...';
@@ -310,7 +310,7 @@ window.showDayCourses = function(dateStr,cell){
 
 document.getElementById('logoutBtn').onclick = () => {
   localStorage.removeItem('authToken');
-  location.href = 'signup.html';
+  location.href = 'login.html';
 };
 
 window.addEventListener('DOMContentLoaded', () => {

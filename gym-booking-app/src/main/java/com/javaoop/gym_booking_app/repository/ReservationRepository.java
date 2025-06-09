@@ -15,6 +15,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     // Find all reservations for a specific course
     List<Reservation> findByCourseId(Long courseId);
 
+    int countByCourseId(Long courseId);
+
     // Count reservations for a specific course to check against capacity
     long countByCourseIdAndStatus(Long courseId, ReservationStatus status);
 }

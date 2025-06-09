@@ -59,7 +59,7 @@
       <button type="submit" id="regBtn">註冊</button>
       <div id="msg" class="msg"></div>
     </form>
-    <p class="link">返回登入<a href="signup.html">立即登入</a></p>
+    <p class="link">返回登入<a href="login.html">立即登入</a></p>
     <p class="link">教練登入？<a href="coachlogin.html">點此前往</a></p>
   </div>
 
@@ -88,7 +88,7 @@ form.addEventListener('submit',async e=>{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
     });
-    if(res.ok){show('註冊成功！自動跳轉登入…','success');setTimeout(()=>location.href='signup.html',1200);} 
+    if(res.ok){show('註冊成功！自動跳轉登入…','success');setTimeout(()=>location.href='login.html',1200);}
     else{const err=await res.json().catch(()=>({message:'註冊失敗'}));throw new Error(err.message);}
   }catch(err){show(err.message,'error');}
   toggle(false);

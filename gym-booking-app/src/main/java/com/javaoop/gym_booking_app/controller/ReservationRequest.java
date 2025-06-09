@@ -1,4 +1,4 @@
-package com.javaoop.gym_booking_app.controller;
+package com.javaoop.gym_booking_app.dto;
 
 public class ReservationRequest {
     private Long courseId;

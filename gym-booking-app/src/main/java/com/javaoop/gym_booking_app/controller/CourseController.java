@@ -1,9 +1,11 @@
 package com.javaoop.gym_booking_app.controller;
 
+import com.javaoop.gym_booking_app.model.CourseStatus;
 import com.javaoop.gym_booking_app.service.CourseService;
 import com.javaoop.gym_booking_app.service.ServiceResult;
 import dto.CourseRequest;
 import com.javaoop.gym_booking_app.model.Course;
+import dto.UpdateRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +41,13 @@ public class CourseController {
                 req.startTime(), req.endTime(), req.status(), req.tags());
         return rs.isSuccess() ? ResponseEntity.ok(rs)
                               : ResponseEntity.badRequest().body(rs);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<ServiceResult<Long>> updateStatus(@RequestBody UpdateRequest req) {
+        var rs = courseService.updateStatus(req.id(), req.status());
+        return rs.isSuccess() ? ResponseEntity.ok(rs)
+                : ResponseEntity.badRequest().body(rs);
     }
     
     @GetMapping("/courses/upcoming")

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>健身預約系統</title>
   <style>
-    /* 變數 */
     :root {
       --accent: #8e44ad;
       --text: #333;
@@ -23,7 +22,6 @@
       color: var(--text);
       overflow-x: hidden;
     }
-    /* 動畫影格 */
     @keyframes float {
       0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
       50% { transform: translateY(-20px) translateX(10px) rotate(15deg); }
@@ -32,7 +30,6 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    /* 動畫幾何圖形：置於最底層 */
     .shape {
       position: absolute;
       z-index: 0;
@@ -75,7 +72,6 @@
       left: 10%;
       animation: spin 15s linear infinite;
     }
-    /* 課程方框金屬光澤紫色斜線條 */
     .course-item {
       background: var(--bg);
       position: relative;
@@ -122,8 +118,6 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-
-    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -143,7 +137,6 @@
     .menu-btn span:nth-child(2) { top: 50%; transform: translateY(-50%); }
     .menu-btn span:nth-child(3) { bottom: 0; }
 
-    /* 主內容 */
     main {
       position: relative;
       z-index: 1;
@@ -193,39 +186,12 @@
     .courses h2 { color: var(--accent); text-align: center; }
     .course-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
     .course-list a { text-decoration: none; color: inherit; }
-    .course-item {
-      background: var(--bg);
-      position: relative;
-      border-radius: var(--radius);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 120px;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      z-index: 2;
-    }
-    .course-item::before {
-      content: '';
-      position: absolute;
-      top: -100%; left: -100%;
-      width: 200%; height: 200%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
-      transform: translateX(-100%) translateY(-100%) rotate(25deg);
-      transition: transform 0.7s ease;
-    }
-    .course-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .course-item:hover::before {
-      transform: translateX(0) translateY(0) rotate(25deg);
-    }
+    .course-item { background: var(--bg); position: relative; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.05); cursor: pointer; display: flex; justify-content: center; align-items: center; height: 120px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; z-index: 2; }
+    .course-item::before { content: ''; position: absolute; top: -100%; left: -100%; width: 200%; height: 200%; background: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%); transform: translateX(-100%) translateY(-100%) rotate(25deg); transition: transform 0.7s ease; }
+    .course-item:hover { transform: translateY(-8px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .course-item:hover::before { transform: translateX(0) translateY(0) rotate(25deg); }
     .course-item .title { font-size: 18px; font-weight: 600; z-index: 1; }
 
-    /* 選單 */
     .overlay {
       display: none;
       position: fixed;
@@ -251,7 +217,6 @@
     .menu-content a:hover { color: var(--accent); }
     .menu-content .close-btn { display: block; text-align: right; padding: 12px 24px; cursor: pointer; color: #888; }
 
-    /* Footer */
     .site-footer { background: var(--accent); color: #fff; padding: 40px 5%; text-align: center; }
     .site-footer p { margin: 8px 0; }
     @media (max-width: 768px) { .site-footer { text-align: center; } }
@@ -273,35 +238,16 @@
     <div class="status">健身房/游泳池目前人數：<span id="currentCount">0</span></div>
     <div class="announcement">
       <h2>最新公告</h2>
-      <div class="scroll">
-        <p>測</p>
-        <p>試</p>
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>我不想寫作業</p>
-        <p>好難</p>
-        <p>我哪會</p>
-        <p>ㄚㄚㄚ</p>
-        <p>QQ</p>
-        <p>跟大家分享莓果乳酸好喝</p>
-        <p>加氣泡水更好喝</p>
-        <p>迷克夏新品好期待</p>
-        <p>今天沒有遛狗ㄟ</p>
-        <p>甚麼時候才要放假</p>
-        <p>好想追劇</p>
-        <p>今天演講課大睡覺</p>
-        <p>這不知道第幾個</p>
-        <p>好累</p>
+      <div class="scroll" id="annList">
+        <p>公告載入中...</p>
       </div>
     </div>
     <section class="courses">
       <h2>課程資訊</h2>
       <div class="course-list">
-        <a href="test.html" class="course-item"><div class="title">游泳課程</div></a>
-        <a href="ball.html" class="course-item"><div class="title">球類課程</div></a>
-        <a href="gym.html" class="course-item"><div class="title">健身房課程</div></a>
+        <div class="course-item"><div class="title">游泳課程</div></div>
+        <div class="course-item"><div class="title">球類課程</div></div>
+        <div class="course-item"><div class="title">健身房課程</div></div>
       </div>
     </section>
   </main>
@@ -315,7 +261,7 @@
       <a href="transport.html">交通指引</a>
       <a href="info.html">中心簡介</a>
       <a href="usage.html">使用須知</a>
-      <a href="signup.html">線上報名</a>
+      <a href="login.html">線上報名</a>
       <a href="contact.html">聯絡我們</a>
       <div class="close-btn" id="closeMenuBtn">關閉</div>
     </div>
@@ -328,13 +274,45 @@
   </footer>
 
   <script>
+    // 動態載入公告
+    async function loadAnnouncements() {
+      const annDiv = document.getElementById('annList');
+      annDiv.innerHTML = '<p>公告載入中...</p>';
+      try {
+        const res = await fetch('http://localhost:8080/api/v1/announcements');
+        if (!res.ok) throw new Error(await res.text());
+        const list = await res.json();
+        if (!list.length) {
+          annDiv.innerHTML = '<p style="color:#888">目前沒有公告</p>';
+          return;
+        }
+        annDiv.innerHTML = '';
+        list.forEach(a => {
+          const p = document.createElement('p');
+          p.textContent = a.title;
+          annDiv.appendChild(p);
+        });
+      } catch (e) {
+        annDiv.innerHTML = `<p style="color:#c0392b">公告載入失敗：${e.message}</p>`;
+      }
+    }
+    window.addEventListener('DOMContentLoaded', loadAnnouncements);
+
+    // 選單動畫與課程連結
     const openBtn = document.getElementById('openMenuBtn');
     const overlay = document.getElementById('menuOverlay');
     const closeBtn = document.getElementById('closeMenuBtn');
     openBtn.addEventListener('click', () => { overlay.classList.toggle('active'); openBtn.classList.toggle('active'); });
     closeBtn.addEventListener('click', () => { overlay.classList.remove('active'); openBtn.classList.remove('active'); });
     overlay.addEventListener('click', e => { if (e.target === overlay) { overlay.classList.remove('active'); openBtn.classList.remove('active'); } });
-    document.querySelectorAll('.course-item').forEach(item => { item.addEventListener('click', e => { e.preventDefault(); item.classList.add('active'); const link = item.getAttribute('href'); setTimeout(() => { item.classList.remove('active'); window.location.href = link; }, 600); }); });
+    // document.querySelectorAll('.course-item').forEach(item => {
+    //   item.addEventListener('click', e => {
+    //     e.preventDefault();
+    //     item.classList.add('active');
+    //     const link = item.getAttribute('href');
+    //     setTimeout(() => { item.classList.remove('active'); window.location.href = link; }, 600);
+    //   });
+    // });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { overlay.classList.remove('active'); openBtn.classList.remove('active'); } });
   </script>
 </body>

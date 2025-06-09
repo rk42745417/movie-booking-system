@@ -6,6 +6,8 @@ import com.javaoop.gym_booking_app.repository.CourseRepository;
 import com.javaoop.gym_booking_app.repository.GymRoomRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.javaoop.gym_booking_app.repository.ReservationRepository;
+
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -14,26 +16,36 @@ import java.util.List;
 @Service
 @Transactional
 public class CourseService {
-
+    private final ReservationRepository reservationRepo;
     private final CourseRepository courseRepo;
     private final CoachRepository coachRepo;
     private final GymRoomRepository roomRepo;
 
     /* ---------- 建構子注入 ---------- */
+
+
     public CourseService(
             CourseRepository courseRepo,
             CoachRepository coachRepo,
-            GymRoomRepository roomRepo
+            GymRoomRepository roomRepo,
+            ReservationRepository reservationRepo
     ) {
         this.courseRepo = courseRepo;
         this.coachRepo  = coachRepo;
         this.roomRepo   = roomRepo;
+        this.reservationRepo = reservationRepo; 
     }
 
     /* ---------- 查詢 ---------- */
     @Transactional(readOnly = true)
     public List<Course> getAllCourses() {
-        return courseRepo.findAll();
+        List<Course> list = courseRepo.findAll();
+        for (Course c : list) {
+            // 查詢這個課程有幾個 Reservation
+            int count = reservationRepo.countByCourseId(c.getId());
+            c.setReservedCount(count);  // 設進 Course
+        }
+        return list;
     }
 
     /* ---------- 建立課程 ---------- */
@@ -108,4 +120,21 @@ public class CourseService {
                         c.getStatus()))
                 .toList();
     }
+
+    @Transactional
+    public ServiceResult<Long> updateStatus(Long id, CourseStatus status) {
+        if (courseRepo.findById(id).isEmpty()) {
+            return ServiceResult.fail("course id not found");
+        }
+        Course course = courseRepo.findById(id).get();
+        course.setStatus(status);
+        courseRepo.save(course);
+        return ServiceResult.ok(id);
+    }
+
+
+
+
+
+    
 }

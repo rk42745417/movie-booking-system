@@ -89,7 +89,7 @@
       <a href="venue.html">場館資訊</a>
       <a href="info.html">中心簡介</a>
       <a href="usage.html">使用須知</a>
-      <a href="signup.html">線上報名</a>
+      <a href="login.html">線上報名</a>
       <a href="contact.html">聯絡我們</a>
       <div class="close-btn" id="closeMenuBtn">關閉</div>
     </div>
@@ -99,28 +99,31 @@
   <main>
     <h1 class="page-title"><strong>優惠與公告</strong></h1>
 
-    <div class="announcement-card">
-      <h2>🎉 新會員首月半價</h2>
-      <p>凡 6 月新加入會員者，首月費用享 5 折優惠，機會難得，歡迎洽詢櫃台！</p>
-    </div>
+    <div id="annList" class="annList">
 
-    <div class="announcement-card">
-      <h2>📢 端午連假營運時間公告</h2>
-      <p>6/8～6/10（六～一）營業時間調整為 10:00－18:00，敬請配合。</p>
     </div>
+<!--    <div class="announcement-card">-->
+<!--      <h2>🎉 新會員首月半價</h2>-->
+<!--      <p>凡 6 月新加入會員者，首月費用享 5 折優惠，機會難得，歡迎洽詢櫃台！</p>-->
+<!--    </div>-->
 
-    <div class="announcement-card">
-      <h2>🔥 夏季團課開跑！</h2>
-      <p>6 月起開放報名「燃脂有氧」、「肌力雕塑」、「TRX 訓練」等團體課程，限量名額，先搶先贏！</p>
-    </div>
-    <div class="announcement-card">
-      <h2>🎉 暑期早鳥優惠開跑囉！</h2>
-      <p>即日起至 6 月 30 日止，凡預約 7 月至 8 月場地享 8 折優惠！歡迎提早預約，享有最佳時段。</p>
-    </div>
-    <div class="announcement-card">
-      <h2>🌟 營業時間調整通知</h2>
-      <p>因應政府防疫措施，健身房營業時間調整為早上6:00至晚上10:00，請會員配合</p>
-    </div>
+<!--    <div class="announcement-card">-->
+<!--      <h2>📢 端午連假營運時間公告</h2>-->
+<!--      <p>6/8～6/10（六～一）營業時間調整為 10:00－18:00，敬請配合。</p>-->
+<!--    </div>-->
+
+<!--    <div class="announcement-card">-->
+<!--      <h2>🔥 夏季團課開跑！</h2>-->
+<!--      <p>6 月起開放報名「燃脂有氧」、「肌力雕塑」、「TRX 訓練」等團體課程，限量名額，先搶先贏！</p>-->
+<!--    </div>-->
+<!--    <div class="announcement-card">-->
+<!--      <h2>🎉 暑期早鳥優惠開跑囉！</h2>-->
+<!--      <p>即日起至 6 月 30 日止，凡預約 7 月至 8 月場地享 8 折優惠！歡迎提早預約，享有最佳時段。</p>-->
+<!--    </div>-->
+<!--    <div class="announcement-card">-->
+<!--      <h2>🌟 營業時間調整通知</h2>-->
+<!--      <p>因應政府防疫措施，健身房營業時間調整為早上6:00至晚上10:00，請會員配合</p>-->
+<!--    </div>-->
 
 
   </main>
@@ -133,6 +136,34 @@
 
   <!-- JS 控制選單開關 -->
   <script>
+    // 動態載入公告
+    async function loadAnnouncements() {
+      const annDiv = document.getElementById('annList');
+      annDiv.innerHTML = '<p>公告載入中...</p>';
+      try {
+        const res = await fetch('http://localhost:8080/api/v1/announcements');
+        if (!res.ok) throw new Error(await res.text());
+        const list = await res.json();
+        if (!list.length) {
+          annDiv.innerHTML = '<p style="color:#888">目前沒有公告</p>';
+          return;
+        }
+        annDiv.innerHTML = '';
+        list.forEach(a => {
+          const div = document.createElement('div');
+          div.className = 'announcement-card';
+          div.innerHTML = `
+            <h2>${a.title}</h2>
+            <p>${a.content}</p>
+          `;
+          annDiv.appendChild(div);
+        });
+      } catch (e) {
+        annDiv.innerHTML = `<p style="color:#c0392b">公告載入失敗：${e.message}</p>`;
+      }
+    }
+    window.addEventListener('DOMContentLoaded', loadAnnouncements);
+
     const openBtn = document.getElementById('openMenuBtn');
     const overlay = document.getElementById('menuOverlay');
     const closeBtn = document.getElementById('closeMenuBtn');

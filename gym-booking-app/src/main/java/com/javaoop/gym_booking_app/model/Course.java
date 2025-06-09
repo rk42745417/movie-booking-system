@@ -49,6 +49,11 @@ public class Course {
     @Column(name = "tag", nullable = false)
     private Set<String> tags = new HashSet<>();
 
+
+
+    @Transient // 不進資料庫，只做計算
+    private int reservedCount;
+
     /* ---------- getter / setter ---------- */
 
     public Long getId() { return id; }
@@ -80,4 +85,13 @@ public class Course {
 
     public Set<String> getTags() { return tags; }
     public void setTags(Set<String> tags) { this.tags = tags; }
+
+
+    public int getReservedCount() {
+        return reservedCount;
+    }
+
+    public void setReservedCount(int reservedCount) {
+        this.reservedCount = reservedCount;
+    }
 }
