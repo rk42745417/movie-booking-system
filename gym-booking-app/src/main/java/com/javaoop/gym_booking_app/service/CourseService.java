@@ -48,6 +48,15 @@ public class CourseService {
         return list;
     }
 
+    public List<Course> getAllOpenCourses() {
+        List<Course> courseList = courseRepo.findByStatus(CourseStatus.OPEN);
+        for (Course c : courseList) {
+            int count = reservationRepo.countByCourseId(c.getId());
+            c.setReservedCount(count);
+        }
+        return courseList;
+    }
+
     /* ---------- 建立課程 ---------- */
     public ServiceResult<Long> createCourse(
             String title,

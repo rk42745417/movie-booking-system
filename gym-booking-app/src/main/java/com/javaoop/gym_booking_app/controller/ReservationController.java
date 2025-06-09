@@ -75,7 +75,7 @@ public class ReservationController {
 
     // 取消預約
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> cancel(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<Void> cancel(@PathVariable("id") Long id, @RequestHeader("Authorization") String token) {
         String email = extractEmailFromToken(token);
         Member member = memberRepository.findByEmail(email).orElse(null);
         if (member == null) {

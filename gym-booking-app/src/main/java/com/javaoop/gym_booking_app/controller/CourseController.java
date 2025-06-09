@@ -23,7 +23,7 @@ public class CourseController {
     @GetMapping("/open")
     public ResponseEntity<List<Course>> openCourses() {
         // 範例只回傳所有課程，也可以改成只回傳 status = OPEN 的課程
-        return ResponseEntity.ok(courseService.getAllCourses());
+        return ResponseEntity.ok(courseService.getAllOpenCourses());
     }
 
 
