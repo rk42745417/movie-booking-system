@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Service class for managing showtime operations such as creation, update,
+ * retrieval, and conflict checking for movie showtimes in halls.
+ */
 @Service
 public class ShowtimeService {
     private final ShowtimeRepository showtimeRepository;
@@ -25,6 +29,14 @@ public class ShowtimeService {
     private final HallRepository hallRepository;
     private final SeatRepository seatRepository;
 
+    /**
+     * Constructs a ShowtimeService with the required repositories.
+     *
+     * @param showtimeRepository repository for showtime data access
+     * @param movieRepository    repository for movie data access
+     * @param hallRepository     repository for hall data access
+     * @param seatRepository     repository for seat data access
+     */
     @Autowired
     public ShowtimeService(ShowtimeRepository showtimeRepository, MovieRepository movieRepository, HallRepository hallRepository, SeatRepository seatRepository) {
         this.movieRepository = movieRepository;
@@ -33,10 +45,24 @@ public class ShowtimeService {
         this.seatRepository = seatRepository;
     }
 
+    /**
+     * Retrieves a showtime by its ID.
+     *
+     * @param showtimeId the ID of the showtime
+     * @return an Optional containing the showtime if found, otherwise empty
+     */
     public Optional<Showtime> getShowtime(Long showtimeId) {
         return showtimeRepository.findById(showtimeId);
     }
 
+    /**
+     * Retrieves all showtimes for a given movie, ordered by start time descending.
+     * Throws an IllegalStateException if the movie does not exist or is inactive.
+     *
+     * @param movieId the ID of the movie
+     * @return a list of showtimes for the movie
+     * @throws IllegalStateException if movie is not found or inactive
+     */
     @Transactional
     public List<Showtime> getMovieShowtimes(Long movieId) throws IllegalStateException {
         Optional<Movie> movieResult = movieRepository.findById(movieId);
@@ -50,6 +76,15 @@ public class ShowtimeService {
         return showtimeRepository.findByMovieMovieIdOrderByStartTimeDesc(movieId);
     }
 
+    /**
+     * Adds a new showtime for a movie in a specific hall.
+     * Validates movie existence and active state, hall existence, and time conflicts.
+     *
+     * @param movieId     the ID of the movie
+     * @param showtimeDto the data transfer object containing showtime details
+     * @throws IllegalStateException     if movie or hall does not exist or movie inactive
+     * @throws ShowtimeCollisionException if there is a scheduling conflict in the hall
+     */
     @Transactional
     public void addNewShowtime(Long movieId, ShowtimeDto showtimeDto) throws IllegalStateException, ShowtimeCollisionException {
         Optional<Movie> movieResult = movieRepository.findById(movieId);
@@ -87,6 +122,14 @@ public class ShowtimeService {
         ));
     }
 
+    /**
+     * Updates an existing showtime's start time and hall, ensuring no schedule conflicts.
+     *
+     * @param showtimeId  the ID of the showtime to update
+     * @param showtimeDto the data transfer object containing new showtime details
+     * @throws IllegalStateException     if showtime or hall does not exist
+     * @throws ShowtimeCollisionException if scheduling conflicts exist with other showtimes
+     */
     @Transactional
     public void updateShowtime(Long showtimeId, ShowtimeDto showtimeDto) throws IllegalStateException, ShowtimeCollisionException {
         Optional<Showtime> showtimeResult = showtimeRepository.findById(showtimeId);
@@ -122,6 +165,12 @@ public class ShowtimeService {
         showtimeRepository.save(showtime);
     }
 
+    /**
+     * Retrieves the set of seat IDs that are already booked for a given showtime.
+     *
+     * @param showtimeId the ID of the showtime
+     * @return a set of seat IDs that are booked
+     */
     public Set<Long> getBookedSeatIdsInShowtime(Long showtimeId) {
         return seatRepository.findBookedSeatIdsByShowtimeId(showtimeId);
     }
