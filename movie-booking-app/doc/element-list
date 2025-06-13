@@ -1,0 +1,8 @@
+com.javaoop.movie_booking_app
+com.javaoop.movie_booking_app.config
+com.javaoop.movie_booking_app.controller
+com.javaoop.movie_booking_app.dto
+com.javaoop.movie_booking_app.exception
+com.javaoop.movie_booking_app.model
+com.javaoop.movie_booking_app.repository
+com.javaoop.movie_booking_app.service
