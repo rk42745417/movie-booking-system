@@ -12,30 +12,56 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.naming.Binding;
-
+/**
+ * Controller that handles member-related actions such as login, registration,
+ * and password changes.
+ */
 @Controller
 @RequestMapping("/user")
 public class MemberController {
-    private MemberService memberService;
 
+    private final MemberService memberService;
+
+    /**
+     * Constructor-based dependency injection of MemberService.
+     *
+     * @param memberService the service handling member business logic
+     */
     @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
+    /**
+     * Displays the login page.
+     *
+     * @return the name of the login view
+     */
     @GetMapping("/login")
     public String login() {
         return "user_login";
     }
 
+    /**
+     * Displays the registration form.
+     *
+     * @param model the model to carry form data
+     * @return the name of the registration view
+     */
     @GetMapping("/register")
     public String register(Model model) {
-        // Pass an empty DTO to the form
         model.addAttribute("user", new RegistrationDto());
         return "user_register";
     }
 
+    /**
+     * Handles user registration form submission.
+     *
+     * @param registrationDto      DTO carrying user registration data
+     * @param bindingResult        result of validation
+     * @param redirectAttributes   for passing flash messages
+     * @return the view to be rendered or redirect URL
+     */
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") RegistrationDto registrationDto,
                            BindingResult bindingResult,
@@ -55,12 +81,26 @@ public class MemberController {
         return "redirect:/user/login";
     }
 
+    /**
+     * Displays the change password form.
+     *
+     * @param model the model to carry form data
+     * @return the name of the change password view
+     */
     @GetMapping("/change_password")
     public String changePassword(Model model) {
         model.addAttribute("user", new ChangePasswordDto());
         return "user_change_password";
     }
 
+    /**
+     * Handles password change form submission.
+     *
+     * @param changePasswordDto    DTO carrying new password data
+     * @param bindingResult        result of validation
+     * @param redirectAttributes   for passing flash messages
+     * @return the view to be rendered or redirect URL
+     */
     @PostMapping("/change_password")
     public String changePassword(@Valid @ModelAttribute("user") ChangePasswordDto changePasswordDto,
                                  BindingResult bindingResult,
@@ -76,6 +116,7 @@ public class MemberController {
             bindingResult.rejectValue("password", "user.exists", e.getMessage());
             return "user_change_password";
         }
+
         redirectAttributes.addFlashAttribute("successMessage", "修改密碼成功");
         return "redirect:/";
     }
