@@ -4,23 +4,48 @@ import com.javaoop.movie_booking_app.model.Hall;
 import com.javaoop.movie_booking_app.model.HallType;
 import com.javaoop.movie_booking_app.model.Movie;
 import com.javaoop.movie_booking_app.model.RatingCategory;
-import com.javaoop.movie_booking_app.repository.HallRepository;
 import com.javaoop.movie_booking_app.repository.MovieRepository;
 import com.javaoop.movie_booking_app.service.HallService;
-import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * Component responsible for seeding initial data into the database
+ * upon application startup.
+ * <p>
+ * Implements {@link CommandLineRunner} so that Spring Boot executes
+ * the {@code run} method automatically after the application starts.
+ * </p>
+ *
+ * This class seeds:
+ * <ul>
+ *     <li>Movie data if not already present</li>
+ *     <li>Hall data if not already present</li>
+ * </ul>
+ */
 @Component
 public class DataSeeder implements CommandLineRunner {
+
     private final MovieRepository movieRepository;
     private final HallService hallService;
 
+    /**
+     * Constructs a new {@code DataSeeder} with the necessary repositories and services.
+     *
+     * @param movieRepository the repository used to access movie data
+     * @param hallService     the service used to access and manage hall data
+     */
     public DataSeeder(MovieRepository movieRepository, HallService hallService) {
         this.movieRepository = movieRepository;
         this.hallService = hallService;
     }
 
+    /**
+     * Attempts to insert a hall only if a hall with the given ID does not already exist.
+     *
+     * @param order the ID to check before insertion
+     * @param hall  the {@link Hall} instance to insert
+     */
     private void tryInsertHall(Long order, Hall hall) {
         if (hallService.getHallById(order).isPresent()) {
             return;
@@ -28,6 +53,9 @@ public class DataSeeder implements CommandLineRunner {
         hallService.createHall(hall);
     }
 
+    /**
+     * Seeds the database with predefined hall records if not already present.
+     */
     private void seedHalls() {
         Hall hall = new Hall(HallType.BIG);
         tryInsertHall(1L, hall);
@@ -36,12 +64,23 @@ public class DataSeeder implements CommandLineRunner {
         tryInsertHall(2L, hall);
     }
 
+    /**
+     * Attempts to insert a movie only if a movie with the same title does not already exist.
+     *
+     * @param movie the {@link Movie} instance to insert
+     */
     private void tryInsertMovie(Movie movie) {
         if (!movieRepository.findByTitle(movie.getTitle()).isEmpty())
             return;
         movieRepository.save(movie);
     }
 
+    /**
+     * Seeds the database with a set of predefined movies if not already present.
+     * <p>
+     * This includes localized and translated titles, posters, descriptions, durations, and rating categories.
+     * </p>
+     */
     private void seedMovies() {
         Movie movie = new Movie(
                 "美國隊長：無畏新世界",
@@ -124,6 +163,12 @@ public class DataSeeder implements CommandLineRunner {
         tryInsertMovie(movie);
     }
 
+    /**
+     * Runs the data seeding logic for movies and halls at application startup.
+     *
+     * @param args startup arguments (not used)
+     * @throws Exception if any error occurs during seeding
+     */
     @Override
     public void run(String... args) throws Exception {
         seedMovies();
