@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling reservations.
+ */
 @RestController
 @RequestMapping("/api/v1/reservations")
 public class ReservationController {
@@ -20,17 +23,27 @@ public class ReservationController {
     private final MemberRepository memberRepository;
     private final CourseRepository courseRepository;
 
+    /**
+     * Constructs a ReservationController with the given repositories.
+     * @param reservationRepository The repository for handling reservation data.
+     * @param memberRepository The repository for handling member data.
+     * @param courseRepository The repository for handling course data.
+     */
     public ReservationController(
-        ReservationRepository reservationRepository,
-        MemberRepository memberRepository,
-        CourseRepository courseRepository
+            ReservationRepository reservationRepository,
+            MemberRepository memberRepository,
+            CourseRepository courseRepository
     ) {
         this.reservationRepository = reservationRepository;
         this.memberRepository = memberRepository;
         this.courseRepository = courseRepository;
     }
 
-    // 取得「我的預約」
+    /**
+     * Gets the reservations for the current member.
+     * @param token The authentication token.
+     * @return A ResponseEntity with a list of reservations for the current member.
+     */
     @GetMapping("/my")
     public ResponseEntity<List<Reservation>> getMyReservations(@RequestHeader("Authorization") String token) {
         String email = extractEmailFromToken(token);
@@ -42,38 +55,47 @@ public class ReservationController {
         return ResponseEntity.ok(list);
     }
 
-    // 預約課程（前端只需傳 { "courseId": 123 }）
+    /**
+     * Creates a new reservation.
+     * @param req The request body containing the reservation details.
+     * @param token The authentication token.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ReservationRequest req, @RequestHeader("Authorization") String token) {
-        // === 這裡加 debug log ===
-        System.out.println("==== 收到報名請求 ====");
+        System.out.println("==== Received booking request ====");
         System.out.println("token = " + token);
         System.out.println("extractEmailFromToken = " + extractEmailFromToken(token));
 
         String email = extractEmailFromToken(token);
         Member member = memberRepository.findByEmail(email).orElse(null);
         if (member == null) {
-            System.out.println("找不到會員！");
-            return ResponseEntity.status(401).body("尚未登入");
+            System.out.println("Member not found!");
+            return ResponseEntity.status(401).body("Not logged in");
         }
 
         Course course = courseRepository.findById(req.getCourseId()).orElse(null);
         if (course == null) {
-            System.out.println("找不到課程！");
-            return ResponseEntity.badRequest().body("找不到課程");
+            System.out.println("Course not found!");
+            return ResponseEntity.badRequest().body("Course not found");
         }
 
         Reservation r = new Reservation();
         r.setMember(member);
-        r.setCourse(course);  // 關鍵！一定要設這個
-        r.setStatus(ReservationStatus.RESERVED); // 預設狀態
+        r.setCourse(course);  // Critical! Must set this
+        r.setStatus(ReservationStatus.RESERVED); // Default status
 
         Reservation saved = reservationRepository.save(r);
-        System.out.println("預約成功：" + saved.getId());
+        System.out.println("Reservation successful: " + saved.getId());
         return ResponseEntity.ok(saved);
     }
 
-    // 取消預約
+    /**
+     * Cancels a reservation.
+     * @param id The ID of the reservation to cancel.
+     * @param token The authentication token.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> cancel(@PathVariable("id") Long id, @RequestHeader("Authorization") String token) {
         String email = extractEmailFromToken(token);
@@ -89,13 +111,19 @@ public class ReservationController {
         return ResponseEntity.ok().build();
     }
 
-    // --- helper ---
+    /**
+     * Extracts the email from the authentication token.
+     * @param token The authentication token.
+     * @return The email extracted from the token.
+     */
     private String extractEmailFromToken(String token) {
         if (token == null || !token.startsWith("Bearer ")) return null;
         return token.substring(7);
     }
 
-    // --- DTO ---
+    /**
+     * DTO for a reservation request.
+     */
     public static class ReservationRequest {
         private Long courseId;
         public Long getCourseId() { return courseId; }

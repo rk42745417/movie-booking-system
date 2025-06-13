@@ -11,45 +11,72 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling courses.
+ */
 @RestController
 @RequestMapping("/api/v1/courses")
 public class CourseController {
 
     private final CourseService courseService;
+
+    /**
+     * Constructs a CourseController with the given CourseService.
+     * @param courseService The service for handling course logic.
+     */
     public CourseController(CourseService courseService) { this.courseService = courseService; }
 
 
-    // 取得所有開放中課程（你可依需求篩選 status）
+    /**
+     * Gets all open courses.
+     * @return A ResponseEntity with a list of all open courses.
+     */
     @GetMapping("/open")
     public ResponseEntity<List<Course>> openCourses() {
-        // 範例只回傳所有課程，也可以改成只回傳 status = OPEN 的課程
+        // Example returns all courses, can be changed to only return status = OPEN
         return ResponseEntity.ok(courseService.getAllOpenCourses());
     }
 
 
-    /* 取得全部課程 */
+    /**
+     * Gets all courses.
+     * @return A ResponseEntity with a list of all courses.
+     */
     @GetMapping
     public ResponseEntity<List<Course>> all() {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    /* 新增課程 (已移除 coachName、roomId) */
+    /**
+     * Creates a new course.
+     * @param req The request body containing the new course details.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PostMapping
     public ResponseEntity<ServiceResult<Long>> create(@RequestBody CourseRequest req) {
         var rs = courseService.createCourse(
                 req.title(), req.description(), req.capacity(),
                 req.startTime(), req.endTime(), req.status(), req.tags());
         return rs.isSuccess() ? ResponseEntity.ok(rs)
-                              : ResponseEntity.badRequest().body(rs);
+                : ResponseEntity.badRequest().body(rs);
     }
 
+    /**
+     * Updates the status of a course.
+     * @param req The request body containing the new status.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PostMapping("/update")
     public ResponseEntity<ServiceResult<Long>> updateStatus(@RequestBody UpdateRequest req) {
         var rs = courseService.updateStatus(req.id(), req.status());
         return rs.isSuccess() ? ResponseEntity.ok(rs)
                 : ResponseEntity.badRequest().body(rs);
     }
-    
+
+    /**
+     * Lists upcoming courses.
+     * @return A ResponseEntity with a list of upcoming courses.
+     */
     @GetMapping("/courses/upcoming")
     public ResponseEntity<List<CourseService.CourseSummary>> upcoming() {
         return ResponseEntity.ok(

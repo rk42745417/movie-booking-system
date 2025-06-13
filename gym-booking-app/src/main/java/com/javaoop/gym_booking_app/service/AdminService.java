@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Service for handling administrative tasks.
+ */
 @Service
 @Transactional
 public class AdminService {
@@ -16,7 +19,12 @@ public class AdminService {
     private final ReservationRepository reservationRepository;
     private final MemberRepository memberRepository;
 
-    /* ---------- Constructor Injection ---------- */
+    /**
+     * Constructs an AdminService with the given repositories.
+     * @param courseRepository The repository for handling course data.
+     * @param reservationRepository The repository for handling reservation data.
+     * @param memberRepository The repository for handling member data.
+     */
     public AdminService(CourseRepository courseRepository,
                         ReservationRepository reservationRepository,
                         MemberRepository memberRepository) {
@@ -25,22 +33,32 @@ public class AdminService {
         this.memberRepository      = memberRepository;
     }
 
-    /* 調整課程狀態 ------------------------------------------------------- */
+    /**
+     * Updates the status of a course.
+     * @param courseId The ID of the course to update.
+     * @param status The new status of the course.
+     * @return A ServiceResult with the result of the operation.
+     */
     public ServiceResult<Long> updateCourseStatus(Long courseId, CourseStatus status) {
         Course course = courseRepository.findById(courseId).orElse(null);
         if (course == null) {
-            return ServiceResult.fail("課程不存在");
+            return ServiceResult.fail("Course does not exist");
         }
         course.setStatus(status);
         courseRepository.save(course);
         return ServiceResult.ok(courseId);
     }
 
-    /* 取消整堂課，並同步取消已預約的記錄 ------------------------------- */
+    /**
+     * Cancels a course and all its reservations.
+     * @param courseId The ID of the course to cancel.
+     * @param reason The reason for cancellation.
+     * @return A ServiceResult with the result of the operation.
+     */
     public ServiceResult<Long> cancelCourse(Long courseId, String reason) {
         Course course = courseRepository.findById(courseId).orElse(null);
         if (course == null) {
-            return ServiceResult.fail("課程不存在");
+            return ServiceResult.fail("Course does not exist");
         }
         course.setStatus(CourseStatus.CANCELED);
         courseRepository.save(course);
@@ -56,17 +74,24 @@ public class AdminService {
         return ServiceResult.ok(courseId);
     }
 
-    /* 列出所有會員 ------------------------------------------------------- */
+    /**
+     * Lists all members.
+     * @return A list of all members.
+     */
     @Transactional(readOnly = true)
     public List<Member> listMembers() {
         return memberRepository.findAll();
     }
 
-    /* 依預約狀態列出預約 -------------------------------------------------- */
+    /**
+     * Lists reservations by their status.
+     * @param status The status of the reservations to list.
+     * @return A list of reservations with the given status.
+     */
     @Transactional(readOnly = true)
     public List<Reservation> listReservationsByStatus(ReservationStatus status) {
         return reservationRepository.findAll().stream()
-                                    .filter(r -> r.getStatus() == status)
-                                    .toList();
+                .filter(r -> r.getStatus() == status)
+                .toList();
     }
 }

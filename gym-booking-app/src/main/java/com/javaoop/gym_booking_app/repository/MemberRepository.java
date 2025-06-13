@@ -6,8 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository for handling members.
+ */
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    // Example of a custom query method
+    /**
+     * Finds a member by their email.
+     * @param email The email of the member to find.
+     * @return An Optional containing the member if found, otherwise empty.
+     */
     Optional<Member> findByEmail(String email);
 }

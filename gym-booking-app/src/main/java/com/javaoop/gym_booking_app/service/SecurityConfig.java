@@ -7,22 +7,32 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configuration for security.
+ */
 @Configuration
-
 public class SecurityConfig {
 
-    /** 提供給 MemberService 注入 */
+    /**
+     * Provides a password encoder bean.
+     * @return A password encoder.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    /** 若暫時不想出現 Spring Security 的登入畫面，可把所有請求放行 */
+    /**
+     * Configures the security filter chain.
+     * @param http The HttpSecurity to configure.
+     * @return The security filter chain.
+     * @throws Exception If an error occurs.
+     */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf(csrf -> csrf.disable())          // 先關掉 CSRF
-                   .authorizeHttpRequests(auth -> auth
-                         .anyRequest().permitAll())       // 全部放行
-                   .build();
+        return http.csrf(csrf -> csrf.disable())          // Disable CSRF for now
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll())       // Allow all requests
+                .build();
     }
 }

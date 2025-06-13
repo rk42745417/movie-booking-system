@@ -7,23 +7,36 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling coach-related tasks.
+ */
 @RestController
 @RequestMapping("/api/v1/coach")
 public class CoachController {
 
     private final CourseService courseService;
 
+    /**
+     * Constructs a CoachController with the given CourseService.
+     * @param courseService The service for handling course logic.
+     */
     public CoachController(CourseService courseService) {
         this.courseService = courseService;
     }
 
-    /** ➊ 仍保留列出全部（如果你還需要） */
+    /**
+     * Lists all courses.
+     * @return A ResponseEntity with a list of all courses.
+     */
     @GetMapping("/courses")
     public ResponseEntity<List<Course>> listCourses() {
         return ResponseEntity.ok(courseService.getAllCourses());
     }
 
-    /** ➋ 給前端「儀表板」用的即將開課清單 */
+    /**
+     * Lists upcoming courses for the dashboard.
+     * @return A ResponseEntity with a list of upcoming courses.
+     */
     @GetMapping("/courses/upcoming")
     public ResponseEntity<List<CourseService.CourseSummary>> upcoming() {
         return ResponseEntity.ok(

@@ -6,8 +6,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository for handling announcements.
+ */
 @Repository
 public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
+    /**
+     * Finds all announcements and orders them by creation date in descending order.
+     * @return A list of all announcements ordered by creation date in descending order.
+     */
     List<Announcement> findByOrderByCreatedAtDesc();
-    // 只要繼承 JpaRepository 就有基本的 CRUD（新增、查詢、刪除、全部查詢...）
 }

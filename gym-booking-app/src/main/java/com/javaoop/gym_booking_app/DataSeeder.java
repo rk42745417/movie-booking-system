@@ -1,4 +1,4 @@
-package com.javaoop.gym_booking_app; // Or any package you prefer
+package com.javaoop.gym_booking_app;
 
 import com.javaoop.gym_booking_app.repository.AnnouncementRepository;
 import com.javaoop.gym_booking_app.service.AnnouncementService;
@@ -8,6 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+/**
+ * Seeds the database with initial data.
+ */
 @Component
 @Order(1) // Use @Order to control the execution order if you have multiple runners
 public class DataSeeder implements CommandLineRunner {
@@ -17,18 +20,30 @@ public class DataSeeder implements CommandLineRunner {
     private final AnnouncementService announcementService;
     private final AnnouncementRepository announcementRepository;
 
-    // We use constructor injection to get the necessary service and repository
+    /**
+     * Constructs a DataSeeder with the given AnnouncementService and AnnouncementRepository.
+     * @param announcementService The service for handling announcement logic.
+     * @param announcementRepository The repository for handling announcement data.
+     */
     public DataSeeder(AnnouncementService announcementService, AnnouncementRepository announcementRepository) {
         this.announcementService = announcementService;
         this.announcementRepository = announcementRepository;
     }
 
+    /**
+     * Runs the data seeder.
+     * @param args The command line arguments.
+     * @throws Exception If an error occurs.
+     */
     @Override
     public void run(String... args) throws Exception {
         // This method will be executed on application startup
         seedAnnouncements();
     }
 
+    /**
+     * Seeds the database with initial announcements.
+     */
     private void seedAnnouncements() {
         // CRITICAL CHECK: Only seed data if the table is empty to avoid duplicates
         if (announcementRepository.count() == 0) {

@@ -6,29 +6,46 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling announcements.
+ */
 @RestController
 @RequestMapping("/api/v1/announcements")
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
 
+    /**
+     * Constructs an AnnouncementController with the given AnnouncementService.
+     * @param service The service for handling announcement logic.
+     */
     public AnnouncementController(AnnouncementService service) {
         this.announcementService = service;
     }
 
-    // 取得全部公告
+    /**
+     * Gets all announcements.
+     * @return A list of all announcements.
+     */
     @GetMapping
     public List<Announcement> all() {
         return announcementService.getAllAnnouncements();
     }
 
-    // 新增公告
+    /**
+     * Adds a new announcement.
+     * @param req The request body containing the new announcement.
+     * @return The new announcement.
+     */
     @PostMapping
     public Announcement add(@RequestBody Announcement req) {
         return announcementService.addAnnouncement(req.getTitle(), req.getContent());
     }
 
-    // 刪除公告
+    /**
+     * Deletes an announcement.
+     * @param id The ID of the announcement to delete.
+     */
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         announcementService.deleteAnnouncement(id);

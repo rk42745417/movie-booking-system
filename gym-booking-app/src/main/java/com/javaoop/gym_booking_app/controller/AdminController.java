@@ -8,16 +8,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling administrative tasks.
+ */
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
     private final AdminService adminService;
 
+    /**
+     * Constructs an AdminController with the given AdminService.
+     * @param adminService The service for handling admin logic.
+     */
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 
-    /* ---------- 調整課程狀態 ---------- */
+    /**
+     * Updates the status of a course.
+     * @param courseId The ID of the course to update.
+     * @param req The request body containing the new status.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PatchMapping("/courses/{courseId}/status")
     public ResponseEntity<?> updateStatus(@PathVariable Long courseId,
                                           @RequestBody StatusReq req) {
@@ -25,7 +37,12 @@ public class AdminController {
         return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
     }
 
-    /* ---------- 取消課程（並同步取消預約） ---------- */
+    /**
+     * Cancels a course and all its reservations.
+     * @param courseId The ID of the course to cancel.
+     * @param req The request body containing the reason for cancellation.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PostMapping("/courses/{courseId}/cancel")
     public ResponseEntity<?> cancelCourse(@PathVariable Long courseId,
                                           @RequestBody CancelReq req) {
@@ -33,19 +50,34 @@ public class AdminController {
         return rs.isSuccess() ? ResponseEntity.ok(rs) : ResponseEntity.badRequest().body(rs);
     }
 
-    /* ---------- 列出會員 ---------- */
+    /**
+     * Lists all members.
+     * @return A list of all members.
+     */
     @GetMapping("/members")
     public List<Member> members() {
         return adminService.listMembers();
     }
 
-    /* ---------- 依預約狀態列出預約 ---------- */
+    /**
+     * Lists reservations by their status.
+     * @param status The status of the reservations to list.
+     * @return A list of reservations with the given status.
+     */
     @GetMapping("/reservations")
     public List<Reservation> reservations(@RequestParam ReservationStatus status) {
         return adminService.listReservationsByStatus(status);
     }
 
-    /* DTO */
+    /**
+     * DTO for a status update request.
+     * @param status The new status.
+     */
     public record StatusReq(CourseStatus status) {}
+
+    /**
+     * DTO for a cancellation request.
+     * @param reason The reason for cancellation.
+     */
     public record CancelReq(String reason) {}
 }

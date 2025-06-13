@@ -7,16 +7,37 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository for handling reservations.
+ */
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    // Find all reservations for a specific member
+    /**
+     * Finds all reservations for a specific member.
+     * @param memberId The ID of the member.
+     * @return A list of all reservations for the specified member.
+     */
     List<Reservation> findByMemberId(Long memberId);
 
-    // Find all reservations for a specific course
+    /**
+     * Finds all reservations for a specific course.
+     * @param courseId The ID of the course.
+     * @return A list of all reservations for the specified course.
+     */
     List<Reservation> findByCourseId(Long courseId);
 
+    /**
+     * Counts the number of reservations for a specific course.
+     * @param courseId The ID of the course.
+     * @return The number of reservations for the specified course.
+     */
     int countByCourseId(Long courseId);
 
-    // Count reservations for a specific course to check against capacity
+    /**
+     * Counts the number of reservations for a specific course with a specific status.
+     * @param courseId The ID of the course.
+     * @param status The status of the reservations to count.
+     * @return The number of reservations for the specified course with the specified status.
+     */
     long countByCourseIdAndStatus(Long courseId, ReservationStatus status);
 }

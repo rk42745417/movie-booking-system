@@ -10,17 +10,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller for handling authentication.
+ */
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
     private final MemberService memberService;
 
+    /**
+     * Constructs an AuthController with the given MemberService.
+     * @param memberService The service for handling member logic.
+     */
     public AuthController(MemberService memberService) {
         this.memberService = memberService;
     }
 
-    /* ---------- 註冊 ---------- */
+    /**
+     * Registers a new member.
+     * @param req The request body containing the registration details.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PostMapping("/register")
     public ResponseEntity<ServiceResult<Long>> register(@RequestBody RegisterRequest req) {
         ServiceResult<Long> rs = memberService.register(
@@ -31,25 +42,31 @@ public class AuthController {
                 : ResponseEntity.badRequest().body(rs);
     }
 
-    /* ---------- 登入 ---------- */
+    /**
+     * Logs in a member.
+     * @param req The request body containing the login details.
+     * @return A ResponseEntity with the result of the operation.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest req) {
         ServiceResult<Member> rs = memberService.loginAsResult(req.email(), req.password());
         if (rs.isSuccess() && rs.getData() != null) {
-            // 用 email 當作 token 回傳
+            // Use email as token for simplicity
             Map<String, Object> result = new HashMap<>();
             result.put("token", rs.getData().getEmail());
             result.put("member", rs.getData());
             return ResponseEntity.ok(result);
         } else {
             return ResponseEntity.status(401).body(
-                Map.of("message", rs.getMessage() != null ? rs.getMessage() : "登入失敗")
+                    Map.of("message", rs.getMessage() != null ? rs.getMessage() : "Login failed")
             );
         }
     }
 
 
-    /* --------- DTO --------- */
+    /**
+     * DTO for a registration request.
+     */
     public record RegisterRequest(
             String email,
             String password,
@@ -58,10 +75,8 @@ public class AuthController {
             Gender gender,
             String phone) {}
 
+    /**
+     * DTO for a login request.
+     */
     public record LoginRequest(String email, String password) {}
-
-
-
-
-    
 }

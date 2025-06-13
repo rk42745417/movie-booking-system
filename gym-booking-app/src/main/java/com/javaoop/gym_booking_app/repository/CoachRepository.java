@@ -6,9 +6,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository for handling coaches.
+ */
 @Repository
 public interface CoachRepository extends JpaRepository<Coach, Long> {
-    // You can add custom query methods here if needed
+    /**
+     * Finds a coach by their email.
+     * @param email The email of the coach to find.
+     * @return An Optional containing the coach if found, otherwise empty.
+     */
     Optional<Coach> findByEmail(String email);
 
 }

@@ -7,18 +7,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling member-related tasks.
+ */
 @RestController
 @RequestMapping("/api/v1/members")
 public class MemberController {
 
     private final MemberService memberService;
 
+    /**
+     * Constructs a MemberController with the given MemberService.
+     * @param memberService The service for handling member logic.
+     */
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
     /**
-     * 回傳某會員的所有預約清單。
+     * Returns a list of all reservations for a member.
+     * @param memberId The ID of the member.
+     * @return A ResponseEntity with a list of all reservations for the member.
      */
     @GetMapping("/{memberId}/reservations")
     public ResponseEntity<List<Reservation>> getReservations(

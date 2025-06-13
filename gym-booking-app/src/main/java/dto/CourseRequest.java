@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
+/**
+ * DTO for a course request.
+ */
 public record CourseRequest(
         String           title,
         String           description,

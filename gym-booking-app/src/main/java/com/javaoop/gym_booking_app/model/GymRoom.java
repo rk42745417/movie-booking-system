@@ -38,49 +38,89 @@ public class GymRoom {
     private List<String> equipment = new ArrayList<>();
 
 
-    // --- Constructors, Getters, and Setters ---
-
+    /**
+     * Default constructor.
+     */
     public GymRoom() {
     }
 
-    // Getters and Setters would be included here...
 
+    /**
+     * Gets the ID of the gym room.
+     * @return The ID of the gym room.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets the ID of the gym room.
+     * @param id The new ID of the gym room.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Gets the name of the gym room.
+     * @return The name of the gym room.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the gym room.
+     * @param name The new name of the gym room.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the location of the gym room.
+     * @return The location of the gym room.
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Sets the location of the gym room.
+     * @param location The new location of the gym room.
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * Gets the capacity of the gym room.
+     * @return The capacity of the gym room.
+     */
     public Integer getCapacity() {
         return capacity;
     }
 
+    /**
+     * Sets the capacity of the gym room.
+     * @param capacity The new capacity of the gym room.
+     */
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
+    /**
+     * Gets the equipment in the gym room.
+     * @return The equipment in the gym room.
+     */
     public List<String> getEquipment() {
         return equipment;
     }
 
+    /**
+     * Sets the equipment in the gym room.
+     * @param equipment The new equipment in the gym room.
+     */
     public void setEquipment(List<String> equipment) {
         this.equipment = equipment;
     }

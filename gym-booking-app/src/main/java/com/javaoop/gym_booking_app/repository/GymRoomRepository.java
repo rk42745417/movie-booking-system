@@ -6,9 +6,16 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository for handling gym rooms.
+ */
 @Repository
 public interface GymRoomRepository extends JpaRepository<GymRoom, Long> {
 
-    // You can add custom finders here if needed
+    /**
+     * Finds a gym room by its name.
+     * @param name The name of the gym room to find.
+     * @return An Optional containing the gym room if found, otherwise empty.
+     */
     Optional<GymRoom> findByName(String name);
 }

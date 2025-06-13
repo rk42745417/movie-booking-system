@@ -8,14 +8,30 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Repository for handling courses.
+ */
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    /** 舊有：依教練查詢 */
+    /**
+     * Finds all courses for a specific coach.
+     * @param coachId The ID of the coach.
+     * @return A list of all courses for the specified coach.
+     */
     List<Course> findByCoachId(Long coachId);
 
+    /**
+     * Finds all courses with a specific status.
+     * @param courseStatus The status of the courses to find.
+     * @return A list of all courses with the specified status.
+     */
     List<Course> findByStatus(CourseStatus courseStatus);
 
-    /** 新增：查詢「某時間之後」的課程，依開始時間排序 */
+    /**
+     * Finds all courses that start after a specific time, ordered by start time.
+     * @param from The time to search after.
+     * @return A list of all courses that start after the specified time, ordered by start time.
+     */
     List<Course> findByStartTimeAfterOrderByStartTimeAsc(LocalDateTime from);
 }
